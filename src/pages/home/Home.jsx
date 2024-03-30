@@ -3,6 +3,8 @@ import Hero from '../../components/home/Hero'
 import SoEasy from '../../components/home/SoEasy'
 import LogoList from '../../components/home/LogoList'
 import WhoAreYou from '../../components/home/WhoAreYou'
+import LogoSlide from '../../components/home/LogoSlide'
+import CategoryTab from '../../components/home/CategoryTab'
 
 const Home = () => {
   return (
@@ -11,6 +13,8 @@ const Home = () => {
       <SoEasy/>
       <LogoList/>
       <WhoAreYou/>
+      <LogoSlide/>
+      <CategoryTab/>
     </div>
   )
 }

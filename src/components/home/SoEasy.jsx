@@ -5,7 +5,7 @@ import CButton from '../../common/CButton/CButton';
 
 const SoEasy = () => {
   return (
-    <Container sx={{my: {xs:5,md:15} }} maxWidth='lg'>
+    <Container sx={{my: {xs:10,md:15} }} maxWidth='lg'>
       <Stack sx={{ width: '100%' }} gap={4} direction={{xs:'column',lg:'row'}} alignItems='center' justifyContent='space-between'>
 
         <Box >

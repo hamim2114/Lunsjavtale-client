@@ -1,9 +1,59 @@
 import { Box, Container, List, ListItem, ListItemIcon, ListItemText, Stack, Tabs, Typography, tabsClasses } from "@mui/material";
 import { useState } from "react";
-import { CustomTabPanel, TabItem } from "../../mui-treasury/tabs-pill/TabsPill";
 import { useTheme } from "@emotion/react";
-import { DoneAllRounded } from "@mui/icons-material";
+import { styled } from "@mui/material/styles";
+import Tab, { tabClasses } from "@mui/material/Tab";
+import PropTypes from 'prop-types';
 import CButton from "../../common/CButton/CButton";
+
+const TabItem = styled(Tab)(({ theme }) => ({
+  position: "relative",
+  borderRadius: "30px",
+  textAlign: "center",
+  textTransform: 'none',
+  marginRight:'10px',
+  transition: "all .5s",
+  padding: "10px 15px",
+  color: "#555555",
+  height: "auto",
+  // margin: "10px 0",
+  float: "none",
+  fontSize: "14px",
+  fontWeight: "500",
+  [theme.breakpoints.up("md")]: {
+    minWidth: 120,
+  },
+  [`&.${tabClasses.selected}`]: {
+    color: "#FFFFFF",
+    backgroundColor: theme.palette.secondary.main,
+    // boxShadow: "0 7px 10px -5px rgba(76, 175, 80, 0.4)",
+  },
+}));
+
+function CustomTabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          {children}
+        </Box>
+      )}
+    </div>
+  );
+};
+CustomTabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
 
 function WhoAreYou() {
   const [tabIndex, setTabIndex] = useState(0);
@@ -29,9 +79,9 @@ function WhoAreYou() {
             },
           }}
         >
-          <TabItem disableRipple label={"The Boss"} />
-          <TabItem disableRipple label={"Employee"} />
-          <TabItem disableRipple label={"Lunch Manager"} />
+          <TabItem style={{borderRadius: "30px"}} disableRipple label={"The Boss"} />
+          <TabItem style={{borderRadius: "30px"}} disableRipple label={"Employee"} />
+          <TabItem style={{borderRadius: "30px"}} disableRipple label={"Lunch Manager"} />
         </Tabs>
       </Stack>
 

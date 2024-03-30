@@ -1,5 +1,6 @@
-import { Box, Container, Stack } from '@mui/material'
+import { Box, Container, Stack, useMediaQuery } from '@mui/material'
 import React from 'react'
+import Marquee from 'react-fast-marquee'
 
 const logo = [
   { img: "/Rectangle 4.png" },
@@ -12,19 +13,25 @@ const logo = [
 ]
 
 const LogoList = () => {
+  const match = useMediaQuery('(min-width:600px)')
+
   return (
     <Container maxWidth='xl' >
-      <Stack direction='row' justifyContent='space-between'  flexWrap={'wrap'} gap={2}>
-        {
-          logo.map((item, i) => (
-            <Box key={i} sx={{
-              width: { xs: '50px',md: '100px', lg: '160px' }
-            }}>
-              <img style={{ width: '100%' }} src={item.img} alt="" />
-            </Box>
-          ))
-        }
-      </Stack>
+      <Marquee autoFill direction='right' gradient speed={20}>
+        {/* <Stack direction='row' gap={{xs:5,md: 8,lg:12}}> */}
+          {
+            logo.map((item, i) => (
+              <Box key={i} sx={{
+                width: { xs: '80px', md: '100px', lg: '160px' },
+                mr:{xs:5,md:8,lg:12}
+              }}>
+                <img style={{ width: '100%' }} src={item.img} alt="" />
+              </Box>
+            ))
+          }
+        {/* </Stack> */}
+      </Marquee>
+
     </Container>
   )
 }
