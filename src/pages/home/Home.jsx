@@ -5,6 +5,10 @@ import LogoList from '../../components/home/LogoList'
 import WhoAreYou from '../../components/home/WhoAreYou'
 import LogoSlide from '../../components/home/LogoSlide'
 import CategoryTab from '../../components/home/CategoryTab'
+import CreateProfile from '../../components/home/CreateProfile'
+import FAskedQ from '../../components/home/FAskedQ'
+import HaveQ from '../../components/home/HaveQ'
+import InstagramSec from '../../components/home/InstagramSec'
 
 const Home = () => {
   return (
@@ -15,6 +19,10 @@ const Home = () => {
       <WhoAreYou/>
       <LogoSlide/>
       <CategoryTab/>
+      <CreateProfile/>
+      <FAskedQ/>
+      <HaveQ/>
+      <InstagramSec/>
     </div>
   )
 }

@@ -1,7 +1,11 @@
-import { Box, Container, Stack, Tab, Tabs, Typography, styled, tabClasses, tabsClasses } from '@mui/material'
-import React, { useState } from 'react'
+import { Box, Container, IconButton, Stack, Tab, Tabs, Typography, styled, tabClasses, tabsClasses } from '@mui/material'
+import React, { useRef, useState } from 'react'
 import { useTheme } from '@emotion/react';
 import PropTypes from 'prop-types';
+import ProductCard from './ProductCard';
+import Slider from 'react-slick';
+import { ArrowBack, ArrowForward } from '@mui/icons-material';
+import CButton from '../../common/CButton/CButton';
 
 const TabItem = styled(Tab)(({ theme }) => ({
   position: "relative",
@@ -13,7 +17,7 @@ const TabItem = styled(Tab)(({ theme }) => ({
   padding: "10px 15px",
   color: "#555555",
   height: "auto",
-  marginRight:'10px',
+  marginRight: '10px',
   float: "none",
   fontSize: "14px",
   fontWeight: "500",
@@ -52,15 +56,53 @@ CustomTabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
+
+const settings = {
+  infinite: true,
+  speed: 1000,
+  arrows: false,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  lazyLoad: true,
+  pauseOnHover: true,
+  swipeToSlide: true,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  responsive: [
+    {
+      breakpoint: 1200,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+      }
+    },
+    {
+      breakpoint: 800,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+  ]
+};
+
 const CategoryTab = () => {
   const [tabIndex, setTabIndex] = useState(0);
 
+  const sliderRef = useRef(null);
+
+  const next = () => {
+    sliderRef.current.slickNext();
+  };
+
+  const previous = () => {
+    sliderRef.current.slickPrev();
+  };
+
   return (
     <Container maxWidth='lg' sx={{ my: { xs: 10, md: 15 } }}>
-      {/* <Typography sx={{ fontSize: { xs: '22px', md: '32px' }, fontWeight: 600, textAlign: 'center', mb: 2 }}>Who are you?</Typography>
-      <Typography sx={{ fontSize: { xs: '16px', md: '24px' }, fontWeight: 500, textAlign: 'center', mb: 6 }}>The lunch collective gives you the canteen right in your pocket</Typography> */}
       <Stack direction='row' sx={{
-        mb: { xs: 3, md: 10 },
+        mb: 3,
         justifyContent: 'center',
       }}>
         <Tabs
@@ -83,13 +125,62 @@ const CategoryTab = () => {
           <TabItem disableRipple label={"Catering"} />
         </Tabs>
       </Stack>
+      {
+        [1, 2, 3, 4, 5].map((item,id) => (
+      <CustomTabPanel key={id} value={tabIndex} index={id}>
+        <Stack>
+          <Typography sx={{ fontSize: '32px', mb: 2, fontWeight: 600, textAlign: 'center' }}>Lunch boxes</Typography>
+          <Typography sx={{ mb: 6, maxWidth: '727px', alignSelf: 'center', textAlign: 'center', fontSize: { xs: '14px', md: '16px' } }}>Our standard categories are fixed throughout the year, but the dish itself changes daily. This means that if you choose salad, you will receive a new salad every day!</Typography>
+          <Stack direction='row' justifyContent='space-between' sx={{ mb: 4 }}>
+            <Typography >*All prices are ex. VAT. Shipping price NOK 120 ex. VAT per delivery.</Typography>
+            <Stack direction='row' sx={{ display: { xs: 'none', md: 'block' } }}>
+              <CButton onClick={previous} variant='outlined' style={{ height: '40px', mr: 2, borderRadius: '50px', width: '90px' }}>
+                <ArrowBack />
+              </CButton>
+              <CButton onClick={next} variant='outlined' style={{ height: '40px', borderRadius: '50px', width: '90px' }}>
+                <ArrowForward />
+              </CButton>
+            </Stack>
+          </Stack>
+        </Stack>
+        <Box >
+          <Slider ref={sliderRef} {...settings}>
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+          </Slider>
+        </Box>
+      </CustomTabPanel>
+      ))
+      }
 
-      <CustomTabPanel value={tabIndex} index={0}>
-        1
+      {/* <CustomTabPanel value={tabIndex} index={0}>
+        <Stack>
+          <Typography sx={{ fontSize: '32px', mb: 2, fontWeight: 600, textAlign: 'center' }}>Lunch boxes</Typography>
+          <Typography sx={{ mb: 6, maxWidth: '727px', alignSelf: 'center', textAlign: 'center', fontSize: {xs:'14px',md:'16px'} }}>Our standard categories are fixed throughout the year, but the dish itself changes daily. This means that if you choose salad, you will receive a new salad every day!</Typography>
+          <Stack direction='row' justifyContent='space-between' sx={{ mb: 4 }}>
+            <Typography >*All prices are ex. VAT. Shipping price NOK 120 ex. VAT per delivery.</Typography>
+            <Stack direction='row' sx={{display:{xs:'none',md:'block'}}}>
+              <CButton onClick={previous} variant='outlined' style={{ height: '40px',mr:2, borderRadius: '50px', width: '90px' }}>
+                <ArrowBack />
+              </CButton>
+              <CButton onClick={next} variant='outlined' style={{ height: '40px', borderRadius: '50px', width: '90px' }}>
+                <ArrowForward />
+              </CButton>
+            </Stack>
+          </Stack>
+        </Stack>
+        <Box >
+          <Slider ref={sliderRef} {...settings}>
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+          </Slider>
+        </Box>
       </CustomTabPanel>
       <CustomTabPanel value={tabIndex} index={1}>
         2
-      </CustomTabPanel>
+      </CustomTabPanel> */}
     </Container>
   )
 }

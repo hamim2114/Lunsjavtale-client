@@ -65,7 +65,7 @@ const Hero = () => {
             <Stack direction='row' sx={{
               alignSelf: { xs: 'start', md: 'start' },
               bgcolor: '#fff',
-              width: { xs: '343px', sm: '640px' },
+              width: { xs: '100%', md: '640px' },
               height: { xs: '40px', md: '56px' },
               justifyContent: 'space-between',
               borderRadius: '40px',
@@ -73,7 +73,7 @@ const Hero = () => {
             }}>
               <Input disableUnderline sx={{
                 border: 'none', outline: 'none',
-                flex: 1, fontSize: { xs: '12px', md: '15px' }, borderRadius: '38px'
+                flex: 1, fontSize: { xs: '11px', sm: '15px' }, borderRadius: '38px'
               }} type="text" placeholder="Your company's postcode" />
               <Button size='small' sx={{
                 textWrap: 'nowrap',

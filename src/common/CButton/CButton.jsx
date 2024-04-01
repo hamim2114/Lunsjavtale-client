@@ -8,7 +8,7 @@ const CButton = (props) => {
       sx={{
         textTransform: "none",
         boxShadow: "none",
-        height: '56px',
+        height: '50px',
         fontSize:'16px',
         borderRadius:'8px',
         position: "relative",

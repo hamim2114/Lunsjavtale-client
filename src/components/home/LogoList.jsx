@@ -17,7 +17,7 @@ const LogoList = () => {
 
   return (
     <Container maxWidth='xl' >
-      <Marquee autoFill direction='right' gradient speed={20}>
+      <Marquee autoFill direction='right' gradient={match} speed={20}>
         {/* <Stack direction='row' gap={{xs:5,md: 8,lg:12}}> */}
           {
             logo.map((item, i) => (
