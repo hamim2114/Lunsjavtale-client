@@ -10,8 +10,7 @@ const Hero = () => {
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
       p:0,
-      // backgroundPosition:'left',
-      height: { xs: '1044px', md: '920px' }
+      height: { xs: '1044px', md: '900px' }
     }}>
       <Container maxWidth='lg'>
         <Stack direction='row' alignItems='center' justifyContent='space-between' py={2}>
@@ -26,7 +25,7 @@ const Hero = () => {
           </CButton>
         </Stack>
 
-        <Stack sx={{ height: '800px' }} direction={{ xs: 'column', md: 'row' }} alignItems='center' justifyContent='space-between' gap={{xs:5,md:10}}>
+        <Stack sx={{ height: '700px' }} direction={{ xs: 'column', md: 'row' }} alignItems='center' justifyContent='space-between' gap={5}>
           <Stack sx={{
             // flex: 1,
             color: '#fff',
@@ -66,7 +65,7 @@ const Hero = () => {
             <Stack direction='row' sx={{
               alignSelf: { xs: 'start', md: 'start' },
               bgcolor: '#fff',
-              width: { xs: '100%', md: '640px' },
+              width:'100%',
               height: { xs: '40px', md: '56px' },
               justifyContent: 'space-between',
               borderRadius: '40px',
