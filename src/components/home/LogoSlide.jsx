@@ -12,7 +12,7 @@ const logo = [
 const LogoSlide = () => {
   const match = useMediaQuery('(min-width:600px)')
   return (
-    <Container maxWidth='xxl' sx={{  }}>
+    <Container maxWidth='xxl' sx={{ p:0 }}>
       <Marquee autoFill gradient={match}>
         {
           logo.map((d,i) => (

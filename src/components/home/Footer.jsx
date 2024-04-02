@@ -48,7 +48,7 @@ const Footer = () => {
           fontSize: { xs: '32px', md: '48px' },
           fontWeight: { xs: 600, md: 800 },
           color: '#fff', textAlign: 'center', mb: 2
-        }}>Healthy, tasty and simplelunch at <br /> the office?</Typography>
+        }}>Healthy, tasty and simple lunch at <br /> the office?</Typography>
         <CButton variant='contained' style={{ height: { xs: '45px', md: '56px' }, mt: 3, width: '128px' }}>
           Get Started
         </CButton>

@@ -16,8 +16,8 @@ const LogoList = () => {
   const match = useMediaQuery('(min-width:600px)')
 
   return (
-    <Container maxWidth='xl' sx={{ my: { xs: 5, md: 15 } }}>
-      <Marquee autoFill direction='right' gradient={match} speed={20}>
+    <Container maxWidth='xl' sx={{p:0, my: { xs: 5, md: 15 } }}>
+      <Marquee autoFill direction='right' gradient={match} speed={20} >
         {
           logo.map((item, i) => (
             <Box key={i} sx={{

@@ -42,7 +42,7 @@ const Hero = () => {
             }}>The next generation <br /> of work lunches</Typography>
             <Typography sx={{ fontSize: {xs:'14px',md:'18px'}, fontWeight: 200,mb:1}}>Let employees manage their own lunch with just a few keystrokes. Cut administration, costs and food waste, while employees are delivered exactly the lunch they want.</Typography>
 
-            <Stack direction='row' alignItems='center' gap={1} justifyContent={{ xs: 'start', sm: 'space-around', lg: 'space-between' }}>
+            <Stack direction='row' alignItems='center' gap={2} justifyContent={{ xs: 'center', sm: 'space-around', lg: 'space-between' }}>
               <Stack sx={{
                 width: { xs: '111px', md: '174px' }
               }} direction='row' alignItems='center' gap={1}>
