@@ -1,8 +1,9 @@
 import { ExpandMore, RemoveCircleOutline } from '@mui/icons-material'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Container, Divider, Stack, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Container, Divider, Stack, Typography, useMediaQuery } from '@mui/material'
 import React from 'react'
 
 const FAskedQ = () => {
+  const match = useMediaQuery('(max-width:600px)')
   return (
     <Container maxWidth='lg' sx={{ display: 'flex', flexDirection: 'column', my: 10 }}>
       <Box sx={{
@@ -19,7 +20,7 @@ const FAskedQ = () => {
 
       <Stack direction={{xs:'column',md:'row'}} gap={{xs:0,md:5}} mt={{xs:2,md:10}}>
         <Box sx={{flex:1}}>
-          <Accordion sx={{mb:4,boxShadow:'none'}}>
+          <Accordion sx={{mb:4,boxShadow:'none'}} defaultExpanded={match}>
             <AccordionSummary
               expandIcon={<ExpandMore />}
               aria-controls="panel1-content"
@@ -33,7 +34,7 @@ const FAskedQ = () => {
             </AccordionDetails>
           </Accordion>
 
-          <Accordion sx={{mt:4,boxShadow:'none'}} defaultExpanded>
+          <Accordion sx={{mt:4,boxShadow:'none'}} defaultExpanded={!match}>
             <AccordionSummary
               expandIcon={<ExpandMore />}
               aria-controls="panel1-content"
@@ -48,7 +49,7 @@ const FAskedQ = () => {
           </Accordion>
         </Box>
           <Box sx={{flex:1}}>
-            <Accordion sx={{mb:4,boxShadow:'none'}}>
+            <Accordion sx={{mb:4,boxShadow:'none'}} defaultExpanded={!match}>
               <AccordionSummary
                 expandIcon={<ExpandMore />}
                 aria-controls="panel1-content"
@@ -62,7 +63,7 @@ const FAskedQ = () => {
               </AccordionDetails>
             </Accordion>
 
-            <Accordion sx={{mt:4,boxShadow:'none'}} defaultExpanded>
+            <Accordion sx={{mt:4,boxShadow:'none'}} >
               <AccordionSummary
                 expandIcon={<ExpandMore />}
                 aria-controls="panel1-content"

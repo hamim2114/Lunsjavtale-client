@@ -64,7 +64,7 @@ const settings = {
   slidesToShow: 3,
   slidesToScroll: 1,
   lazyLoad: true,
-  pauseOnHover: true,
+  // pauseOnHover: true,
   swipeToSlide: true,
   autoplay: true,
   // centerMode: true,
@@ -101,7 +101,7 @@ const CategoryTab = () => {
   };
 
   return (
-    <Container maxWidth='lg' sx={{ my: { xs: 10, md: 15 } }}>
+    <Container maxWidth='lg' sx={{ my: { xs: 10, md: 15 },p:0 }}>
       <Stack direction='row' sx={{
         mb: 3,
         justifyContent: 'center',
@@ -127,34 +127,40 @@ const CategoryTab = () => {
         </Tabs>
       </Stack>
       {
-        [1, 2, 3, 4, 5].map((item,id) => (
-      <CustomTabPanel key={id} value={tabIndex} index={id}>
-        <Stack>
-          <Typography sx={{ fontSize: '32px', mb: 2, fontWeight: 600, textAlign: 'center' }}>Lunch boxes</Typography>
-          <Typography sx={{ mb: 6, maxWidth: '727px', alignSelf: 'center', textAlign: 'center', fontSize: { xs: '14px', md: '16px' } }}>Our standard categories are fixed throughout the year, but the dish itself changes daily. This means that if you choose salad, you will receive a new salad every day!</Typography>
-          <Stack direction='row' justifyContent='space-between' sx={{ mb: 4 }}>
-            <Typography >*All prices are ex. VAT. Shipping price NOK 120 ex. VAT per delivery.</Typography>
-            <Stack direction='row' sx={{ display: { xs: 'none', md: 'block' } }}>
-              <CButton onClick={previous} variant='outlined' style={{ height: '40px', mr: 2, borderRadius: '50px', width: '90px' }}>
-                <ArrowBack />
-              </CButton>
-              <CButton onClick={next} variant='outlined' style={{ height: '40px', borderRadius: '50px', width: '90px' }}>
-                <ArrowForward />
-              </CButton>
+        [1, 2, 3, 4, 5].map((item, id) => (
+          <CustomTabPanel key={id} value={tabIndex} index={id}>
+            <Stack>
+              <Typography sx={{ fontSize: '32px', mb: 2, fontWeight: 600, textAlign: 'center' }}>Lunch boxes</Typography>
+              <Typography sx={{ mb: 6,px:'16px', maxWidth: '727px', alignSelf: 'center', textAlign: 'center', fontSize: { xs: '14px', md: '16px' } }}>Our standard categories are fixed throughout the year, but the dish itself changes daily. This means that if you choose salad, you will receive a new salad every day!</Typography>
+              <Stack direction='row' justifyContent='space-between' sx={{ mb: 4 }}>
+                <Typography sx={{px:'16px'}}>*All prices are ex. VAT. Shipping price NOK 120 ex. VAT per delivery.</Typography>
+                <Stack direction='row' sx={{ display: { xs: 'none', md: 'block' } }}>
+                  <CButton onClick={previous} variant='outlined' style={{ height: '40px', mr: 2, borderRadius: '50px', width: '90px' }}>
+                    <ArrowBack />
+                  </CButton>
+                  <CButton onClick={next} variant='outlined' style={{ height: '40px', borderRadius: '50px', width: '90px' }}>
+                    <ArrowForward />
+                  </CButton>
+                </Stack>
+              </Stack>
             </Stack>
-          </Stack>
-        </Stack>
-        <Box sx={{
-          
-        }}>
-          <Slider ref={sliderRef} {...settings}>
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-          </Slider>
-        </Box>
-      </CustomTabPanel>
-      ))
+            <Box>
+              <Slider ref={sliderRef} {...settings}>
+                <Box px={1}>
+                  <ProductCard />
+                </Box>
+                <Box px={1}>
+                  <ProductCard />
+                </Box>
+                <Box px={1}>
+                  <ProductCard />
+                </Box>
+
+
+              </Slider>
+            </Box>
+          </CustomTabPanel>
+        ))
       }
 
       {/* <CustomTabPanel value={tabIndex} index={0}>

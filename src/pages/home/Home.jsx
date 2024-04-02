@@ -9,6 +9,7 @@ import CreateProfile from '../../components/home/CreateProfile'
 import FAskedQ from '../../components/home/FAskedQ'
 import HaveQ from '../../components/home/HaveQ'
 import InstagramSec from '../../components/home/InstagramSec'
+import Footer from '../../components/home/Footer'
 
 const Home = () => {
   return (
@@ -23,6 +24,7 @@ const Home = () => {
       <FAskedQ/>
       <HaveQ/>
       <InstagramSec/>
+      <Footer/>
     </div>
   )
 }

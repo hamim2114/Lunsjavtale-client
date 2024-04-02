@@ -70,7 +70,7 @@ const Hero = () => {
               height: { xs: '40px', md: '56px' },
               justifyContent: 'space-between',
               borderRadius: '40px',
-              pl: { xs: 1, md: 2 },
+              pl: { xs: 1.5, md: 2 },
             }}>
               <Input disableUnderline sx={{
                 border: 'none', outline: 'none',
@@ -82,7 +82,7 @@ const Hero = () => {
                 fontSize: { xs: '11px',sm:'13px', md: '15px' },
                 borderRadius: '38px',
                 bgcolor: '#F5F5F5',
-                px: { xs: 1, md: 2 }
+                px: { xs: 1.5, md: 2 }
               }} startIcon={<Chat size='small' />}>See if we deliver to you</Button>
             </Stack>
 

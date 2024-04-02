@@ -1,5 +1,4 @@
-import { CheckCircle, DoneAllRounded } from '@mui/icons-material'
-import { Box, Button, Container, Divider, List, ListItem, ListItemIcon, ListItemText, Stack, Typography } from '@mui/material'
+import { Box, Container, Divider, List, ListItem, ListItemIcon, ListItemText, Stack, Typography } from '@mui/material'
 import React from 'react'
 import CButton from '../../common/CButton/CButton';
 

@@ -39,6 +39,7 @@ const CreateProfile = () => {
               width: { xs: '100%', md: '490px' },
               height: '459px',
               backgroundImage: 'url(/GroupAll.png)',
+              backgroundPosition:'center',
               backgroundSize: 'contain'
             }} justifyContent='center' alignItems='center'>
               <Stack sx={{
@@ -63,7 +64,7 @@ const CreateProfile = () => {
               </Stack>
               <Box sx={{
                 position: 'absolute',
-                right: { xs: -40, md: 0 },
+                right: { xs: -20, md: 0 },
                 top: '20px',
                 width: '67px',
                 height: '73px'
@@ -87,7 +88,7 @@ const CreateProfile = () => {
               </Box>
               <Box sx={{
                 position: 'absolute',
-                right: { xs: -40, md: 0 },
+                right: { xs: -20, md: 0 },
                 bottom: { xs: 60, md: 0 },
                 width: { xs: '140px', md: '172px' },
                 height: { xs: '300px', md: '366px' }

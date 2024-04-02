@@ -11,7 +11,7 @@ const HaveQ = () => {
       alignItems: 'center',
       width: '100%',
       bgcolor: 'light.main',
-      borderRadius: '16px',
+      borderRadius: {xs:0,md:'16px'},
       my: 5
     }}>
       <Stack justifyContent='center' alignItems='center' py={5}>
