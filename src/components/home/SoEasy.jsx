@@ -6,7 +6,7 @@ import CButton from '../../common/CButton/CButton';
 const SoEasy = () => {
   return (
     <Container sx={{ my: { xs: 5, md: 10 } }} maxWidth='lg'>
-      <Stack sx={{ width: '100%' }} gap={4} direction={{ xs: 'column', lg: 'row' }} alignItems='center' justifyContent='space-between'>
+      <Stack sx={{ width: '100%' }} gap={{xs:8,md:4}} direction={{ xs: 'column', lg: 'row' }} alignItems='center' justifyContent='space-between'>
 
         <Box >
           <Typography sx={{ fontWeight: 800, fontSize: { xs: '32px', md: '58px' } }}>So easy!</Typography>
@@ -14,10 +14,10 @@ const SoEasy = () => {
           <List>
             {
               [1, 2, 3, 4, 5].map((_, id) => (
-                <ListItem sx={{ mb: 2 }} disablePadding key={id}>
+                <ListItem sx={{ mb: {xs:1,md:2} }} disablePadding key={id}>
                   <ListItemIcon><img src="/ok.png" alt="" /></ListItemIcon>
                   <ListItemText sx={{ ml: -3 }}>
-                    <Typography fontSize='18px'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Typography>
+                    <Typography sx={{fontSize:{xs:'14px',md:'18px'}}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Typography>
                   </ListItemText>
                 </ListItem>
               ))

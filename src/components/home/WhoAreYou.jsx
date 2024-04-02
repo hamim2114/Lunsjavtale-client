@@ -100,7 +100,7 @@ function WhoAreYou() {
                       <img src="/ok.png" alt="" />
                     </ListItemIcon>
                     <ListItemText sx={{ ml: -3 }}>
-                      <Typography fontSize='18px'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Typography>
+                      <Typography sx={{fontSize:{xs:'14px',md:'18px'}}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Typography>
                     </ListItemText>
                   </ListItem>
                 ))
@@ -171,7 +171,7 @@ function WhoAreYou() {
                       <img src="/ok.png" alt="" />
                     </ListItemIcon>
                     <ListItemText sx={{ ml: -3 }}>
-                      <Typography fontSize='18px'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Typography>
+                      <Typography sx={{fontSize:{xs:'14px',md:'18px'}}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Typography>
                     </ListItemText>
                   </ListItem>
                 ))
@@ -199,7 +199,7 @@ function WhoAreYou() {
                   <img src="/ok.png" alt="" />
                 </ListItemIcon>
                 <ListItemText sx={{ ml: -3 }}>
-                  <Typography fontSize='18px'>Stress-free tech allows you to manage employees, have full cost control and decide how much the company will pay.</Typography>
+                  <Typography sx={{fontSize:{xs:'14px',md:'18px'}}}>Stress-free tech allows you to manage employees, have full cost control and decide how much the company will pay.</Typography>
                 </ListItemText>
               </ListItem>
               <ListItem sx={{ mb: 2 }} disablePadding>
@@ -207,7 +207,7 @@ function WhoAreYou() {
                   <img src="/ok.png" alt="" />
                 </ListItemIcon>
                 <ListItemText sx={{ ml: -3 }}>
-                  <Typography fontSize='18px'>We even fix payroll deductions and have full control over tax rules😇</Typography>
+                  <Typography sx={{fontSize:{xs:'14px',md:'18px'}}}>We even fix payroll deductions and have full control over tax rules😇</Typography>
                 </ListItemText>
               </ListItem>
               <ListItem sx={{ mb: 2 }} disablePadding>
@@ -215,7 +215,7 @@ function WhoAreYou() {
                   <img src="/ok.png" alt="" />
                 </ListItemIcon>
                 <ListItemText sx={{ ml: -3 }}>
-                  <Typography fontSize='18px'>Let's fix lunch. Then you can focus on everything else!</Typography>
+                  <Typography sx={{fontSize:{xs:'14px',md:'18px'}}}>Let's fix lunch. Then you can focus on everything else!</Typography>
                 </ListItemText>
               </ListItem>
             </List>
