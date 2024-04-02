@@ -9,6 +9,7 @@ const Hero = () => {
       backgroundImage: 'url(/BG.png)',
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
+      backgroundAttachment:'fixed',
       p:0,
       height: { xs: '1044px', md: '900px' }
     }}>

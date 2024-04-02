@@ -5,17 +5,18 @@ import { Button, CircularProgress } from "@mui/material";
 const CButton = (props) => {
   return (
     <Button
-    className="btn41-43 btn-43"
+      className="btn41-43 btn-43"
       sx={{
         textTransform: "none",
         boxShadow: "none",
         height: '50px',
-        fontSize:'16px',
-        borderRadius:'8px',
+        fontSize: '16px',
+        borderRadius: '8px',
         // border: '1px solid lightgray',
         position: "relative",
         ...props.style,
       }}
+      // disableRipple
       size={props.size}
       variant={props.variant}
       startIcon={props.startIcon}

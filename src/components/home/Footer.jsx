@@ -23,6 +23,7 @@ const Footer = () => {
           backgroundImage: 'url(/footer.png)',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
+          backgroundAttachment:'fixed',
           backgroundPosition: 'center',
           zIndex: -1,
           ":before": {
