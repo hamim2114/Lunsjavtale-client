@@ -17,7 +17,7 @@ const FAskedQ = () => {
       <Typography sx={{ fontSize: { xs: '24px', md: '32px' }, fontWeight: 600, alignSelf: 'center', mb: 2 }}>Frequently Asked Questions</Typography>
       <Typography alignSelf='center'>The lunch collective is a digital canteen that makes lunch easier (and smarter)!</Typography>
 
-      <Stack direction={{xs:'column',md:'row'}} gap={5} mt={10}>
+      <Stack direction={{xs:'column',md:'row'}} gap={{xs:0,md:5}} mt={{xs:2,md:10}}>
         <Box sx={{flex:1}}>
           <Accordion sx={{mb:4,boxShadow:'none'}}>
             <AccordionSummary

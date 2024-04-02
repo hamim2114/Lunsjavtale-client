@@ -74,12 +74,12 @@ const Hero = () => {
             }}>
               <Input disableUnderline sx={{
                 border: 'none', outline: 'none',
-                flex: 1, fontSize: { xs: '11px', sm: '15px' }, borderRadius: '38px'
+                flex: 1, fontSize: { xs: '11px', sm: '13px',md:'15px' }, borderRadius: '38px'
               }} type="text" placeholder="Your company's postcode" />
               <Button size='small' sx={{
                 textWrap: 'nowrap',
                 fontWeight: 700,
-                fontSize: { xs: '10px',sm:'12px', md: '15px' },
+                fontSize: { xs: '11px',sm:'13px', md: '15px' },
                 borderRadius: '38px',
                 bgcolor: '#F5F5F5',
                 px: { xs: 1, md: 2 }

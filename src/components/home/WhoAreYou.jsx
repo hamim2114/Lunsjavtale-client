@@ -78,24 +78,24 @@ function WhoAreYou() {
             },
           }}
         >
-          <TabItem style={{borderRadius: "30px",marginRight:'20px'}} disableRipple label={"The Boss"} />
-          <TabItem style={{borderRadius: "30px",marginRight:'20px'}} disableRipple label={"Employee"} />
+          <TabItem style={{borderRadius: "30px",marginRight:'10px'}} disableRipple label={"The Boss"} />
+          <TabItem style={{borderRadius: "30px",marginRight:'10px'}} disableRipple label={"Employee"} />
           <TabItem style={{borderRadius: "30px"}} disableRipple label={"Lunch Manager"} />
         </Tabs>
       </Stack>
 
       <CustomTabPanel value={tabIndex} index={0}>
         <Stack direction={{ sm: 'column', lg: 'row' }} gap={6} >
-          <Stack alignItems={{ md: 'center', lg: 'start', }} sx={{
+          <Stack alignItems={{ md: 'center', lg: 'start', }} justifyContent='center' sx={{
             flex: 1,
           }}>
             <Typography color='primary' sx={{ fontSize: '18px', fontWeight: 700 }}>The boss</Typography>
             <Typography sx={{ fontSize: '32px', fontWeight: 600, mb: 2 }}>Cut costs and get more for <br /> your money.</Typography>
-            <Typography mb={2}>Because what is the point of canteen contribution? We have no running costs and of course you pay nothing for lunch that no one should eat. Our customers cut an average of 25% of their lunch costs!</Typography>
+            <Typography mb={1}>Because what is the point of canteen contribution? We have no running costs and of course you pay nothing for lunch that no one should eat. Our customers cut an average of 25% of their lunch costs!</Typography>
             <List>
               {
                 [1, 2, 3, 4, 5].map((_, id) => (
-                  <ListItem sx={{ mb: 2 }} disablePadding key={id}>
+                  <ListItem sx={{ mb: 1 }} disablePadding key={id}>
                     <ListItemIcon>
                       <img src="/ok.png" alt="" />
                     </ListItemIcon>
@@ -157,16 +157,16 @@ function WhoAreYou() {
               <img style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} src="/image 7.png" alt="" />
             </Box>
           </Stack>
-          <Stack alignItems={{ md: 'center', lg: 'start', }} sx={{
+          <Stack alignItems={{ md: 'center', lg: 'start', }} justifyContent='center' sx={{
             flex: 1,
           }}>
             <Typography color='primary' sx={{ fontSize: '18px', fontWeight: 700 }}>Employer</Typography>
             <Typography sx={{ fontSize: '32px', fontWeight: 600, mb: 2 }}>Choose between 12 different lunch dishes every day</Typography>
-            <Typography mb={2}>There is guaranteed to be something everyone likes here - and new dishes on the menu every single day! We can't fix everything, but we can arrange a stress-free break and ensure that you get food that is not only good, but also good for the body.</Typography>
+            <Typography mb={1}>There is guaranteed to be something everyone likes here - and new dishes on the menu every single day! We can't fix everything, but we can arrange a stress-free break and ensure that you get food that is not only good, but also good for the body.</Typography>
             <List>
               {
                 [1, 2, 3, 4, 5].map((_, id) => (
-                  <ListItem sx={{ mb: 2 }} disablePadding key={id}>
+                  <ListItem sx={{ mb: 1 }} disablePadding key={id}>
                     <ListItemIcon>
                       <img src="/ok.png" alt="" />
                     </ListItemIcon>
@@ -187,14 +187,14 @@ function WhoAreYou() {
 
       <CustomTabPanel value={tabIndex} index={2}>
         <Stack direction={{ sm: 'column', lg: 'row' }} gap={6} >
-          <Stack alignItems={{ md: 'center', lg: 'start', }} sx={{
+          <Stack alignItems={{ md: 'center', lg: 'start', }} justifyContent='center' sx={{
             flex: 1,
           }}>
             <Typography color='primary' sx={{ fontSize: '18px', fontWeight: 700 }}>Lunch manager</Typography>
             <Typography sx={{ fontSize: '32px', fontWeight: 600, mb: 2 }}>Do you spend unnecessary time organizing lunch for everyone?</Typography>
-            <Typography mb={2}>Flexible everyday working life requires flexible solutions. Let employees themselves keep order about what they should eat and when they have a home office.</Typography>
+            <Typography mb={1}>Flexible everyday working life requires flexible solutions. Let employees themselves keep order about what they should eat and when they have a home office.</Typography>
             <List>
-              <ListItem sx={{ mb: 2 }} disablePadding>
+              <ListItem sx={{ mb: 1 }} disablePadding>
                 <ListItemIcon>
                   <img src="/ok.png" alt="" />
                 </ListItemIcon>

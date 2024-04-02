@@ -144,7 +144,9 @@ const CategoryTab = () => {
             </Stack>
           </Stack>
         </Stack>
-        <Box>
+        <Box sx={{
+          
+        }}>
           <Slider ref={sliderRef} {...settings}>
             <ProductCard />
             <ProductCard />
