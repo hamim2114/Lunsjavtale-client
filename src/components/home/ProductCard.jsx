@@ -7,9 +7,12 @@ const ProductCard = () => {
   const theme = useTheme()
   return (
     <Stack sx={{
+      alignSelf:'center',
       width: { xs: '100%', md: '396px' },
       p: { xs: '12px', md: '24px' },
-      border: `1px solid ${theme.palette.primary.main}`
+      border: `1px solid ${theme.palette.primary.main}`,
+      borderRadius:'8px',
+      cursor:'grab'
     }}>
       <Typography sx={{
         fontSize: { xs: '14px', md: '18px' },

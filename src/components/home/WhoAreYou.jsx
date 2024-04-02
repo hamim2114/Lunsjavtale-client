@@ -11,7 +11,6 @@ const TabItem = styled(Tab)(({ theme }) => ({
   borderRadius: "30px",
   textAlign: "center",
   textTransform: 'none',
-  marginRight:'10px',
   transition: "all .5s",
   padding: "10px 15px",
   color: "#555555",
@@ -42,7 +41,7 @@ function CustomTabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box>
           {children}
         </Box>
       )}
@@ -79,8 +78,8 @@ function WhoAreYou() {
             },
           }}
         >
-          <TabItem style={{borderRadius: "30px"}} disableRipple label={"The Boss"} />
-          <TabItem style={{borderRadius: "30px"}} disableRipple label={"Employee"} />
+          <TabItem style={{borderRadius: "30px",marginRight:'20px'}} disableRipple label={"The Boss"} />
+          <TabItem style={{borderRadius: "30px",marginRight:'20px'}} disableRipple label={"Employee"} />
           <TabItem style={{borderRadius: "30px"}} disableRipple label={"Lunch Manager"} />
         </Tabs>
       </Stack>

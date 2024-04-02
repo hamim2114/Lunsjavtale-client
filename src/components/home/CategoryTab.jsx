@@ -43,7 +43,7 @@ function CustomTabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box>
           {children}
         </Box>
       )}
@@ -67,6 +67,7 @@ const settings = {
   pauseOnHover: true,
   swipeToSlide: true,
   autoplay: true,
+  // centerMode: true,
   autoplaySpeed: 2000,
   responsive: [
     {
@@ -143,7 +144,7 @@ const CategoryTab = () => {
             </Stack>
           </Stack>
         </Stack>
-        <Box >
+        <Box>
           <Slider ref={sliderRef} {...settings}>
             <ProductCard />
             <ProductCard />

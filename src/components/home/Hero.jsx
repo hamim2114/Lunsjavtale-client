@@ -9,12 +9,13 @@ const Hero = () => {
       backgroundImage: 'url(/BG.png)',
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
+      p:0,
       // backgroundPosition:'left',
       height: { xs: '1044px', md: '920px' }
     }}>
       <Container maxWidth='lg'>
         <Stack direction='row' alignItems='center' justifyContent='space-between' py={2}>
-          <Box sx={{ display: { xs: 'none', lg: 'block' } }}></Box>
+          {/* <Box sx={{ display: { xs: 'none', lg: 'block' } }}></Box> */}
           <Box sx={{
             width: { xs: '96px', md: '124px' }
           }}>
@@ -30,7 +31,7 @@ const Hero = () => {
             // flex: 1,
             color: '#fff',
             width: {xs:'100%',md:'50%'},
-            gap: { xs: 3, md: 5 },
+            gap: { xs: 3, md: 3 },
             justifyContent: 'center'
           }}>
             <Typography sx={{
@@ -39,7 +40,7 @@ const Hero = () => {
               fontWeight: 800,
               // lineHeight: '57.6px'
             }}>The next generation <br /> of work lunches</Typography>
-            <Typography sx={{ fontSize: {xs:'14px',md:'18px'}, fontWeight: 200 }}>Let employees manage their own lunch with just a few keystrokes. Cut administration, costs and food waste, while employees are delivered exactly the lunch they want.</Typography>
+            <Typography sx={{ fontSize: {xs:'14px',md:'18px'}, fontWeight: 200,mb:1}}>Let employees manage their own lunch with just a few keystrokes. Cut administration, costs and food waste, while employees are delivered exactly the lunch they want.</Typography>
 
             <Stack direction='row' alignItems='center' gap={1} justifyContent={{ xs: 'start', sm: 'space-around', lg: 'space-between' }}>
               <Stack sx={{
@@ -78,11 +79,11 @@ const Hero = () => {
               <Button size='small' sx={{
                 textWrap: 'nowrap',
                 fontWeight: 700,
-                fontSize: { xs: '12px', md: '15px' },
+                fontSize: { xs: '10px',sm:'12px', md: '15px' },
                 borderRadius: '38px',
                 bgcolor: '#F5F5F5',
                 px: { xs: 1, md: 2 }
-              }} startIcon={<Chat sx={{ fontSize: '15px' }} />}>See if we deliver to you</Button>
+              }} startIcon={<Chat size='small' />}>See if we deliver to you</Button>
             </Stack>
 
           </Stack>

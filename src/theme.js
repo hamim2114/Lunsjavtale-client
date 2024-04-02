@@ -18,10 +18,13 @@ export const theme = createTheme({
     // }
   },
   components: {
-    // MuiContainer:
-    //   // styleOverrides:{
-    //   //   maxWidthXl: '368px'
-    //   // }
+    // MuiContainer: {
+    //  styleOverrides:{
+    //   // disableGutters:true
+    //   root:{
+    //     marginTop: '50px'
+    //   }
+    //  }
     // },
     MuiButton: {
       styleOverrides: {

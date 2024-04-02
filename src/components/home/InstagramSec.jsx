@@ -45,14 +45,14 @@ const InstagramSec = () => {
       <Stack direction={{ xs: 'column', md: 'row' }} gap={3} justifyContent='center'>
         <Box sx={imgContainer}>
           <img style={imgContainerImg} src="/insImg1.png" alt="" />
-          <Typography sx={imgContainerTitle}>lunsjkollektivet</Typography>
+          <Typography sx={imgContainerTitle}>lunsjavtale</Typography>
           <Box sx={imgContainerBtn} >
             Instagram
           </Box>
         </Box>
         <Box sx={imgContainer}>
           <img style={imgContainerImg} src="/insImg2.png" alt="" />
-          <Typography sx={imgContainerTitle}>lunsjkollektivet</Typography>
+          <Typography sx={imgContainerTitle}>lunsjavtale</Typography>
           <Box sx={imgContainerBtn} >
             Instagram
           </Box>
@@ -64,7 +64,7 @@ const InstagramSec = () => {
           position: 'relative'
         }}>
           <img style={imgContainerImg} src="/insImg3.png" alt="" />
-          <Typography sx={imgContainerTitle}>lunsjkollektivet</Typography>
+          <Typography sx={imgContainerTitle}>lunsjavtale</Typography>
           <Box sx={imgContainerBtn} >
             Instagram
           </Box>
@@ -79,21 +79,21 @@ const InstagramSec = () => {
           position: 'relative'
         }}>
           <img style={imgContainerImg} src="/insImg4.png" alt="" />
-          <Typography sx={imgContainerTitle}>lunsjkollektivet</Typography>
+          <Typography sx={imgContainerTitle}>lunsjavtale</Typography>
           <Box sx={imgContainerBtn} >
             Instagram
           </Box>
         </Box>
         <Box sx={imgContainer}>
           <img style={imgContainerImg} src="/insImg5.png" alt="" />
-          <Typography sx={imgContainerTitle}>lunsjkollektivet</Typography>
+          <Typography sx={imgContainerTitle}>lunsjavtale</Typography>
           <Box sx={imgContainerBtn} >
             Instagram
           </Box>
         </Box>
         <Box sx={imgContainer}>
           <img style={imgContainerImg} src="/insImg6.png" alt="" />
-          <Typography sx={imgContainerTitle}>lunsjkollektivet</Typography>
+          <Typography sx={imgContainerTitle}>lunsjavtale</Typography>
           <Box sx={imgContainerBtn} >
             Instagram
           </Box>

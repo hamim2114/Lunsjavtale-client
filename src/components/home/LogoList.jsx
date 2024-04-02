@@ -16,22 +16,19 @@ const LogoList = () => {
   const match = useMediaQuery('(min-width:600px)')
 
   return (
-    <Container maxWidth='xl' >
+    <Container maxWidth='xl' sx={{ my: { xs: 5, md: 10 } }}>
       <Marquee autoFill direction='right' gradient={match} speed={20}>
-        {/* <Stack direction='row' gap={{xs:5,md: 8,lg:12}}> */}
-          {
-            logo.map((item, i) => (
-              <Box key={i} sx={{
-                width: { xs: '80px', md: '100px', lg: '160px' },
-                mr:{xs:5,md:8,lg:12}
-              }}>
-                <img style={{ width: '100%' }} src={item.img} alt="" />
-              </Box>
-            ))
-          }
-        {/* </Stack> */}
+        {
+          logo.map((item, i) => (
+            <Box key={i} sx={{
+              width: { xs: '80px', md: '100px', lg: '160px' },
+              mr: { xs: 5, md: 8, lg: 12 }
+            }}>
+              <img style={{ width: '100%' }} src={item.img} alt="" />
+            </Box>
+          ))
+        }
       </Marquee>
-
     </Container>
   )
 }

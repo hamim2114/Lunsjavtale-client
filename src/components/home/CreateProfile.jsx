@@ -16,7 +16,7 @@ const bigTitle = {
 const CreateProfile = () => {
   return (
     <Container maxWidth='xxl' sx={{ bgcolor: 'light.main' }}>
-      <Container maxWidth='lg' sx={{ py: '40px' }}>
+      <Container maxWidth='lg' sx={{ py: '40px',px:0 }}>
 
         <Stack direction={{ xs: 'column', sm: 'row' }} mb={10} gap={{ xs: 5, md: 10 }} justifyContent='space-between' alignItems='center'>
           <Box sx={{
