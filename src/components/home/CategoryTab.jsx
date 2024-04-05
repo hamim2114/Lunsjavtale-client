@@ -153,8 +153,8 @@ const CategoryTab = (props) => {
               </Stack>
               <Box px={1}>
                 <Carousel
-                  swipeable={false}
-                  draggable={true}
+                  swipeable={true}
+                  // draggable={true}
                   showDots={false}
                   arrows={false}
                   rewindWithAnimation={true}

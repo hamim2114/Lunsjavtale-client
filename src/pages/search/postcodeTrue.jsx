@@ -44,7 +44,10 @@ const PostCodeTrue = () => {
           <Typography sx={{
             width: '100%',
             padding: '8px 24px',
-            bgcolor: '#F3FFFB'
+            bgcolor: 'primary.main',
+            borderRadius:'8px',
+            fontSize:'18px',
+            color:'#fff'
           }}>
             We  deliver to this postcode yet. But fill in the fields below and we'll see what we can do. 🧑‍🍳
           </Typography>
@@ -65,13 +68,13 @@ const PostCodeTrue = () => {
             <Link to='/'>
               <Button>Back</Button>
             </Link>
-            <Button variant='contained' color='primary'>Sing up</Button>
+            <Button variant='contained' color='primary'>Sign up</Button>
           </Stack>
           <Box sx={{
             display: 'inline-flex', mt: 2
           }}>
             <Typography>Already have a account? </Typography>
-            <Typography sx={{ fontWeight: 'bold', color: 'primary.main', ml: 1 }}>Sing in here </Typography>
+            <Typography sx={{ fontWeight: 'bold', color: 'primary.main', ml: 1 }}>Sign in here </Typography>
           </Box>
         </Box>
       </Stack>

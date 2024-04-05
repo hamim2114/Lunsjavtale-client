@@ -10,6 +10,9 @@ export const theme = createTheme({
     },
     light: {
       main: '#F5F5F5'
+    },
+    white: {
+      main: '#fff'
     }
     // lightGray: '#F5F5F5',
     // common: {

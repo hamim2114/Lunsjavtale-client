@@ -44,7 +44,10 @@ const PostCodeFalse = () => {
           <Typography sx={{
             width: '100%',
             padding: '8px 24px',
-            bgcolor: '#FFF3F3'
+            bgcolor: '#C94F2A',
+            color:'#fff',
+            fontSize:'18px',
+            borderRadius:'8px'
           }}>
             We do not deliver to this postcode yet. But fill in the fields below and we'll see what we can do. 🧑‍🍳
           </Typography>

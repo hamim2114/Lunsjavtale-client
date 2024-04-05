@@ -22,8 +22,8 @@ const Search = () => {
       console.log(data)
       const res = data.checkPostCode;
       setPostcodeAvailable(res)
-      if(res) navigate(`/search/${postcode}/true`)
-      if(!res) navigate(`/search/${postcode}/false`)
+      if(res) navigate(`/search/${postcode}/available`)
+      if(!res) navigate(`/search/${postcode}/not-available`)
     }
   });
 
