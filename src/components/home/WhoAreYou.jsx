@@ -47,7 +47,7 @@ function CustomTabPanel(props) {
       )}
     </div>
   );
-};
+}
 CustomTabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,

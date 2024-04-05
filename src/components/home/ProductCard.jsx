@@ -3,7 +3,8 @@ import React from 'react'
 import CButton from '../../common/CButton/CButton'
 import { useTheme } from '@emotion/react'
 
-const ProductCard = () => {
+const ProductCard = ({data}) => {
+  // console.log('product card:',data)
   const theme = useTheme()
   return (
     <Stack sx={{
@@ -23,17 +24,17 @@ const ProductCard = () => {
         fontSize: { xs: '24px', md: '32px' },
         fontWeight: 600,
         mb: { xs: 1, md: 2 }
-      }}>Vegetarian</Typography>
+      }}>{data?.node?.name}</Typography>
       <Typography sx={{
         mb: 2,
         fontSize: { xs: '14px', md: '16px' }
-      }}>Do you want a regular vegetarian, or do you like to vary throughout the week? We always have at least one vegetarian option, and also offer vegan.</Typography>
+      }}>{data.node.description}</Typography>
       <Box sx={{
         width: '100%',
         height: '280px',
         mb: 2
       }}>
-        <img style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} src="/Image (1).png" alt="" />
+        <img style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} src={data?.node?.photoUrl} alt="" />
       </Box>
       <Typography sx={{
         fontSize: { xs: '12px', md: '14px' }

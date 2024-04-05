@@ -1,9 +1,22 @@
 import { ArrowRightAlt, Chat } from '@mui/icons-material'
 import { Box, Button, Container, Input, Stack, TextField, Typography } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import CButton from '../../common/CButton/CButton'
+import { useNavigate } from 'react-router-dom'
 
 const Hero = () => {
+  const [postcode, setPostcode] = useState(null);
+  const [inputdetect, setInputdetect] = useState(false)
+
+  const navigate = useNavigate()
+
+  const handleSearchClick = () => {
+    if(postcode !== null) {
+      navigate(`/search/${postcode}`)
+    }else{
+      setInputdetect(true)
+    }
+  }
   return (
     <Container maxWidth='xxl' sx={{
       backgroundImage: 'url(/BG.png)',
@@ -72,10 +85,10 @@ const Hero = () => {
               borderRadius: '40px',
               pl: { xs: 1.5, md: 2 },
             }}>
-              <Input disableUnderline sx={{
+              <Input autoFocus={inputdetect} disableUnderline sx={{
                 border: 'none', outline: 'none',
                 flex: 1, fontSize: { xs: '11px', sm: '13px',md:'15px' }, borderRadius: '38px'
-              }} type="text" placeholder="Your company's postcode" />
+              }} type="number" placeholder="Your company's postcode" onChange={e=> setPostcode(e.target.value)} />
               <Button size='small' sx={{
                 textWrap: 'nowrap',
                 fontWeight: 700,
@@ -83,8 +96,9 @@ const Hero = () => {
                 borderRadius: '38px',
                 bgcolor: '#F5F5F5',
                 px: { xs: 1.5, md: 2 }
-              }} startIcon={<Chat size='small' />}>See if we deliver to you</Button>
+              }} startIcon={<Chat size='small' />} onClick={handleSearchClick}>See if we deliver to you</Button>
             </Stack>
+            <Typography sx={{ml:2,color:'red', visibility: inputdetect ? 'visible':'hidden'}}>Post Code Needed!</Typography>
 
           </Stack>
           <Box sx={{

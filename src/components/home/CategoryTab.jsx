@@ -6,6 +6,11 @@ import ProductCard from './ProductCard';
 import Slider from 'react-slick';
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import CButton from '../../common/CButton/CButton';
+import { useQuery } from '@apollo/client';
+import { GET_ALL_CATEGORY, } from '../../graphql/query';
+import Loader from '../../common/loader/Index';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 const TabItem = styled(Tab)(({ theme }) => ({
   position: "relative",
@@ -57,51 +62,58 @@ CustomTabPanel.propTypes = {
 };
 
 
-const settings = {
-  infinite: true,
-  speed: 1000,
-  arrows: false,
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  lazyLoad: true,
-  // pauseOnHover: true,
-  swipeToSlide: true,
-  autoplay: true,
-  // centerMode: true,
-  autoplaySpeed: 2000,
-  responsive: [
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
-      }
-    },
-    {
-      breakpoint: 800,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-  ]
+const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1278 },
+    items: 3
+  },
+  tablet: {
+    breakpoint: { max: 1074, min: 700 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 600, min: 0 },
+    items: 1
+  }
 };
 
-const CategoryTab = () => {
+const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
+  const { carouselState: { currentSlide } } = rest;
+  return (
+
+    <Stack direction='row' sx={{
+      display: { xs: 'none', md: 'block' },
+      mt: 2, ml: 2,
+      // position:'absolute',top:0
+    }}>
+      <CButton disable={currentSlide === 0 ? true : false} onClick={() => previous()} variant='outlined' style={{ height: '40px', mr: 2, borderRadius: '50px', width: '90px' }}>
+        <ArrowBack />
+      </CButton>
+      <CButton onClick={() => next()} variant='outlined' style={{ height: '40px', borderRadius: '50px', width: '90px' }}>
+        <ArrowForward />
+      </CButton>
+    </Stack>
+  );
+};
+
+
+const CategoryTab = (props) => {
   const [tabIndex, setTabIndex] = useState(0);
+  const [allCategorys, setAllCategorys] = useState([])
 
-  const sliderRef = useRef(null);
-
-  const next = () => {
-    sliderRef.current.slickNext();
-  };
-
-  const previous = () => {
-    sliderRef.current.slickPrev();
-  };
+  const { loading, error } = useQuery(GET_ALL_CATEGORY, {
+    onCompleted: (data) => {
+      const res = data?.categories?.edges
+      setAllCategorys(res)
+    },
+  });
 
   return (
-    <Container maxWidth='lg' sx={{ my: { xs: 10, md: 15 },p:0 }}>
+    <Container maxWidth='lg' sx={{ my: { xs: 10, md: 15 }, p: 0 }}>
       <Stack direction='row' sx={{
         mb: 3,
         justifyContent: 'center',
@@ -119,77 +131,60 @@ const CategoryTab = () => {
             },
           }}
         >
-          <TabItem disableRipple label={"Lunch boxes"} />
-          <TabItem disableRipple label={"Hot food"} />
-          <TabItem disableRipple label={"Season"} />
-          <TabItem disableRipple label={"Something extra"} />
-          <TabItem disableRipple label={"Catering"} />
+          {
+            loading ? <Loader /> : error ? <h4>Something went wrong!</h4> :
+              allCategorys.map((item) => (
+                <TabItem key={item.node.id} disableRipple label={item.node.name} />
+              ))
+          }
         </Tabs>
       </Stack>
       {
-        [1, 2, 3, 4, 5].map((item, id) => (
-          <CustomTabPanel key={id} value={tabIndex} index={id}>
-            <Stack>
-              <Typography sx={{ fontSize: '32px', mb: 2, fontWeight: 600, textAlign: 'center' }}>Lunch boxes</Typography>
-              <Typography sx={{ mb: 6,px:'16px', maxWidth: '727px', alignSelf: 'center', textAlign: 'center', fontSize: { xs: '14px', md: '16px' } }}>Our standard categories are fixed throughout the year, but the dish itself changes daily. This means that if you choose salad, you will receive a new salad every day!</Typography>
-              <Stack direction='row' justifyContent='space-between' sx={{ mb: 4 }}>
-                <Typography sx={{px:'16px'}}>*All prices are ex. VAT. Shipping price NOK 120 ex. VAT per delivery.</Typography>
-                <Stack direction='row' sx={{ display: { xs: 'none', md: 'block' } }}>
-                  <CButton onClick={previous} variant='outlined' style={{ height: '40px', mr: 2, borderRadius: '50px', width: '90px' }}>
-                    <ArrowBack />
-                  </CButton>
-                  <CButton onClick={next} variant='outlined' style={{ height: '40px', borderRadius: '50px', width: '90px' }}>
-                    <ArrowForward />
-                  </CButton>
+        loading ? <Loader /> : error ? <h4>Something went wrong!</h4> :
+          allCategorys.map((item, id) => (
+            <CustomTabPanel key={id} value={tabIndex} index={id}>
+              <Stack>
+                <Typography sx={{ fontSize: '32px', mb: 2, fontWeight: 600, textAlign: 'center' }}>{item.node.name}</Typography>
+                <Typography sx={{ mb: 6, px: '16px', maxWidth: '727px', alignSelf: 'center', textAlign: 'center', fontSize: { xs: '14px', md: '16px' } }}>{item.node.description}</Typography>
+                <Stack direction='row' justifyContent='space-between' sx={{ mb: 4 }}>
+                  <Typography sx={{ px: '16px' }}>*All prices are ex. VAT. Shipping price NOK 120 ex. VAT per delivery.</Typography>
+                  {/* <ButtonGroup /> */}
                 </Stack>
               </Stack>
-            </Stack>
-            <Box px={1}>
-              <Slider ref={sliderRef} {...settings}>
-                <Box px={1}>
-                  <ProductCard />
-                </Box>
-                <Box px={1}>
-                  <ProductCard />
-                </Box>
-                <Box px={1}>
-                  <ProductCard />
-                </Box>
-
-
-              </Slider>
-            </Box>
-          </CustomTabPanel>
-        ))
+              <Box px={1}>
+                <Carousel
+                  swipeable={false}
+                  draggable={true}
+                  showDots={false}
+                  arrows={false}
+                  rewindWithAnimation={true}
+                  rewind={true}
+                  responsive={responsive}
+                  // infinite={true}
+                  renderButtonGroupOutside={true}
+                  autoPlay={true}
+                  customButtonGroup={<ButtonGroup />}
+                  // autoPlay={props.deviceType !== "mobile" ? true : false}
+                  autoPlaySpeed={2000}
+                  keyBoardControl={true}
+                  customTransition="all 1s"
+                  transitionDuration={1000}
+                  containerClass="carousel-container"
+                  removeArrowOnDeviceType={["tablet", "mobile"]}
+                  deviceType={props.deviceType}
+                >
+                  {
+                    item?.node?.products?.edges?.map((data, id) => (
+                      <Box key={id} px={1}>
+                        <ProductCard data={data} />
+                      </Box>
+                    ))
+                  }
+                </Carousel>
+              </Box>
+            </CustomTabPanel>
+          ))
       }
-
-      {/* <CustomTabPanel value={tabIndex} index={0}>
-        <Stack>
-          <Typography sx={{ fontSize: '32px', mb: 2, fontWeight: 600, textAlign: 'center' }}>Lunch boxes</Typography>
-          <Typography sx={{ mb: 6, maxWidth: '727px', alignSelf: 'center', textAlign: 'center', fontSize: {xs:'14px',md:'16px'} }}>Our standard categories are fixed throughout the year, but the dish itself changes daily. This means that if you choose salad, you will receive a new salad every day!</Typography>
-          <Stack direction='row' justifyContent='space-between' sx={{ mb: 4 }}>
-            <Typography >*All prices are ex. VAT. Shipping price NOK 120 ex. VAT per delivery.</Typography>
-            <Stack direction='row' sx={{display:{xs:'none',md:'block'}}}>
-              <CButton onClick={previous} variant='outlined' style={{ height: '40px',mr:2, borderRadius: '50px', width: '90px' }}>
-                <ArrowBack />
-              </CButton>
-              <CButton onClick={next} variant='outlined' style={{ height: '40px', borderRadius: '50px', width: '90px' }}>
-                <ArrowForward />
-              </CButton>
-            </Stack>
-          </Stack>
-        </Stack>
-        <Box >
-          <Slider ref={sliderRef} {...settings}>
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-          </Slider>
-        </Box>
-      </CustomTabPanel>
-      <CustomTabPanel value={tabIndex} index={1}>
-        2
-      </CustomTabPanel> */}
     </Container>
   )
 }

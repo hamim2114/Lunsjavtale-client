@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache, from } from "@apollo/client";
+import { ApolloClient, HttpLink, InMemoryCache, from } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import { setContext } from "@apollo/client/link/context";
 import { relayStylePagination } from "@apollo/client/utilities";
@@ -24,14 +24,15 @@ const errorLink = onError(
     // Graphql Error hapenning
     if (graphQLErrors) {
       graphQLErrors.forEach(({ message, extensions, locations, path }) => {
-        if (
-          message === "Signature has expired" ||
-          message === "You are not authorized user."
-        ) {
-          localStorage.removeItem("token");
-          localStorage.removeItem("refresh");
-          window.location.href = "/admin/login";
-        }
+        console.log('graphql err:',message)
+        // if (
+        //   message === "Signature has expired" ||
+        //   message === "You are not authorized user."
+        // ) {
+        //   localStorage.removeItem("token");
+        //   localStorage.removeItem("refresh");
+        //   window.location.href = "/admin/login";
+        // }
       });
     }
 
@@ -43,13 +44,13 @@ const errorLink = onError(
 );
 const BASE_URL = import.meta.env.BASE_URL;
 
-// const link = from([
-//   errorLink,
-//   new createUploadLink({ uri: `${BASE_URL}graphql/` }),
-// ]);
+const link = from([
+  errorLink,
+  new HttpLink({ uri: 'https://api.lunsjavtale.no/graphql/' }),
+]);
 
 export const client = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: BASE_URL
+  link: link
   // link: authLink.concat(link),
 });
