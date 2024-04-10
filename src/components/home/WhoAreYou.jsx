@@ -5,6 +5,7 @@ import { styled } from "@mui/material/styles";
 import Tab, { tabClasses } from "@mui/material/Tab";
 import PropTypes from 'prop-types';
 import CButton from "../../common/CButton/CButton";
+import { Link } from "react-router-dom";
 
 const TabItem = styled(Tab)(({ theme }) => ({
   position: "relative",
@@ -78,9 +79,9 @@ function WhoAreYou() {
             },
           }}
         >
-          <TabItem style={{borderRadius: "30px",marginRight:'10px'}} disableRipple label={"The Boss"} />
-          <TabItem style={{borderRadius: "30px",marginRight:'10px'}} disableRipple label={"Employee"} />
-          <TabItem style={{borderRadius: "30px"}} disableRipple label={"Lunch Manager"} />
+          <TabItem style={{ borderRadius: "30px", marginRight: '10px' }} disableRipple label={"The Boss"} />
+          <TabItem style={{ borderRadius: "30px", marginRight: '10px' }} disableRipple label={"Employee"} />
+          <TabItem style={{ borderRadius: "30px" }} disableRipple label={"Lunch Manager"} />
         </Tabs>
       </Stack>
 
@@ -100,13 +101,15 @@ function WhoAreYou() {
                       <img src="/ok.png" alt="" />
                     </ListItemIcon>
                     <ListItemText sx={{ ml: -3 }}>
-                      <Typography sx={{fontSize:{xs:'14px',md:'18px'}}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Typography>
+                      <Typography sx={{ fontSize: { xs: '14px', md: '18px' } }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Typography>
                     </ListItemText>
                   </ListItem>
                 ))
               }
             </List>
-            <CButton variant='contained' color='light' style={{ height: { xs: '45px', md: '56px' }, width: '136px', color: 'secondary.main' }}>Get Start</CButton>
+            <Link to='/search'>
+              <CButton variant='contained' color='light' style={{ height: { xs: '45px', md: '56px' }, width: '136px', color: 'secondary.main' }}>Get Start</CButton>
+            </Link>
           </Stack>
           <Stack sx={{
             flex: 1,
@@ -171,14 +174,16 @@ function WhoAreYou() {
                       <img src="/ok.png" alt="" />
                     </ListItemIcon>
                     <ListItemText sx={{ ml: -3 }}>
-                      <Typography sx={{fontSize:{xs:'14px',md:'18px'}}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Typography>
+                      <Typography sx={{ fontSize: { xs: '14px', md: '18px' } }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Typography>
                     </ListItemText>
                   </ListItem>
                 ))
               }
             </List>
             <Stack direction='row ' gap={2}>
-              <CButton variant='contained' color='light' style={{ height: { xs: '45px', md: '56px' }, width: '136px', color: 'secondary.main' }}>Get Start</CButton>
+              <Link to='/search'>
+                <CButton variant='contained' color='light' style={{ height: { xs: '45px', md: '56px' }, width: '136px', color: 'secondary.main' }}>Get Start</CButton>
+              </Link>
               <CButton variant='outlined' style={{ height: { xs: '45px', md: '56px' }, width: '136px' }}>Tip The Boss</CButton>
             </Stack>
           </Stack>
@@ -199,7 +204,7 @@ function WhoAreYou() {
                   <img src="/ok.png" alt="" />
                 </ListItemIcon>
                 <ListItemText sx={{ ml: -3 }}>
-                  <Typography sx={{fontSize:{xs:'14px',md:'18px'}}}>Stress-free tech allows you to manage employees, have full cost control and decide how much the company will pay.</Typography>
+                  <Typography sx={{ fontSize: { xs: '14px', md: '18px' } }}>Stress-free tech allows you to manage employees, have full cost control and decide how much the company will pay.</Typography>
                 </ListItemText>
               </ListItem>
               <ListItem sx={{ mb: 2 }} disablePadding>
@@ -207,7 +212,7 @@ function WhoAreYou() {
                   <img src="/ok.png" alt="" />
                 </ListItemIcon>
                 <ListItemText sx={{ ml: -3 }}>
-                  <Typography sx={{fontSize:{xs:'14px',md:'18px'}}}>We even fix payroll deductions and have full control over tax rules😇</Typography>
+                  <Typography sx={{ fontSize: { xs: '14px', md: '18px' } }}>We even fix payroll deductions and have full control over tax rules😇</Typography>
                 </ListItemText>
               </ListItem>
               <ListItem sx={{ mb: 2 }} disablePadding>
@@ -215,12 +220,14 @@ function WhoAreYou() {
                   <img src="/ok.png" alt="" />
                 </ListItemIcon>
                 <ListItemText sx={{ ml: -3 }}>
-                  <Typography sx={{fontSize:{xs:'14px',md:'18px'}}}>Let's fix lunch. Then you can focus on everything else!</Typography>
+                  <Typography sx={{ fontSize: { xs: '14px', md: '18px' } }}>Let's fix lunch. Then you can focus on everything else!</Typography>
                 </ListItemText>
               </ListItem>
             </List>
             <Stack direction='row ' gap={2}>
-              <CButton variant='contained' color='light' style={{ height: { xs: '45px', md: '56px' }, width: '219px', color: 'secondary.main' }}>Become a customer</CButton>
+              <Link to='/search'>
+                <CButton variant='contained' color='light' style={{ height: { xs: '45px', md: '56px' }, width: '219px', color: 'secondary.main' }}>Become a customer</CButton>
+              </Link>
             </Stack>
           </Stack>
           <Stack sx={{
@@ -232,15 +239,15 @@ function WhoAreYou() {
               width: { xs: '100%', md: '713px' },
               height: { xs: '404px', md: '580px' },
               position: 'relative',
-              mt: {xs:5,md:0}
+              mt: { xs: 5, md: 0 }
             }}>
               <img style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} src="/lunch.png" alt="" />
               <Box sx={{
                 position: 'absolute',
-                top: '-50px',left: '-50px',
-                width: {xs:'120px',md:'160px'}
+                top: '-50px', left: '-50px',
+                width: { xs: '120px', md: '160px' }
               }}>
-                <img style={{width:'100%',height:'100%'}} src="/image 26.png" alt="" />
+                <img style={{ width: '100%', height: '100%' }} src="/image 26.png" alt="" />
               </Box>
             </Box>
           </Stack>

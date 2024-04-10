@@ -1,42 +1,34 @@
 import { Chat, KeyboardArrowLeft } from '@mui/icons-material'
 import { Box, Button, Container, Input, Stack, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import React, {useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { CHECk_POST_CODE } from '../../graphql/query'
 import LoadingBar from '../../common/loadingBar/LoadingBar'
 
 const Search = () => {
-  const {postcode} = useParams();
-  const [code, setCode] = useState(postcode);
-  const [getCode, setGetCode] = useState(null);
-  const [postcodeAvailable, setPostcodeAvailable] = useState();
+  const [postcode, setPostcode] = useState();
+  const [inputdetect, setInputdetect] = useState(false)
 
   const navigate = useNavigate()
 
-  const {loading,refetch} = useQuery(CHECk_POST_CODE, {
-    variables: {
-      postCode: parseInt(getCode)
-    },
+  const { loading, refetch } = useQuery(CHECk_POST_CODE, {
     onCompleted: (data) => {
       console.log(data)
       const res = data.checkPostCode;
-      setPostcodeAvailable(res)
-      if(res) navigate(`/search/${postcode}/available`)
-      if(!res) navigate(`/search/${postcode}/not-available`)
+      if (res) navigate(`/search/${postcode}/available`)
+      if (!res) navigate(`/search/${postcode}/not-available`)
     }
   });
 
   const handleSearchClick = () => {
-    setGetCode(code);
-    refetch()
+    if (postcode !== null) {
+      refetch({ postCode: parseInt(postcode) });
+    } else {
+      setInputdetect(true)
+    }
   }
-  useEffect(() => {
-    setGetCode(postcode)
-  }, [postcode])
-  
-  console.log(postcodeAvailable)
-  
+
   return (
     <Container maxWidth='lg' sx={{
       minHeight: '100vh',
@@ -50,7 +42,7 @@ const Search = () => {
           Back To Home
         </Button>
       </Link>
-      {loading && <LoadingBar/>}
+      {loading && <LoadingBar />}
       <Stack direction={{ xs: 'column', md: 'row' }} alignItems='center' gap={{ xs: 4, md: 8 }}>
         <Box sx={{
           flex: 1,
@@ -81,7 +73,7 @@ const Search = () => {
             <Input disableUnderline sx={{
               border: 'none', outline: 'none',
               flex: 1, fontSize: { xs: '11px', sm: '13px', md: '15px' }, borderRadius: '38px'
-            }} type="number" placeholder="Your company's postcode" value={code} onChange={e=>setCode(e.target.value)} />
+            }} type="number" placeholder="Your company's postcode" value={postcode} onChange={e => setPostcode(e.target.value)} />
             <Button disabled={loading} onClick={handleSearchClick} variant='contained' size='small' sx={{
               textWrap: 'nowrap',
               fontWeight: 700,
@@ -91,6 +83,7 @@ const Search = () => {
               px: { xs: 1.5, md: 2 }
             }} startIcon={<Chat size='small' />}>See if we deliver to you</Button>
           </Stack>
+          <Typography sx={{ ml: 2, color: 'red', visibility: inputdetect ? 'visible' : 'hidden' }}>Post Code Needed!</Typography>
         </Box>
       </Stack>
     </Container>

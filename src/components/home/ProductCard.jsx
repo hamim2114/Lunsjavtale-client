@@ -2,18 +2,19 @@ import { Box, Stack, Typography } from '@mui/material'
 import React from 'react'
 import CButton from '../../common/CButton/CButton'
 import { useTheme } from '@emotion/react'
+import { Link } from 'react-router-dom'
 
-const ProductCard = ({data}) => {
+const ProductCard = ({ data }) => {
   // console.log('product card:',data)
   const theme = useTheme()
   return (
     <Stack sx={{
-      alignSelf:'center',
+      alignSelf: 'center',
       width: { xs: '100%', md: '396px' },
       p: { xs: '12px', md: '24px' },
       border: `1px solid ${theme.palette.primary.main}`,
-      borderRadius:'8px',
-      cursor:'grab'
+      borderRadius: '8px',
+      cursor: 'grab'
     }}>
       <Typography sx={{
         fontSize: { xs: '14px', md: '18px' },
@@ -43,13 +44,15 @@ const ProductCard = ({data}) => {
         <Typography>Contains:</Typography>
         <Typography sx={{ fontSize: '12px', ml: 1 }}>570 Calories, 40g carbohydrate , 31 g fat, 27 grams of protein</Typography>
       </Box>
-      <Stack direction={{xs:'column',sm:'row'}} gap={1}>
+      <Stack direction={{ xs: 'column', sm: 'row' }} gap={1}>
         <CButton variant='contained' color='light' style={{ flex: 1, height: { xs: '45px', md: '56px', fontSize: { xs: '14px', md: '16px' } } }}>
           from 89, per person*
         </CButton>
-        <CButton style={{ height: { xs: '45px', md: '56px', fontSize: { xs: '14px', md: '16px' } } }} variant='contained' color='secondary'>
-          Get Stared
-        </CButton>
+        <Link to='/search'>
+          <CButton style={{ height: { xs: '45px', md: '56px', fontSize: { xs: '14px', md: '16px' } } }} variant='contained' color='secondary'>
+            Get Stared
+          </CButton>
+        </Link>
       </Stack>
     </Stack>
   )

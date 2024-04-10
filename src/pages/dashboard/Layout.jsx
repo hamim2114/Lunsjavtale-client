@@ -16,50 +16,96 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Outlet } from 'react-router-dom';
-import { CategoryOutlined, DoubleArrow, MailOutline, NotificationsNone, PeopleAltOutlined, Search, SettingsOutlined, ViewStreamOutlined } from '@mui/icons-material';
-import { Avatar, Badge, InputAdornment, Stack, TextField, styled } from '@mui/material';
+import { Link, Outlet, useLocation } from 'react-router-dom';
+import { AccountCircle, AccountCircleOutlined, CategoryOutlined, DoubleArrow, ExitToApp, Logout, MailOutline, NotificationsNone, PeopleAltOutlined, PersonAdd, Search, Settings, SettingsOutlined, VerifiedUser, ViewStreamOutlined } from '@mui/icons-material';
+import { Avatar, Badge, Button, Collapse, InputAdornment, Menu, MenuItem, Paper, Stack, TextField, Tooltip, styled } from '@mui/material';
 
 const drawerWidth = 264;
 
-const ListBtn = ({ style, text, icon }) => {
+const ListBtn = ({ style, text, icon, link, selected, onClick }) => {
   return (
-    <Box sx={{
-      display: 'inline-flex',
-      padding: '8px 12px',
-      borderRadius: '4px',
-      color: 'gray',
-      mb: 1,
-      cursor:'pointer',
-      ...style
-    }}>
-      {icon}
-      <Typography sx={{
-        fontSize:'16px',
-        fontWeight:500,ml:1
-      }}>{text}</Typography>
-    </Box>
+    <Link onClick={onClick} className='link' to={link ? link : ''}>
+      <Box sx={{
+        width: '100%',
+        display: 'inline-flex',
+        padding: '8px 12px',
+        borderRadius: '4px',
+        color: selected ? '#fff' : '#68686F',
+        mb: 1,
+        cursor: 'pointer',
+        bgcolor: selected ? 'primary.main' : '',
+        ...style
+      }}>
+        {icon}
+        <Typography sx={{
+          color: 'gray',
+          fontSize: '16px',
+          fontWeight: 400, ml: 1
+        }}>{text}</Typography>
+      </Box>
+    </Link>
   )
+};
+
+const paperProps = {
+  elevation: 0,
+  sx: {
+    overflow: 'visible',
+    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+    mt: 1.5,
+    '& .MuiAvatar-root': {
+      width: 32,
+      height: 32,
+      ml: -0.5,
+      mr: 1,
+    },
+    '&::before': {
+      content: '""',
+      display: 'block',
+      position: 'absolute',
+      top: 0,
+      right: 14,
+      width: 10,
+      height: 10,
+      bgcolor: 'background.paper',
+      transform: 'translateY(-50%) rotate(45deg)',
+      zIndex: 0,
+    },
+  },
 }
+
 
 function Layout() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [userMenuOpen, setUsermenuOpen] = useState(null);
+  const [openEmail, setOpenEmail] = useState(false)
+  const [openNotification, setOpenNotification] = useState(false);
+
+  const { pathname } = useLocation()
+
+  const open = Boolean(userMenuOpen);
+  const handleUserMenuOpen = (event) => {
+    setUsermenuOpen(event.currentTarget);
+  };
+  const handleUserMenuClose = () => {
+    setUsermenuOpen(null);
+  };
+
 
   const handleDrawerClose = () => {
-    setIsClosing(true);
+    setDrawerOpen(true);
     setMobileOpen(false);
   };
-
   const handleDrawerTransitionEnd = () => {
-    setIsClosing(false);
+    setDrawerOpen(false);
   };
-
   const handleDrawerToggle = () => {
-    if (!isClosing) {
+    if (!drawerOpen) {
       setMobileOpen(!mobileOpen);
     }
   };
+
 
   const drawer = (
     <Box sx={{
@@ -73,7 +119,7 @@ function Layout() {
         justifyContent: 'center', mt: 2
       }}>
         <Box sx={{
-          width: { xs: '96px', md: '180px' }
+          width: { xs: '150px', md: '180px' }
         }}>
           <img style={{ width: '100%' }} src="/Logo.svg" alt="" />
         </Box>
@@ -82,10 +128,11 @@ function Layout() {
       <Typography sx={{
         // width: '100%',
         padding: '16px 12px',
-        color: '#fff',
-        bgcolor: 'primary.main',
+        color: 'primary.main',
+        bgcolor: 'light.main',
         borderRadius: '8px',
-        fontSize: '14px',
+        fontSize: '15px',
+        fontWeight: 500,
         textAlign: 'center',
         m: 3
       }}>
@@ -97,28 +144,22 @@ function Layout() {
           textTransform: 'uppercase',
           fontSize: '14px', mb: 2, mt: 2
         }}>Jacqueline Hellestøl</Typography>
-        <ListBtn icon={<DoubleArrow />} text='My Side' style={{ bgcolor: 'light.main' }} />
-        <ListBtn icon={<PeopleAltOutlined />} text='Manage Staff' style={{}} />
+        <ListBtn onClick={handleDrawerClose} link='/dashboard/myside' icon={<DoubleArrow />} text='My Side'
+          selected={pathname === '/dashboard/myside' || pathname === '/dashboard/myside/cart' || pathname === '/dashboard/myside/checkout' || pathname === '/dashboard/myside/complete'} />
+        <ListBtn onClick={handleDrawerClose} link='/dashboard/manage-staff' icon={<PeopleAltOutlined />} text='Manage Staff'
+          selected={pathname === '/dashboard/manage-staff'} />
         <Typography sx={{
           color: '#C2C2C2',
           textTransform: 'uppercase',
           fontSize: '14px', my: 2
         }}>Company</Typography>
-        <ListBtn icon={<CategoryOutlined />} text='Products' style={{}} />
-        <ListBtn icon={<ViewStreamOutlined />} text='Orders' style={{}} />
-        <ListBtn icon={<SettingsOutlined />} text='Setting' style={{}} />
+        <ListBtn onClick={handleDrawerClose} link={'dashboard/products'} icon={<CategoryOutlined />} text='Products'
+          selected={pathname === '/dashboard/products'} />
+        <ListBtn onClick={handleDrawerClose} link={'dashboard/orders'} icon={<ViewStreamOutlined />} text='Orders'
+          selected={pathname === '/dashboard/orders'} />
+        <ListBtn onClick={handleDrawerClose} link={'dashboard/setting'} icon={<SettingsOutlined />} text='Setting'
+          selected={pathname === '/dashboard/setting'} />
       </Stack>
-
-      {/* <List>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <MailIcon />
-              </ListItemIcon>
-              <ListItemText primary={'text'} />
-              </ListItemButton>
-        </ListItem>
-      </List> */}
     </Box>
   );
 
@@ -135,7 +176,10 @@ function Layout() {
           boxShadow: 'none',
         }}
       >
-        <Toolbar>
+        <Toolbar sx={{
+          display: 'flex',
+          justifyContent: 'space-between'
+        }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -146,10 +190,11 @@ function Layout() {
             <MenuIcon />
           </IconButton>
           <TextField sx={{
-            mr: { xs: 0, sm: 2, md: 20 }
+            mr: { xs: 0, sm: 2, md: 20 },
+            maxWidth: '700px',
+            width: '100%'
           }}
             size='small'
-            fullWidth
             placeholder='Type to search'
             InputProps={{
               startAdornment: (
@@ -165,30 +210,116 @@ function Layout() {
             display: 'flex',
             alignItems: 'center'
           }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailOutline />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={0} color="error">
-                <NotificationsNone />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-haspopup="true"
-              // onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <Avatar />
-            </IconButton>
+            <Box sx={{
+              position: 'relative'
+            }}>
+              <Tooltip title="Message">
+                <IconButton onClick={() => (
+                  setOpenEmail(!openEmail),
+                  setOpenNotification(false)
+                )} sx={{ color: 'gray.main' }}>
+                  <Badge badgeContent={4} color="error">
+                    <MailOutline />
+                  </Badge>
+                </IconButton>
+              </Tooltip>
+              <Collapse sx={{
+                position: 'absolute',
+                right: { xs: -80, md: 0 },
+                top: 55,
+                zIndex: 9999999
+              }} in={openEmail}>
+                <Box sx={{
+                  width: { xs: '90vw', sm: '300px', md: '350px' },
+                  maxHeight: '500px',
+                  overflowY: 'auto',
+                  bgcolor: '#fff',
+                  border: '1px solid gray',
+                  borderRadius: '8px', p: '10px 20px',
+                }}>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ipsam asperiores quasi dolor, recusandae sequi ducimus nam labore impedit quam?</p>
+                </Box>
+              </Collapse>
+            </Box>
+
+            <Box sx={{
+              position: 'relative'
+            }}>
+              <Tooltip title="Notification" >
+
+                <IconButton onClick={() => (
+                  setOpenNotification(!openNotification),
+                  setOpenEmail(false)
+                )} sx={{ color: 'gray.main' }} color="inherit"
+                >
+                  <Badge badgeContent={0} color="error">
+                    <NotificationsNone />
+                  </Badge>
+                </IconButton>
+              </Tooltip>
+              <Collapse sx={{
+                position: 'absolute',
+                right: { xs: -35, md: 0 },
+                top: 55,
+              }} in={openNotification}>
+                <Box sx={{
+                  width: { xs: '90vw', sm: '300px', md: '350px' },
+                  maxHeight: '500px',
+                  overflowY: 'auto',
+                  zIndex: 99999,
+                  bgcolor: '#fff',
+                  border: '1px solid gray',
+                  borderRadius: '8px', p: '10px 20px',
+                }}>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ipsam asperiores quasi dolor, recusandae sequi ducimus nam labore impedit quam?</p>
+                </Box>
+              </Collapse>
+            </Box>
+            {/* user menu */}
+            <Box>
+              <Tooltip title="Account settings">
+                <IconButton
+                  onClick={handleUserMenuOpen}
+                  size="small"
+                  aria-controls={open ? 'account-menu' : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? 'true' : undefined}
+                >
+                  <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                </IconButton>
+              </Tooltip>
+              <Menu
+                anchorEl={userMenuOpen}
+                id="account-menu"
+                open={open}
+                onClose={handleUserMenuClose}
+                onClick={handleUserMenuClose}
+                PaperProps={paperProps}
+                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+              >
+                <MenuItem sx={{ width: '200px' }} onClick={handleUserMenuClose}>
+                  <ListItemIcon>
+                    <AccountCircle />
+                  </ListItemIcon>
+                  Profile
+                </MenuItem>
+                <Divider />
+                <MenuItem onClick={handleUserMenuClose}>
+                  <ListItemIcon>
+                    <Settings fontSize="small" />
+                  </ListItemIcon>
+                  Settings
+                </MenuItem>
+                <MenuItem onClick={handleUserMenuClose}>
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  Logout
+                </MenuItem>
+              </Menu>
+            </Box>
+            {/* user menu end */}
           </Box>
         </Toolbar>
         <Divider />
@@ -196,7 +327,6 @@ function Layout() {
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
       >
         <Drawer
           variant="temporary"
@@ -226,7 +356,11 @@ function Layout() {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+        sx={{
+          flexGrow: 1, p: 3,
+          width: { xs: '100%', sm: `calc(100% - ${drawerWidth}px)` }
+
+        }}
       >
         <Toolbar />
         <Outlet />

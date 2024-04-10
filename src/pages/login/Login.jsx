@@ -13,7 +13,7 @@ const Login = () => {
       alignItems: 'center',
       justifyContent: 'center'
     }} maxWidth='lg'>
-      <Stack >
+      <Stack>
         <Link to='/'>
           <Button startIcon={<KeyboardArrowLeft />} sx={{ color: 'primary.main', alignSelf: 'flex-start', mb: 2 }}>
             Back To Home
@@ -28,14 +28,15 @@ const Login = () => {
           <Box sx={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: '8px',
-            width: '100%',
             height: '128px',
-            bgcolor: 'light.main',
-            mb: 2
+            justifyContent: 'center',
           }}>
-            <img src="/credit-card.png" alt="" />
+            <Box sx={{
+              width: { xs: '70%', md: '200px' },
+              mb: 2
+            }}>
+              <img width='100%' src="Logo.svg" alt="" />
+            </Box>
           </Box>
           <TextField sx={{ mb: 2 }} fullWidth label="Email" variant="outlined" />
           <TextField fullWidth label="Password" variant="outlined" />

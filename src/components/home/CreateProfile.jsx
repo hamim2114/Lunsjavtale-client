@@ -1,6 +1,7 @@
 import { Box, Button, Container, Input, Stack, Typography } from '@mui/material'
 import React from 'react'
 import CButton from '../../common/CButton/CButton'
+import { Link } from 'react-router-dom'
 
 const smTitle = {
   fontSize: { xs: '16px', md: '18px' },
@@ -16,7 +17,7 @@ const bigTitle = {
 const CreateProfile = () => {
   return (
     <Container maxWidth='xxl' sx={{ bgcolor: 'light.main' }}>
-      <Container maxWidth='lg' sx={{ py: '40px',px:0 }}>
+      <Container maxWidth='lg' sx={{ py: '40px', px: 0 }}>
 
         <Stack direction={{ xs: 'column', sm: 'row' }} mb={10} gap={{ xs: 5, md: 10 }} justifyContent='space-between' alignItems='center'>
           <Box sx={{
@@ -26,9 +27,11 @@ const CreateProfile = () => {
             <Typography sx={smTitle}>01. Create a pofile</Typography>
             <Typography mb={3} sx={bigTitle}>Register your company in minutes</Typography>
             <Typography mb={3}>Our standard categories are fixed throughout the year, but the dish itself changes daily. This means that if you choose salad, you will receive a new salad every day!</Typography>
-            <CButton variant='outlined' style={{ height: { xs: '37px', md: '56px' }, width: '150px' }}>
-              Let&apos;s try
-            </CButton>
+            <Link to='/search'>
+              <CButton variant='outlined' style={{ height: { xs: '37px', md: '56px' }, width: '150px' }}>
+                Let&apos;s try
+              </CButton>
+            </Link>
           </Box>
           <Box sx={{
             flex: 1,
@@ -39,7 +42,7 @@ const CreateProfile = () => {
               width: { xs: '100%', md: '490px' },
               height: '459px',
               backgroundImage: 'url(/GroupAll.png)',
-              backgroundPosition:'center',
+              backgroundPosition: 'center',
               backgroundSize: 'contain'
             }} justifyContent='center' alignItems='center'>
               <Stack sx={{
@@ -115,9 +118,11 @@ const CreateProfile = () => {
             <Typography sx={smTitle}>02. Invite employees</Typography>
             <Typography sx={bigTitle} mb={3}>It is just as quick to onboard 2 as 200 employees</Typography>
             <Typography mb={3}>We know how important it is both for the person who administers and the person who will have something new &quot;thrown&quot; at them that it does not feel like a &quot;burden&quot;. We have created a system that means that, no matter how big or small your company is, it is just as easy to get started.</Typography>
-            <CButton variant='outlined' style={{ height: { xs: '37px', md: '56px' }, width: '150px' }}>
-              Get Started
-            </CButton>
+            <Link to='/search'>
+              <CButton variant='outlined' style={{ height: { xs: '37px', md: '56px' }, width: '150px' }}>
+                Get Started
+              </CButton>
+            </Link>
           </Box>
         </Stack>
 
@@ -129,9 +134,11 @@ const CreateProfile = () => {
             <Typography sx={bigTitle} mb={3}>Stress-free and hearty work lunch delivered to the office</Typography>
             <Typography mb={2}>All employees receive a stress-free and good lunch that is good for the body, delivered to the door by 11:15 every day. </Typography>
             <Typography mb={3}>The company saves time on administration and gets a flexible lunch arrangement, where you of course do not pay for lunch on the days that are cancelled. Have a good lunch!</Typography>
-            <CButton variant='outlined' style={{ height: { xs: '37px', md: '56px' }, width: '150px' }}>
-              Order Now
-            </CButton>
+            <Link to='/search'>
+              <CButton variant='outlined' style={{ height: { xs: '37px', md: '56px' }, width: '150px' }}>
+                Order Now
+              </CButton>
+            </Link>
           </Box>
           <Box sx={{
             flex: 1,

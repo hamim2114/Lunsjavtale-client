@@ -56,7 +56,7 @@ const PostCodeFalse = () => {
           <Input disableUnderline sx={inputStyle} placeholder='Your work email' />
           <Input disableUnderline sx={inputStyle} placeholder='Your mobile number' />
           <Stack direction='row' gap={2} mt={2}>
-            <Link to='/'>
+            <Link to='/search'>
               <Button>Back</Button>
             </Link>
             <Button variant='contained' color='light'>Got started</Button>

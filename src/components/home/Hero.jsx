@@ -3,6 +3,9 @@ import { Box, Button, Container, Input, Stack, TextField, Typography } from '@mu
 import React, { useState } from 'react'
 import CButton from '../../common/CButton/CButton'
 import { Link, useNavigate } from 'react-router-dom'
+import { useQuery } from '@apollo/client'
+import { CHECk_POST_CODE } from '../../graphql/query'
+import LoadingBar from '../../common/loadingBar/LoadingBar'
 
 const Hero = () => {
   const [postcode, setPostcode] = useState(null);
@@ -10,9 +13,19 @@ const Hero = () => {
 
   const navigate = useNavigate()
 
+  const {loading,refetch} = useQuery(CHECk_POST_CODE, {
+    onCompleted: (data) => {
+      console.log(data)
+      const res = data.checkPostCode;
+      if(res) navigate(`/search/${postcode}/available`)
+      if(!res) navigate(`/search/${postcode}/not-available`)
+    }
+  });
+
+
   const handleSearchClick = () => {
     if (postcode !== null) {
-      navigate(`/search/${postcode}`)
+      refetch({ postCode: parseInt(postcode) });
     } else {
       setInputdetect(true)
     }
@@ -27,6 +40,7 @@ const Hero = () => {
       height: { xs: '1044px', md: '900px' }
     }}>
       <Container maxWidth='lg'>
+      {loading && <LoadingBar/>}
         <Stack direction='row' alignItems='center' justifyContent='space-between' py={2}>
           {/* <Box sx={{ display: { xs: 'none', lg: 'block' } }}></Box> */}
           <Box sx={{

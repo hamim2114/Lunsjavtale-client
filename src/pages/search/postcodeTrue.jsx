@@ -65,7 +65,7 @@ const PostCodeTrue = () => {
           </Stack>
 
           <Stack direction='row' gap={2} mt={2}>
-            <Link to='/'>
+            <Link to='/search'>
               <Button>Back</Button>
             </Link>
             <Button variant='contained' color='primary'>Sign up</Button>

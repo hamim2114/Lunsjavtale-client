@@ -1,6 +1,7 @@
 import { Box, Container, Typography } from '@mui/material'
 import React from 'react'
 import CButton from '../../common/CButton/CButton'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -31,7 +32,7 @@ const Footer = () => {
             position: 'absolute',
             top: 0,
             left: 0,
-            width: {xs:'100%',md:'0'},
+            width: { xs: '100%', md: '0' },
             height: '100%',
             backgroundColor: 'rgba(0, 0, 0, 0.3)',
           }
@@ -50,13 +51,15 @@ const Footer = () => {
           fontWeight: { xs: 600, md: 800 },
           color: '#fff', textAlign: 'center', mb: 2
         }}>Healthy, tasty and simple lunch at <br /> the office?</Typography>
-        <CButton variant='contained' style={{ height: { xs: '45px', md: '56px' }, mt: 3, width: '128px' }}>
-          Get Started
-        </CButton>
+        <Link to='/search'>
+          <CButton variant='contained' style={{ height: { xs: '45px', md: '56px' }, mt: 3, width: '128px' }}>
+            Get Started
+          </CButton>
+        </Link>
         <Box sx={{
           alignSelf: { xs: 'center', md: 'flex-start' },
           color: '#fff',
-          mt: {xs:8,md:8},
+          mt: { xs: 8, md: 8 },
           textAlign: { xs: 'center', md: 'none' },
           pb: { xs: 10, md: 0 }
         }}>

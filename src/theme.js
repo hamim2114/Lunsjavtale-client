@@ -13,6 +13,9 @@ export const theme = createTheme({
     },
     white: {
       main: '#fff'
+    },
+    gray: {
+      main: 'gray'
     }
     // lightGray: '#F5F5F5',
     // common: {
@@ -46,6 +49,10 @@ export const theme = createTheme({
       'Plus Jakarta Sans',
       'Roboto',
     ].join(','),
+    h6:{
+      fontSize: '16px',
+      fontWeight: 600
+    }
   },
   breakpoints: {
     values: {
