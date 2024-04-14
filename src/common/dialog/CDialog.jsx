@@ -11,10 +11,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 
 
-export default function CDialog({ openDialog, closeDialog, children }) {
+export default function CDialog({ openDialog, closeDialog, children,maxWidth }) {
 
   return (
     <Dialog
+      maxWidth={maxWidth}
       fullWidth
       onClose={closeDialog}
       aria-labelledby="customized-dialog-title"

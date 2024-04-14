@@ -40,3 +40,33 @@
   object-fit: cover;
   border-radius: 12px;
 }
+
+.MuiDataGrid-cell:focus,
+.MuiDataGrid-cell:focus-within {
+  outline: none !important;
+}
+
+/* Order cart table */
+.shopping-cart-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.shopping-cart-table th,
+.shopping-cart-table td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 12px;
+}
+
+.shopping-cart-table th {
+  background-color: #f2f2f2;
+}
+
+.shopping-cart-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.shopping-cart-table tbody tr:hover {
+  background-color: #dddddd;
+}

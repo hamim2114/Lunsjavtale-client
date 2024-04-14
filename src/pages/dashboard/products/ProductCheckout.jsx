@@ -9,18 +9,12 @@ import OrderSummary from '../../../components/dashboard/OrderSummary';
 import CheckOut from '../../../components/dashboard/CheckOut';
 
 
-const Checkout = () => {
-  const [tabValue, setTabValue] = useState(0);
-
-  const theme = useTheme()
-
-  const handleTabChange = (event, newValue) => {
-    setTabValue(newValue);
-  };
+const ProductCheckout = () => {
+ 
   return (
     <Box sx={{ maxWidth: '1368px' }}>
       <Stack direction='row' justifyContent='space-between' alignItems='center'>
-        <Link to='/dashboard/myside/cart'>
+        <Link to='/dashboard/products/cart'>
           <IconButton>
             <ArrowBack />
           </IconButton>
@@ -43,4 +37,4 @@ const Checkout = () => {
   )
 }
 
-export default Checkout
+export default ProductCheckout

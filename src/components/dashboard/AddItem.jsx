@@ -3,7 +3,7 @@ import { useTheme } from '@emotion/react'
 import { Add, Close, Remove } from '@mui/icons-material'
 import { Box, IconButton, Stack, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import CButton from '../../../common/CButton/CButton';
+import CButton from '../../common/CButton/CButton';
 
 const allergies = [
   'Gluten (oats, wheat, rye, spelt, barley)',

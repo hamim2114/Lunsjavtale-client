@@ -1,13 +1,12 @@
-import { Add, ArrowBack, ArrowForward, Close, MoreVert } from '@mui/icons-material'
-import { Box, Grid, IconButton, Paper, Stack, Typography } from '@mui/material'
+import { Add, ArrowBack, ArrowForward } from '@mui/icons-material'
+import { Box,IconButton, Paper, Stack, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import Carousel from 'react-multi-carousel';
 import Calender from './Calender'
 import CDialog from '../../../common/dialog/CDialog';
-import AddItem from './AddItem';
-import CButton from '../../../common/CButton/CButton';
+import AddItem from '../../../components/dashboard/AddItem';
 import { useTheme } from '@emotion/react';
-import MiniCart from './MiniCart';
+import MiniCart from '../../../components/dashboard/MiniCart';
 
 
 
@@ -76,7 +75,7 @@ const MySide = (props) => {
   const SelectedItem = true
 
   return (
-    <Stack maxWidth='1368px' mb={5} direction={{ xs: 'column', lg: 'row' }} gap={3}>
+    <Stack maxWidth='lg' mb={5} direction={{ xs: 'column', lg: 'row' }} gap={3}>
       <Box sx={{
         width: { xs: '100%', lg: '70%' }
       }}>
@@ -263,7 +262,7 @@ const MySide = (props) => {
         {
           SelectedItem
             ?
-            <MiniCart/>
+            <MiniCart path='/dashboard/myside/cart'/>
             :
             <Box sx={{
               p: 2, borderRadius: '8px', mb: 2,

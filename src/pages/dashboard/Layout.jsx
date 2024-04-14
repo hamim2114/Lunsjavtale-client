@@ -6,28 +6,23 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { AccountCircle, AccountCircleOutlined, CategoryOutlined, DoubleArrow, ExitToApp, Logout, MailOutline, NotificationsNone, PeopleAltOutlined, PersonAdd, Search, Settings, SettingsOutlined, VerifiedUser, ViewStreamOutlined } from '@mui/icons-material';
-import { Avatar, Badge, Button, Collapse, InputAdornment, Menu, MenuItem, Paper, Stack, TextField, Tooltip, styled } from '@mui/material';
+import { AccountCircle,CategoryOutlined, DoubleArrow, Logout, MailOutline, NotificationsNone, PeopleAltOutlined, Search, Settings, SettingsOutlined, ViewStreamOutlined } from '@mui/icons-material';
+import { Avatar, Badge, Collapse, InputAdornment, Menu, MenuItem, Stack, TextField, Tooltip } from '@mui/material';
 
 const drawerWidth = 264;
 
-const ListBtn = ({ style, text, icon, link, selected, onClick }) => {
+const ListBtn = ({ style, text, icon, link, selected, onClick,notification }) => {
   return (
     <Link onClick={onClick} className='link' to={link ? link : ''}>
       <Box sx={{
         width: '100%',
         display: 'inline-flex',
+        justifyContent: 'space-between',
         padding: '8px 12px',
         borderRadius: '4px',
         color: selected ? '#fff' : '#68686F',
@@ -36,12 +31,25 @@ const ListBtn = ({ style, text, icon, link, selected, onClick }) => {
         bgcolor: selected ? 'primary.main' : '',
         ...style
       }}>
-        {icon}
-        <Typography sx={{
-          color: 'gray',
-          fontSize: '16px',
-          fontWeight: 400, ml: 1
-        }}>{text}</Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          {icon}
+          <Typography sx={{
+            color: 'gray',
+            fontSize: '16px',
+            fontWeight: 400, ml: 1
+          }}>{text}</Typography>
+        </Box>
+        {notification && <Typography sx={{
+          fontSize:'14px',
+          color:'#fff',
+          width:'22px',
+          height:'22px',
+          lineHeight:'21px',
+          textAlign:'center',
+          borderRadius:'50%',
+          bgcolor:'primary.dark'
+          }}>{notification}</Typography>}
+        
       </Box>
     </Link>
   )
@@ -144,7 +152,7 @@ function Layout() {
           textTransform: 'uppercase',
           fontSize: '14px', mb: 2, mt: 2
         }}>Jacqueline Hellestøl</Typography>
-        <ListBtn onClick={handleDrawerClose} link='/dashboard/myside' icon={<DoubleArrow />} text='My Side'
+        <ListBtn onClick={handleDrawerClose} notification={'5'} link='/dashboard/myside' icon={<DoubleArrow />} text='My Side'
           selected={pathname === '/dashboard/myside' || pathname === '/dashboard/myside/cart' || pathname === '/dashboard/myside/checkout' || pathname === '/dashboard/myside/complete'} />
         <ListBtn onClick={handleDrawerClose} link='/dashboard/manage-staff' icon={<PeopleAltOutlined />} text='Manage Staff'
           selected={pathname === '/dashboard/manage-staff'} />
@@ -153,9 +161,9 @@ function Layout() {
           textTransform: 'uppercase',
           fontSize: '14px', my: 2
         }}>Company</Typography>
-        <ListBtn onClick={handleDrawerClose} link={'dashboard/products'} icon={<CategoryOutlined />} text='Products'
-          selected={pathname === '/dashboard/products'} />
-        <ListBtn onClick={handleDrawerClose} link={'dashboard/orders'} icon={<ViewStreamOutlined />} text='Orders'
+        <ListBtn onClick={handleDrawerClose} notification={'14'} link={'dashboard/products'} icon={<CategoryOutlined />} text='Products'
+          selected={pathname === '/dashboard/products' || pathname === '/dashboard/products/cart' || pathname === '/dashboard/products/checkout'} />
+        <ListBtn onClick={handleDrawerClose} notification={'6'} link={'dashboard/orders'} icon={<ViewStreamOutlined />} text='Orders'
           selected={pathname === '/dashboard/orders'} />
         <ListBtn onClick={handleDrawerClose} link={'dashboard/setting'} icon={<SettingsOutlined />} text='Setting'
           selected={pathname === '/dashboard/setting'} />

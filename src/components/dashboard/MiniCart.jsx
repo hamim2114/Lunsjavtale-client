@@ -1,13 +1,13 @@
 import { Box, Button, IconButton, Stack, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import CButton from '../../../common/CButton/CButton'
+import CButton from '../../common/CButton/CButton'
 import { MoreVert } from '@mui/icons-material'
 import { useTheme } from '@emotion/react'
-import CDialog from '../../../common/dialog/CDialog'
+import CDialog from '../../common/dialog/CDialog'
 import AddItem from './AddItem'
 import { Link } from 'react-router-dom'
 
-const MiniCart = () => {
+const MiniCart = ({path}) => {
   const [openProductEditDialog, setOpenProductEditDialog] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
 
@@ -34,7 +34,7 @@ const MiniCart = () => {
 
       <Stack direction='row' justifyContent='space-between' alignItems='center' mb={1}>
         <Typography sx={{ fontSize: '17px', fontWeight: '600' }}>Shopping Cart</Typography>
-        <Link to='cart'>
+        <Link to={path}>
           <Button variant='contained'>
             Place Order
           </Button>

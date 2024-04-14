@@ -16,7 +16,10 @@ export const theme = createTheme({
     },
     gray: {
       main: 'gray'
-    }
+    },
+    text: {
+      primary: '#52525B'
+    },
     // lightGray: '#F5F5F5',
     // common: {
     //   black: '#121212',
