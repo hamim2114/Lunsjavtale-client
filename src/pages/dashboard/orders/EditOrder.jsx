@@ -32,12 +32,12 @@ const EditOrder = () => {
     <Box maxWidth='lg'>
       <Stack direction='row' justifyContent='space-between'>
         <Typography sx={{ fontSize: { xs: '18px', lg: '24px' }, fontWeight: 600 }}>Edit Order</Typography>
-        <Button onClick={()=> setAddCustomItemDialogOpen(true)} startIcon={<Add />} variant='outlined' sx={{ justifySelf: 'flex-end', width: 'fit-content' }}>Add Custom Items</Button>
+        <Button onClick={() => setAddCustomItemDialogOpen(true)} startIcon={<Add />} variant='outlined' sx={{ justifySelf: 'flex-end', width: 'fit-content' }}>Add Custom Items</Button>
       </Stack>
 
       {/* add custom item dialog */}
-      <CDialog maxWidth='md' openDialog={addCustomItemDialogOpen} closeDialog={()=> setAddCustomItemDialogOpen(false)}>
-        <AddCustomItems closeDialog={()=> setAddCustomItemDialogOpen(false)}/>
+      <CDialog maxWidth='md' openDialog={addCustomItemDialogOpen} closeDialog={() => setAddCustomItemDialogOpen(false)}>
+        <AddCustomItems closeDialog={() => setAddCustomItemDialogOpen(false)} />
       </CDialog>
 
       <Box mt={6}>
@@ -49,14 +49,14 @@ const EditOrder = () => {
               <th>Item Price</th>
               <th>Qty</th>
               <th>Item Total</th>
-              <th>Remove</th>
+              {!isMobile && <th>Remove</th>}
             </tr>
           </thead>
           <tbody>
             {cartItems.map((item, index) => (
               <tr key={index}>
                 <td>
-                  <Typography sx={{ color: 'primary.main',fontSize:{xs:'14px',md:'16px'} }}>{item.product}</Typography>
+                  <Typography sx={{ color: 'primary.main', fontSize: { xs: '14px', md: '16px' } }}>{item.product}</Typography>
                 </td>
                 {
                   !isMobile &&
@@ -64,9 +64,9 @@ const EditOrder = () => {
                     <Typography sx={{ color: 'primary.main', fontWeight: 600 }}> {item.inStock}</Typography>
                   </td>
                 }
-                <td><Typography sx={{fontSize:{xs:'14px',md:'16px',fontWeight:600}}}>{item.itemPrice}</Typography></td>
+                <td><Typography sx={{ fontSize: { xs: '14px', md: '16px', fontWeight: 600 } }}>{item.itemPrice}</Typography></td>
                 <td >
-                 
+
                   <input
                     style={{
                       border: '1px solid lightgray',
@@ -79,12 +79,12 @@ const EditOrder = () => {
                     onChange={(e) => handleQtyChange(index, e.target.value)}
                   />
                 </td>
-                <td><Typography sx={{fontSize:{xs:'14px',md:'16px',fontWeight:600}}}>{item.itemTotal}</Typography></td>
-                <td>
+                <td><Typography sx={{ fontSize: { xs: '14px', md: '16px', fontWeight: 600 } }}>{item.itemTotal}</Typography></td>
+                {!isMobile && <td>
                   <IconButton onClick={() => handleRemoveItem(index)}>
                     <Close />
                   </IconButton>
-                </td>
+                </td>}
               </tr>
             ))}
           </tbody>
@@ -125,7 +125,7 @@ const EditOrder = () => {
       </Stack>
       <Stack direction='row' justifyContent='space-between'>
         <Box></Box>
-      <CButton variant='contained' style={{mt:3}}>Edit Order</CButton>
+        <CButton variant='contained' style={{ mt: 3 }}>Edit Order</CButton>
       </Stack>
 
     </Box>

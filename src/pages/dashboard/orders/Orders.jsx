@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 const rows = [
-  { orderDate: 'Feb 09, 2024', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
-  { orderDate: 'Feb 09, 2024', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
-  { orderDate: 'Feb 09, 2024', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
-  { orderDate: 'Feb 09, 2024', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
-  { orderDate: 'Feb 09, 2024', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
+  { orderDate: 'Feb 09', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
+  { orderDate: 'Feb 09', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
+  { orderDate: 'Feb 09', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
+  { orderDate: 'Feb 09', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
+  { orderDate: 'Feb 09', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
 
 ];
 
@@ -28,7 +28,7 @@ const Orders = () => {
   }
   const columns = [
     {
-      field: 'orderDate', headerName: 'Order Date', flex: isMobile ? .3 : .5, renderCell: (params) => {
+      field: 'orderDate', headerName: 'Order Date', flex: isMobile ? .2 : .3, renderCell: (params) => {
         return (
           <Stack sx={{height:'100%'}} direction='row' alignItems='center'>
             <Typography sx={{fontSize:{xs:'12px',md:'16px'}}}>{params.row.orderDate}</Typography>

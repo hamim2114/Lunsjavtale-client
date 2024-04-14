@@ -189,7 +189,11 @@ const OrderSingleDetails = () => {
           <Stack direction='row' gap={2}>
             <Box sx={{
               bgcolor: 'light.main',
-              p: 1.5
+              width: '72px', height: '58px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: '8px'
             }}>
               <img src="/visaicon.png" alt="" />
             </Box>

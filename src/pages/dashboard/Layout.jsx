@@ -11,12 +11,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { AccountCircle,CategoryOutlined, DoubleArrow, Logout, MailOutline, NotificationsNone, PeopleAltOutlined, Search, Settings, SettingsOutlined, ViewStreamOutlined } from '@mui/icons-material';
-import { Avatar, Badge, Collapse, InputAdornment, Menu, MenuItem, Stack, TextField, Tooltip } from '@mui/material';
+import { AccountCircle, CategoryOutlined, DoubleArrow, Logout, MailOutline, NotificationsNone, PeopleAltOutlined, Search, Settings, SettingsOutlined, ViewStreamOutlined } from '@mui/icons-material';
+import { Avatar, Badge, ClickAwayListener, Collapse, InputAdornment, Menu, MenuItem, Stack, TextField, Tooltip } from '@mui/material';
 
 const drawerWidth = 264;
 
-const ListBtn = ({ style, text, icon, link, selected, onClick,notification }) => {
+const ListBtn = ({ style, text, icon, link, selected, onClick, notification }) => {
   return (
     <Link onClick={onClick} className='link' to={link ? link : ''}>
       <Box sx={{
@@ -40,16 +40,16 @@ const ListBtn = ({ style, text, icon, link, selected, onClick,notification }) =>
           }}>{text}</Typography>
         </Box>
         {notification && <Typography sx={{
-          fontSize:'14px',
-          color:'#fff',
-          width:'22px',
-          height:'22px',
-          lineHeight:'21px',
-          textAlign:'center',
-          borderRadius:'50%',
-          bgcolor:'primary.dark'
-          }}>{notification}</Typography>}
-        
+          fontSize: '14px',
+          color: '#fff',
+          width: '22px',
+          height: '22px',
+          lineHeight: '21px',
+          textAlign: 'center',
+          borderRadius: '50%',
+          bgcolor: 'primary.dark'
+        }}>{notification}</Typography>}
+
       </Box>
     </Link>
   )
@@ -218,10 +218,10 @@ function Layout() {
             display: 'flex',
             alignItems: 'center'
           }}>
-            <Box sx={{
-              position: 'relative'
-            }}>
-              <Tooltip title="Message">
+            <ClickAwayListener onClickAway={() => setOpenEmail(false)}>
+              <Box sx={{
+                position: 'relative'
+              }}>
                 <IconButton onClick={() => (
                   setOpenEmail(!openEmail),
                   setOpenNotification(false)
@@ -230,31 +230,30 @@ function Layout() {
                     <MailOutline />
                   </Badge>
                 </IconButton>
-              </Tooltip>
-              <Collapse sx={{
-                position: 'absolute',
-                right: { xs: -80, md: 0 },
-                top: 55,
-                zIndex: 9999999
-              }} in={openEmail}>
-                <Box sx={{
-                  width: { xs: '90vw', sm: '300px', md: '350px' },
-                  maxHeight: '500px',
-                  overflowY: 'auto',
-                  bgcolor: '#fff',
-                  border: '1px solid gray',
-                  borderRadius: '8px', p: '10px 20px',
-                }}>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ipsam asperiores quasi dolor, recusandae sequi ducimus nam labore impedit quam?</p>
-                </Box>
-              </Collapse>
-            </Box>
+                <Collapse sx={{
+                  position: 'absolute',
+                  right: { xs: -80, md: 0 },
+                  top: 55,
+                  zIndex: 9999999
+                }} in={openEmail}>
+                  <Box sx={{
+                    width: { xs: '90vw', sm: '300px', md: '350px' },
+                    maxHeight: '500px',
+                    overflowY: 'auto',
+                    bgcolor: '#fff',
+                    border: '1px solid gray',
+                    borderRadius: '8px', p: '10px 20px',
+                  }}>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ipsam asperiores quasi dolor, recusandae sequi ducimus nam labore impedit quam?</p>
+                  </Box>
+                </Collapse>
+              </Box>
+            </ClickAwayListener>
 
-            <Box sx={{
-              position: 'relative'
-            }}>
-              <Tooltip title="Notification" >
-
+            <ClickAwayListener onClickAway={()=> setOpenNotification(false)}>
+              <Box sx={{
+                position: 'relative'
+              }}>
                 <IconButton onClick={() => (
                   setOpenNotification(!openNotification),
                   setOpenEmail(false)
@@ -264,25 +263,25 @@ function Layout() {
                     <NotificationsNone />
                   </Badge>
                 </IconButton>
-              </Tooltip>
-              <Collapse sx={{
-                position: 'absolute',
-                right: { xs: -35, md: 0 },
-                top: 55,
-              }} in={openNotification}>
-                <Box sx={{
-                  width: { xs: '90vw', sm: '300px', md: '350px' },
-                  maxHeight: '500px',
-                  overflowY: 'auto',
-                  zIndex: 99999,
-                  bgcolor: '#fff',
-                  border: '1px solid gray',
-                  borderRadius: '8px', p: '10px 20px',
-                }}>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ipsam asperiores quasi dolor, recusandae sequi ducimus nam labore impedit quam?</p>
-                </Box>
-              </Collapse>
-            </Box>
+                <Collapse sx={{
+                  position: 'absolute',
+                  right: { xs: -35, md: 0 },
+                  top: 55,
+                }} in={openNotification}>
+                  <Box sx={{
+                    width: { xs: '90vw', sm: '300px', md: '350px' },
+                    maxHeight: '500px',
+                    overflowY: 'auto',
+                    zIndex: 99999,
+                    bgcolor: '#fff',
+                    border: '1px solid gray',
+                    borderRadius: '8px', p: '10px 20px',
+                  }}>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ipsam asperiores quasi dolor, recusandae sequi ducimus nam labore impedit quam?</p>
+                  </Box>
+                </Collapse>
+              </Box>
+            </ClickAwayListener>
             {/* user menu */}
             <Box>
               <Tooltip title="Account settings">
