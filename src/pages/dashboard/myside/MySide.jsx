@@ -153,6 +153,7 @@ const MySide = (props) => {
           }}>
             <Carousel
               swipeable={true}
+              draggable={true}
               showDots={false}
               arrows={false}
               rewindWithAnimation={true}
