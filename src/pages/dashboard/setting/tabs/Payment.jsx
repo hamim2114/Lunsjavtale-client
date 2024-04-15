@@ -1,5 +1,5 @@
 import { Add, ArrowForwardIos, BorderColor, Check } from '@mui/icons-material'
-import { Box, Button, Collapse, FormGroup, IconButton, Paper, Stack, TextField, Typography } from '@mui/material'
+import { Box, Button, Collapse, FormGroup, IconButton, Paper, Stack, TextField, Typography, useMediaQuery } from '@mui/material'
 import React, { useState } from 'react'
 import DataTable from '../../../../components/dashboard/DataTable'
 
@@ -14,26 +14,41 @@ const Payment = () => {
   const [openTransaction, setOpenTransaction] = useState(false)
   const [openBillingInfo, setOpenBillingInfo] = useState(false)
 
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('lg'));
+
+
   const columns = [
     {
-      field: 'amount', headerName: 'Amount', flex: .3, renderCell: (params) => (
+      field: 'amount', headerName: 'Amount', flex: .3,
+      renderHeader: () => (
+        <Typography sx={{ fontSize: { xs: '12px', fontWeight: 600, lg: '15px' } }}>Amount</Typography>
+      ),
+      renderCell: (params) => (
         <Stack sx={{ height: '100%' }} direction='row' alignItems='center'>
           <Typography sx={{ fontSize: { xs: '12px', md: '16px' } }}>${params.row.amount}</Typography>
         </Stack>
       )
     },
     {
-      field: 'status', headerName: 'Status', flex: .5, renderCell: (params) => (
+      field: 'status', headerName: 'Status', flex: isMobile ? .3 : .5, 
+      renderHeader: () => (
+        <Typography sx={{ fontSize: { xs: '12px', fontWeight: 600, lg: '15px' } }}>Status</Typography>
+      ),
+      renderCell: (params) => (
         <Stack sx={{ height: '100%', }} direction='row' alignItems='center'>
           <Stack sx={{ bgcolor: '#EBFFF1', py: '3px', px: '5px', borderRadius: '5px', color: 'primary.main' }} direction='row' alignItems='center'>
             <Check />
-            <Typography sx={{ fontSize: { xs: '12px', md: '16px' }, }}>{params.row.status}</Typography>
+            {!isMobile && <Typography sx={{ fontSize: { xs: '12px', md: '16px' }, }}>{params.row.status}</Typography>}
           </Stack>
         </Stack>
       )
     },
-    { field: 'date', headerName: 'Date', flex: .5 },
-    { field: 'info', headerName: 'Info', flex: 1 },
+    { field: 'date', headerName: 'Date', flex: .5, renderHeader: () => (
+      <Typography sx={{ fontSize: { xs: '12px', fontWeight: 600, lg: '15px' } }}>Date</Typography>
+    ), },
+    { field: 'info', headerName: 'Info', flex: 1, renderHeader: () => (
+      <Typography sx={{ fontSize: { xs: '12px', fontWeight: 600, lg: '15px' } }}>Info</Typography>
+    ), },
   ]
   return (
     <Box>
@@ -114,21 +129,21 @@ const Payment = () => {
         </Collapse>
       </Paper>
 
-      <Paper sx={{ p: 2, mt: 3 }}>
-        <Stack direction='row' justifyContent='space-between' alignItems='center'>
+      <Paper sx={{ p: {xs:!openTransaction ? 2:0,lg:2}, mt: 3 }}>
+        <Stack sx={{px:{xs: !openTransaction ? 0 : 2,lg:0}}} direction='row' justifyContent='space-between' alignItems='center'>
           <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>Transaction History</Typography>
           <IconButton onClick={() => setOpenTransaction(!openTransaction)}>
             <ArrowForwardIos sx={{
               transition: 'transform .3s ease',
-              transform: openPaymentGateway ? 'rotate(90deg)' : 'none'
+              transform: openTransaction ? 'rotate(90deg)' : 'none'
             }} />
           </IconButton>
         </Stack>
         <Collapse in={openTransaction} >
-          <Typography sx={{ fontSize: '15px', color: 'primary.main' }}>We received your payments !</Typography>
+          <Typography sx={{ fontSize: '15px', color: 'primary.main',px:{xs:2,lg:0} }}>We received your payments !</Typography>
           <Stack direction='row' alignItems='center' justifyContent='space-between' mt={2}>
             <Box />
-            <Button startIcon={<Add />} variant='contained'>Create Payment</Button>
+            <Button sx={{mr:{xs:2,lg:0}}} startIcon={<Add />} variant='contained'>Create Payment</Button>
           </Stack>
           <Box mt={3}>
             <DataTable columns={columns} rows={rows} />
@@ -142,7 +157,7 @@ const Payment = () => {
           <IconButton onClick={() => setOpenBillingInfo(!openBillingInfo)}>
             <ArrowForwardIos sx={{
               transition: 'transform .3s ease',
-              transform: openPaymentGateway ? 'rotate(90deg)' : 'none'
+              transform: openBillingInfo ? 'rotate(90deg)' : 'none'
             }} />
           </IconButton>
         </Stack>
@@ -158,12 +173,12 @@ const Payment = () => {
                 <Stack flex={1} gap={2}>
                   <TextField required size='small' label='Sector' value={'Closing Office'} />
                   <TextField required size='small' label='Country' value={'Corbin City'} />
-                  <TextField required size='small' label='Last Name'  value={'Marjorie'}/>
+                  <TextField required size='small' label='Last Name' value={'Marjorie'} />
                 </Stack>
               </Stack>
             </Box>
             <Stack direction='row' justifyContent='space-between' alignItems='center' mt={2}>
-              <Box/>
+              <Box />
               <Button variant='contained'>Save Change</Button>
             </Stack>
           </FormGroup>

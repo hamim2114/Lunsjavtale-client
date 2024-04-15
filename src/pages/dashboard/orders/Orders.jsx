@@ -28,47 +28,65 @@ const Orders = () => {
   }
   const columns = [
     {
-      field: 'orderDate', headerName: 'Order Date', flex: isMobile ? .2 : .3, renderCell: (params) => {
+      field: 'orderDate', flex: isMobile ? .2 : .4,
+      renderHeader: () => (
+        <Typography sx={{ fontSize: { xs: '12px',fontWeight:600, lg: '15px' } }}>{isMobile ? 'Date' : 'Order Date'}</Typography>
+      ),
+      renderCell: (params) => {
         return (
-          <Stack sx={{height:'100%'}} direction='row' alignItems='center'>
-            <Typography sx={{fontSize:{xs:'12px',md:'16px'}}}>{params.row.orderDate}</Typography>
+          <Stack sx={{ height: '100%' }} direction='row' alignItems='center'>
+            <Typography sx={{ fontSize: { xs: '12px', md: '16px' } }}>{params.row.orderDate}</Typography>
           </Stack>
         )
       }
     },
     {
-      field: 'id', headerName: 'Order ID', flex: .4, renderCell: (params) => {
+      field: 'id', flex: .4,
+      renderHeader: () => (
+        <Typography sx={{ fontSize: { xs: '12px',fontWeight:600, lg: '15px' } }}>Order ID</Typography>
+      ),
+      renderCell: (params) => {
         return (
           <Stack sx={{
             cursor: 'pointer',
             color: 'blue'
           }} onClick={() => OrderIdClick(params.row)} direction='row' alignItems='center'>
             <Box>#</Box>
-            <Typography sx={{fontSize:{xs:'12px',md:'16px'}}}>{params.id}</Typography>
+            <Typography sx={{ fontSize: { xs: '12px', md: '16px' } }}>{params.id}</Typography>
           </Stack>
         )
       }
     },
     {
-      field: 'orderDetails', headerName: 'Order Details', flex: isMobile ? .7 : 1, renderCell: (params) => {
+      field: 'orderDetails',flex: isMobile ? .7 : 1, 
+      renderHeader: () => (
+        <Typography sx={{ fontSize: { xs: '12px',fontWeight:600, lg: '15px' } }}>Order Details</Typography>
+      ),
+      renderCell: (params) => {
         const { row } = params;
         return (
           <Stack >
-            <Typography sx={{fontSize:{xs:'12px',md:'16px'}}}>{row.orderName}</Typography>
+            <Typography sx={{ fontSize: { xs: '12px', md: '16px' } }}>{row.orderName}</Typography>
             <Box sx={{ display: 'inline-flex' }}>
-              <Typography sx={{fontSize:{xs:'12px',md:'14px'}}}>{row.price}</Typography>
-              <Typography sx={{fontSize:{xs:'12px',md:'14px'}}}>x{row.quantity}</Typography>
+              <Typography sx={{ fontSize: { xs: '12px', md: '14px' } }}>{row.price}</Typography>
+              <Typography sx={{ fontSize: { xs: '12px', md: '14px' } }}>x{row.quantity}</Typography>
             </Box>
           </Stack>
         )
       }
     },
     { field: 'paymentInfo', headerName: 'Payment Info', flex: .5 },
-    { field: 'price', headerName: 'Price', flex: isMobile ? .3 : .5, renderCell:(params)=> (
-      <Stack sx={{height:'100%'}} direction='row' alignItems='center'>
-        <Typography sx={{fontSize:{xs:'12px',md:'16px'}}}>{params.row.price}</Typography>
-      </Stack>
-    ) },
+    {
+      field: 'price', headerName: 'Price', flex: isMobile ? .3 : .5, 
+      renderHeader: () => (
+        <Typography sx={{ fontSize: { xs: '12px',fontWeight:600, lg: '15px' } }}>Price</Typography>
+      ),
+      renderCell: (params) => (
+        <Stack sx={{ height: '100%' }} direction='row' alignItems='center'>
+          <Typography sx={{ fontSize: { xs: '12px', md: '16px' } }}>{params.row.price}</Typography>
+        </Stack>
+      )
+    },
     {
       field: 'status', headerName: 'Status', flex: .5, renderCell: (params) => (
         <Box sx={{
@@ -83,13 +101,17 @@ const Orders = () => {
     },
     { field: 'deliveryDate', headerName: 'Delivery Date', flex: .5 },
     {
-      field: 'action', headerName: 'Action', flex: isMobile ? .2 : .5, renderCell: (params) => {
+      field: 'action', headerName: 'Action', flex: isMobile ? .2 : .5, 
+      renderHeader: () => (
+        <Typography sx={{ fontSize: { xs: '12px',fontWeight:600, lg: '15px' } }}>Action</Typography>
+      ),
+      renderCell: (params) => {
         return (
           <IconButton sx={{
             bgcolor: 'light.main',
             borderRadius: '5px',
-            width: {xs:'30px',md:'40px'},
-            height: {xs:'30px',md:'40px'},
+            width: { xs: '30px', md: '40px' },
+            height: { xs: '30px', md: '40px' },
           }} onClick={() => handleEdit(params.row)}>
             <BorderColor fontSize='small' />
           </IconButton>

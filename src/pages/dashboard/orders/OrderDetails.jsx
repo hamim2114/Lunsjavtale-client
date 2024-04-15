@@ -35,7 +35,11 @@ const OrderDetails = () => {
       }
     },
     {
-      field: 'employerId', headerName: 'Employer Id', flex: isMobile ? .6 : .3, renderCell: (params) => {
+      field: 'employerId', flex: isMobile ? .6 : .3, 
+      renderHeader: () => (
+        <Typography sx={{ fontSize: { xs: '12px',fontWeight:600, lg: '15px' } }}>EmployeID</Typography>
+      ),
+      renderCell: (params) => {
         return (
           <Box sx={{
             height: '100%',
@@ -48,19 +52,19 @@ const OrderDetails = () => {
       }
     },
     {
-      field: 'orderItem', headerName: 'Order Item', flex: 1, renderCell: (params) => {
+      field: 'orderItem', flex: 1, headerName:'Order Item',
+      renderCell: (params) => {
         const { row } = params;
         return (
-          <Stack direction='row' gap={1} p={1}>
+          <Stack direction='row' gap={1} p={1} alignItems='center'>
             {
               !isMobile && <img style={{width:'70px',height:'70px',borderRadius:'4px',objectFit:'cover'}} src={row.img} alt="" />
-
             }
-            <Box>
-              <Typography sx={{ fontSize: '15px', fontWeight: 600 }}>{row.orderItem}</Typography>
-              <Typography sx={{ fontSize: '14px' }}>{row.category}</Typography>
+            <Stack>
+              <Typography sx={{ fontSize: {xs:'12px',lg:'15px'}, fontWeight: 600 }}>{row.orderItem}</Typography>
+              <Typography sx={{ fontSize: {xs:'12px',lg:'14px'} }}>{row.category}</Typography>
               <Typography sx={{ fontSize: '12px' }}>x{row.details}</Typography>
-            </Box>
+            </Stack>
           </Stack>
         )
       }
