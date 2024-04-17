@@ -126,11 +126,13 @@ function Layout() {
         display: 'flex',
         justifyContent: 'center', mt: 2
       }}>
-        <Box sx={{
-          width: { xs: '150px', md: '180px' }
-        }}>
-          <img style={{ width: '100%' }} src="/Logo.svg" alt="" />
-        </Box>
+        <Link to='/'>
+          <Box sx={{
+            width: { xs: '150px', md: '180px' }
+          }}>
+            <img style={{ width: '100%' }} src="/Logo.svg" alt="" />
+          </Box>
+        </Link>
       </Toolbar>
       {/* <Divider /> */}
       <Typography sx={{
@@ -250,7 +252,7 @@ function Layout() {
               </Box>
             </ClickAwayListener>
 
-            <ClickAwayListener onClickAway={()=> setOpenNotification(false)}>
+            <ClickAwayListener onClickAway={() => setOpenNotification(false)}>
               <Box sx={{
                 position: 'relative'
               }}>

@@ -57,9 +57,11 @@ const CreateProfile = () => {
                 <Input disableUnderline sx={{ bgcolor: '#fff', width: '188px', px: 1, fontSize: '13px' }} type='text' placeholder='Last Name' />
                 <Input disableUnderline sx={{ bgcolor: '#fff', width: '188px', px: 1, fontSize: '13px' }} type='email' placeholder='Email' />
                 <Input disableUnderline sx={{ bgcolor: '#fff', width: '188px', px: 1, fontSize: '13px' }} type='password' placeholder='Password' />
-                <Stack direction='row'>
+                <Stack direction='row' alignItems='center'>
                   <Typography sx={{ fontSize: '12px' }}>Already a member?</Typography>
-                  <button style={{ border: 'none', outline: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>Login</button>
+                  <Link to='/login'>
+                    <button style={{ border: 'none', outline: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>Login</button>
+                  </Link>
                 </Stack>
                 <Button variant="contained" sx={{ width: '188px', height: '32px', bgcolor: '#407BFF', borderRadius: '0px', mb: 2 }}>
                   Register
