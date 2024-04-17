@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 const rows = [
-  { orderDate: 'Feb 09', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
-  { orderDate: 'Feb 09', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
-  { orderDate: 'Feb 09', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
-  { orderDate: 'Feb 09', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
-  { orderDate: 'Feb 09', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
+  { orderDate: 'Feb 09,24', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
+  { orderDate: 'Feb 09,24', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
+  { orderDate: 'Feb 09,24', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
+  { orderDate: 'Feb 09,24', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
+  { orderDate: 'Feb 09,24', id: '987654', orderName: 'The lunch collective"s Caesar salad', price: '200.00', quantity: '05', paymentInfo: '**********3478', price: '$1000', status: 'Action', deliveryDate: 'Feb 09, 2022' },
 
 ];
 
@@ -28,7 +28,7 @@ const Orders = () => {
   }
   const columns = [
     {
-      field: 'orderDate', flex: isMobile ? .2 : .4,
+      field: 'orderDate', width: isMobile ? 90 : 110,
       renderHeader: () => (
         <Typography sx={{ fontSize: { xs: '12px',fontWeight:600, lg: '15px' } }}>{isMobile ? 'Date' : 'Order Date'}</Typography>
       ),
@@ -41,7 +41,7 @@ const Orders = () => {
       }
     },
     {
-      field: 'id', flex: .4,
+      field: 'id', width: isMobile ? 100 : 110,
       renderHeader: () => (
         <Typography sx={{ fontSize: { xs: '12px',fontWeight:600, lg: '15px' } }}>Order ID</Typography>
       ),
@@ -58,7 +58,7 @@ const Orders = () => {
       }
     },
     {
-      field: 'orderDetails',flex: isMobile ? .7 : 1, 
+      field: 'orderDetails',width: isMobile ? 150 : 350, 
       renderHeader: () => (
         <Typography sx={{ fontSize: { xs: '12px',fontWeight:600, lg: '15px' } }}>Order Details</Typography>
       ),
@@ -75,20 +75,20 @@ const Orders = () => {
         )
       }
     },
-    { field: 'paymentInfo', headerName: 'Payment Info', flex: .5 },
+    { field: 'paymentInfo', headerName: 'Payment Info', width: 150 },
     {
-      field: 'price', headerName: 'Price', flex: isMobile ? .3 : .5, 
+      field: 'price', headerName: 'Price', width: isMobile ? 110 : 120, 
       renderHeader: () => (
-        <Typography sx={{ fontSize: { xs: '12px',fontWeight:600, lg: '15px' } }}>Price</Typography>
+        <Typography sx={{ fontSize: { xs: '12px',fontWeight:600, lg: '15px' } ,ml:'20px'}}>Price</Typography>
       ),
       renderCell: (params) => (
-        <Stack sx={{ height: '100%' }} direction='row' alignItems='center'>
+        <Stack sx={{ height: '100%' ,ml:'20px'}} direction='row' alignItems='center'>
           <Typography sx={{ fontSize: { xs: '12px', md: '16px' } }}>{params.row.price}</Typography>
         </Stack>
       )
     },
     {
-      field: 'status', headerName: 'Status', flex: .5, renderCell: (params) => (
+      field: 'status', headerName: 'Status', width: 120, renderCell: (params) => (
         <Box sx={{
           display: 'inline-flex',
           padding: '4px 12px',
@@ -99,9 +99,9 @@ const Orders = () => {
         </Box>
       ),
     },
-    { field: 'deliveryDate', headerName: 'Delivery Date', flex: .5 },
+    { field: 'deliveryDate', headerName: 'Delivery Date', width:150 },
     {
-      field: 'action', headerName: 'Action', flex: isMobile ? .2 : .5, 
+      field: 'action', headerName: 'Action', width: isMobile ? 90 : 80, 
       renderHeader: () => (
         <Typography sx={{ fontSize: { xs: '12px',fontWeight:600, lg: '15px' } }}>Action</Typography>
       ),
@@ -120,13 +120,13 @@ const Orders = () => {
     },
   ];
 
-  useEffect(() => {
-    setColumnVisibilityModel({
-      paymentInfo: isMobile ? false : true,
-      status: isMobile ? false : true,
-      deliveryDate: isMobile ? false : true,
-    })
-  }, [isMobile])
+  // useEffect(() => {
+  //   setColumnVisibilityModel({
+  //     paymentInfo: isMobile ? false : true,
+  //     status: isMobile ? false : true,
+  //     deliveryDate: isMobile ? false : true,
+  //   })
+  // }, [isMobile])
 
   return (
     <Box maxWidth='lg'>

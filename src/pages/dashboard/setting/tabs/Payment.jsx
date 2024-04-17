@@ -19,7 +19,7 @@ const Payment = () => {
 
   const columns = [
     {
-      field: 'amount', headerName: 'Amount', flex: .3,
+      field: 'amount', headerName: 'Amount', width: 70,
       renderHeader: () => (
         <Typography sx={{ fontSize: { xs: '12px', fontWeight: 600, lg: '15px' } }}>Amount</Typography>
       ),
@@ -30,7 +30,7 @@ const Payment = () => {
       )
     },
     {
-      field: 'status', headerName: 'Status', flex: isMobile ? .3 : .5, 
+      field: 'status', headerName: 'Status', width: 120, 
       renderHeader: () => (
         <Typography sx={{ fontSize: { xs: '12px', fontWeight: 600, lg: '15px' } }}>Status</Typography>
       ),
@@ -38,15 +38,15 @@ const Payment = () => {
         <Stack sx={{ height: '100%', }} direction='row' alignItems='center'>
           <Stack sx={{ bgcolor: '#EBFFF1', py: '3px', px: '5px', borderRadius: '5px', color: 'primary.main' }} direction='row' alignItems='center'>
             <Check />
-            {!isMobile && <Typography sx={{ fontSize: { xs: '12px', md: '16px' }, }}>{params.row.status}</Typography>}
+            <Typography sx={{ fontSize: { xs: '12px', md: '16px' }, }}>{params.row.status}</Typography>
           </Stack>
         </Stack>
       )
     },
-    { field: 'date', headerName: 'Date', flex: .5, renderHeader: () => (
+    { field: 'date', headerName: 'Date', width: 120, renderHeader: () => (
       <Typography sx={{ fontSize: { xs: '12px', fontWeight: 600, lg: '15px' } }}>Date</Typography>
     ), },
-    { field: 'info', headerName: 'Info', flex: 1, renderHeader: () => (
+    { field: 'info', headerName: 'Info', width: 250, renderHeader: () => (
       <Typography sx={{ fontSize: { xs: '12px', fontWeight: 600, lg: '15px' } }}>Info</Typography>
     ), },
   ]
