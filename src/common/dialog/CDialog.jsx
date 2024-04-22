@@ -18,7 +18,6 @@ export default function CDialog({ openDialog, closeDialog, children,maxWidth }) 
       maxWidth={maxWidth}
       fullWidth
       onClose={closeDialog}
-      aria-labelledby="customized-dialog-title"
       open={openDialog}
     >
       <DialogContent>

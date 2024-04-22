@@ -5,7 +5,7 @@ import { useTheme } from '@emotion/react'
 import { Link } from 'react-router-dom'
 
 const ProductCard = ({ data }) => {
-  // console.log('product card:',data)
+  console.log('product card:',data)
   const theme = useTheme()
   return (
     <Stack sx={{
@@ -35,7 +35,7 @@ const ProductCard = ({ data }) => {
         height: '280px',
         mb: 2
       }}>
-        <img style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} src={data?.node?.photoUrl} alt="" />
+        <img style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} src={data?.node?.attachments.edges[0].node.fileUrl} alt="" />
       </Box>
       <Typography sx={{
         fontSize: { xs: '12px', md: '14px' }

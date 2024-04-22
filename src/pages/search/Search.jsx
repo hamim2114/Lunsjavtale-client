@@ -1,33 +1,71 @@
-import { Chat, KeyboardArrowLeft } from '@mui/icons-material'
-import { Box, Button, Container, Input, Stack, Typography } from '@mui/material'
-import React, {useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+/* eslint-disable react/prop-types */
+import { Chat, Close, KeyboardArrowLeft } from '@mui/icons-material'
+import { Box, Button, Checkbox, Container, Input, Slide, Stack, TextField, Typography } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { CHECk_POST_CODE } from '../../graphql/query'
 import LoadingBar from '../../common/loadingBar/LoadingBar'
+import PostCodeAvailable from './PostcodeAvailable'
+import PostCodeNotAvailable from './PostcodeNotAvailable'
 
 const Search = () => {
-  const [postcode, setPostcode] = useState();
-  const [inputdetect, setInputdetect] = useState(false)
+  const [postcode, setPostcode] = useState(null);
+  const [inputErr, setInputErr] = useState(false);
+  const [postcodeAvailable, setPostcodeAvailable] = useState(false);
+  const [postcodeNotAvailabe, setPostcodeNotAvailabe] = useState(false);
+  const [postcodeTrue, setPostcodeTrue] = useState(undefined);
 
-  const navigate = useNavigate()
 
-  const { loading, refetch } = useQuery(CHECk_POST_CODE, {
+  // function handlePostcodeErrMsg() {
+  //   if (postcode?.length < 4 || postcode?.length > 4) {
+  //     setPostcodeErrMsg('Post Code Not Correct!')
+  //   }
+  //   if (postcode?.length === 4) {
+  //     setPostcodeErrMsg('')
+  //   }
+  //   if (postcode?.length === 0) {
+  //     setPostcodeErrMsg('Post Code Empty!')
+  //   }
+  // }
+
+  const handleAvailabe = () => {
+    setPostcodeAvailable(false);
+  }
+  const handleNotAvailabe = () => {
+    setPostcodeNotAvailabe(false);
+  }
+  const { loading } = useQuery(CHECk_POST_CODE, {
+    variables: {
+      postCode: parseInt(postcode)
+    },
+    skip: postcode?.length !== 4,
     onCompleted: (data) => {
-      console.log(data)
       const res = data.checkPostCode;
-      if (res) navigate(`/search/${postcode}/available`)
-      if (!res) navigate(`/search/${postcode}/not-available`)
-    }
+      if (res) {
+        setPostcodeTrue(true)
+      } else {
+        setPostcodeTrue(false)
+      }
+    },
   });
 
   const handleSearchClick = () => {
-    if (postcode !== null) {
-      refetch({ postCode: parseInt(postcode) });
+    if (postcode?.length === 4) {
+      if (postcodeTrue) {
+        setPostcodeAvailable(true)
+        setPostcodeNotAvailabe(false)
+      }
+      if (!postcodeTrue) {
+        setPostcodeNotAvailabe(true)
+        setPostcodeAvailable(false)
+      }
+      setInputErr(false)
     } else {
-      setInputdetect(true)
+      setInputErr(true)
     }
-  }
+    setPostcode(null);
+  };
 
   return (
     <Container maxWidth='lg' sx={{
@@ -56,34 +94,46 @@ const Search = () => {
             fontWeight: { xs: 500, md: 800 },
             mb: { xs: 2, md: 4 }
           }}>Better food, less food waste, more time</Typography>
-          <Typography sx={{
-            fontSize: { xs: '14px', md: '18px' },
-            mb: { xs: 2, md: 4 }
-          }}>Eliminate the need for a physical canteen, or running to the store. This canteen is controlled digitally and delivers the food where you want it. And not least - the food is tasty, good for the body and varies every day.</Typography>
-          <Stack direction='row' sx={{
-            alignSelf: { xs: 'start', md: 'start' },
-            bgcolor: '#fff',
-            width: '100%',
-            height: { xs: '40px', md: '56px' },
-            justifyContent: 'space-between',
-            border: '1px solid lightgray',
-            borderRadius: '40px',
-            pl: { xs: 1.5, md: 2 },
-          }}>
-            <Input disableUnderline sx={{
-              border: 'none', outline: 'none',
-              flex: 1, fontSize: { xs: '11px', sm: '13px', md: '15px' }, borderRadius: '38px'
-            }} type="number" placeholder="Your company's postcode" value={postcode} onChange={e => setPostcode(e.target.value)} />
-            <Button disabled={loading} onClick={handleSearchClick} variant='contained' size='small' sx={{
-              textWrap: 'nowrap',
-              fontWeight: 700,
-              fontSize: { xs: '11px', sm: '13px', md: '15px' },
-              borderRadius: '38px',
-              color: '#fff',
-              px: { xs: 1.5, md: 2 }
-            }} startIcon={<Chat size='small' />}>See if we deliver to you</Button>
-          </Stack>
-          <Typography sx={{ ml: 2, color: 'red', visibility: inputdetect ? 'visible' : 'hidden' }}>Post Code Needed!</Typography>
+          {
+            postcodeAvailable ?
+              <PostCodeAvailable handleAvailabe={handleAvailabe} />
+              : postcodeNotAvailabe ? <PostCodeNotAvailable handleNotAvailabe={handleNotAvailabe} /> :
+                <Box>
+                  <Typography sx={{
+                    fontSize: { xs: '14px', md: '18px' },
+                    mb: { xs: 2, md: 4 }
+                  }}>Eliminate the need for a physical canteen, or running to the store. This canteen is controlled digitally and delivers the food where you want it. And not least - the food is tasty, good for the body and varies every day.</Typography>
+                  <Stack direction='row' sx={{
+                    alignSelf: { xs: 'start', md: 'start' },
+                    bgcolor: '#fff',
+                    width: '100%',
+                    height: { xs: '40px', md: '56px' },
+                    justifyContent: 'space-between',
+                    border: '1px solid lightgray',
+                    borderRadius: '40px',
+                    pl: { xs: 1.5, md: 2 },
+                  }}>
+                    <Input disableUnderline sx={{
+                      border: 'none', outline: 'none',
+                      flex: 1, fontSize: { xs: '11px', sm: '13px', md: '15px' }, borderRadius: '38px'
+                    }} type="number" maxLength={4} placeholder="Your company's postcode" value={postcode}
+                      onChange={e => {
+                        const newValue = e.target.value.slice(0, 4);
+                        setPostcode(newValue);
+                      }}
+                    />
+                    <Button disabled={loading} onClick={handleSearchClick} variant='contained' size='small' sx={{
+                      textWrap: 'nowrap',
+                      fontSize: { xs: '11px', sm: '13px', md: '15px' },
+                      borderRadius: '38px',
+                      color: '#fff',
+                      px: { xs: 1.5, md: 2 }
+                    }} startIcon={<Chat size='small' />}>See if we deliver to you</Button>
+                  </Stack>
+                  <Typography sx={{ ml: 2, color: 'red', visibility: inputErr ? 'visible' : 'hidden' }}>Post Code Incorrect!</Typography>
+                </Box>
+          }
+
         </Box>
       </Stack>
     </Container>

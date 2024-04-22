@@ -15,7 +15,14 @@ query{
             price
             name
             description
-            photoUrl
+            attachments(isCover:true){
+              edges{
+                node{
+                  id
+                  fileUrl
+                }
+              }
+            }
           }
         }
       }

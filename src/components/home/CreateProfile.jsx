@@ -19,7 +19,7 @@ const CreateProfile = () => {
     <Container maxWidth='xxl' sx={{ bgcolor: 'light.main' }}>
       <Container maxWidth='lg' sx={{ py: '40px', px: 0 }}>
 
-        <Stack direction={{ xs: 'column', sm: 'row' }} mb={10} gap={{ xs: 5, md: 10 }} justifyContent='space-between' alignItems='center'>
+        <Stack direction={{ xs: 'column-reverse', sm: 'row' }} mb={10} gap={{ xs: 5, md: 10 }} justifyContent='space-between' alignItems='center'>
           <Box sx={{
             flex: 1,
             maxWidth: '582px'
@@ -37,7 +37,8 @@ const CreateProfile = () => {
             flex: 1,
             maxWidth: '560px'
           }}>
-            <Stack sx={{
+            <img style={{width:'100%',height:'100%',borderRadius:'30px'}} src="/signupart.jpg" alt="" />
+            {/* <Stack sx={{
               position: 'relative',
               width: { xs: '100%', md: '490px' },
               height: '459px',
@@ -103,7 +104,7 @@ const CreateProfile = () => {
                   height: '100%'
                 }} src="/Group.png" alt="" />
               </Box>
-            </Stack>
+            </Stack> */}
           </Box>
         </Stack>
 

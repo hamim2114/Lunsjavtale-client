@@ -1,35 +1,39 @@
-import { ArrowRightAlt, Chat } from '@mui/icons-material'
-import { Box, Button, Container, Input, Stack, TextField, Typography } from '@mui/material'
+import { ArrowRightAlt, Chat, Close, KeyboardBackspace } from '@mui/icons-material'
+import { Box, Button, Container, Dialog, DialogActions, IconButton, Input, Slide, Stack, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import CButton from '../../common/CButton/CButton'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { CHECk_POST_CODE } from '../../graphql/query'
 import LoadingBar from '../../common/loadingBar/LoadingBar'
+import Search from '../../pages/search/Search'
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="left" ref={ref} {...props} />;
+});
+
 
 const Hero = () => {
   const [postcode, setPostcode] = useState(null);
-  const [inputdetect, setInputdetect] = useState(false)
+  const [inputdetect, setInputdetect] = useState(false);
+  const [postcodeAvailable, setPostcodeAvailable] = useState('');
+  const [postcodeDialog, setPostcodeDialog] = useState(false)
 
+  const handleDialog = () => {
+    setPostcodeDialog(false)
+  }
   const navigate = useNavigate()
-
-  const {loading,refetch} = useQuery(CHECk_POST_CODE, {
-    onCompleted: (data) => {
-      console.log(data)
-      const res = data.checkPostCode;
-      if(res) navigate(`/search/${postcode}/available`)
-      if(!res) navigate(`/search/${postcode}/not-available`)
-    }
-  });
 
 
   const handleSearchClick = () => {
-    if (postcode !== null) {
-      refetch({ postCode: parseInt(postcode) });
-    } else {
-      setInputdetect(true)
-    }
+    navigate(`/search`)
+    // if (postcode) {
+    //   navigate(`/search/${postcode}`)
+    // } else {
+    //   setInputdetect(true)
+    // }
   }
+
   return (
     <Container maxWidth='xxl' sx={{
       backgroundImage: 'url(/BG.png)',
@@ -40,7 +44,17 @@ const Hero = () => {
       height: { xs: '1044px', md: '900px' }
     }}>
       <Container maxWidth='lg'>
-      {loading && <LoadingBar/>}
+        {/* <Dialog
+          fullScreen
+          open={postcodeDialog}
+          TransitionComponent={Transition}
+        >
+          <DialogActions>
+            <Button sx={{ pr: 5 }} startIcon={<KeyboardBackspace />} onClick={handleDialog}>Back to Home</Button>
+          </DialogActions>
+          <Search code={postcode} handleDialog={handleDialog} />
+        </Dialog> */}
+        {/* {loading && <LoadingBar />} */}
         <Stack direction='row' alignItems='center' justifyContent='space-between' py={2}>
           {/* <Box sx={{ display: { xs: 'none', lg: 'block' } }}></Box> */}
           <Box sx={{
@@ -94,26 +108,26 @@ const Hero = () => {
 
             <Stack direction='row' sx={{
               alignSelf: { xs: 'start', md: 'start' },
-              bgcolor: '#fff',
-              width: '100%',
+              // bgcolor: '#fff',
+              // width: '100%',
               height: { xs: '40px', md: '56px' },
               justifyContent: 'space-between',
               borderRadius: '40px',
-              pl: { xs: 1.5, md: 2 },
+              // pl: { xs: 1.5, md: 2 },
             }}>
-              <Input autoFocus={inputdetect} disableUnderline sx={{
+              {/* <Input autoFocus={inputdetect} disableUnderline sx={{
                 border: 'none', outline: 'none',
                 flex: 1, fontSize: { xs: '11px', sm: '13px', md: '15px' }, borderRadius: '38px'
-              }} type="number" placeholder="Your company's postcode" onChange={e => setPostcode(e.target.value)} />
+              }} type="number" placeholder="Your company's postcode" value={postcode} onChange={e => setPostcode(e.target.value)} /> */}
               <Button variant='contained' size='small' sx={{
                 textWrap: 'nowrap',
                 fontWeight: 400,
-                fontSize: { xs: '11px', sm: '13px', md: '15px' },
+                fontSize: { xs: '14px', sm: '15px', md: '15px' },
                 borderRadius: '38px',
-                px: { xs: 1.5, md: 2 }
-              }} startIcon={<Chat size='small' />} onClick={handleSearchClick}>See if we deliver to you</Button>
+                px: { xs: 3, md: 5 }
+              }} startIcon={<Chat size='small' />} onClick={handleSearchClick}>I want to start now</Button>
             </Stack>
-            <Typography sx={{ ml: 2, color: 'red', visibility: inputdetect ? 'visible' : 'hidden' }}>Post Code Needed!</Typography>
+            {/* <Typography sx={{ ml: 2, color: 'red', visibility: inputdetect ? 'visible' : 'hidden' }}>Post Code Needed!</Typography> */}
 
           </Stack>
           <Box sx={{

@@ -11,6 +11,7 @@ import { GET_ALL_CATEGORY, } from '../../graphql/query';
 import Loader from '../../common/loader/Index';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import ErrorMsg from '../../common/ErrorMsg/ErrorMsg';
 
 const TabItem = styled(Tab)(({ theme }) => ({
   position: "relative",
@@ -140,7 +141,7 @@ const CategoryTab = (props) => {
         </Tabs>
       </Stack>
       {
-        loading ? <Loader /> : error ? <h4>Something went wrong!</h4> :
+        loading ? <Loader /> : error ? <ErrorMsg/> :
           allCategorys.map((item, id) => (
             <CustomTabPanel key={id} value={tabIndex} index={id}>
               <Stack>

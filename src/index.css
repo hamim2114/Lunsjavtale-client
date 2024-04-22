@@ -46,7 +46,7 @@
   outline: none !important;
 }
 
-/* Order cart table */
+/*table */
 .shopping-cart-table {
   width: 100%;
   border-collapse: collapse;
@@ -68,7 +68,7 @@
 }
 
 .shopping-cart-table tbody tr:hover {
-  background-color: #dddddd;
+  /* background-color: #dddddd; */
 }
 
 

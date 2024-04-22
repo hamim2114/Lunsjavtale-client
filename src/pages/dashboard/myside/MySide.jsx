@@ -1,12 +1,15 @@
 import { Add, ArrowBack, ArrowForward } from '@mui/icons-material'
-import { Box,IconButton, Paper, Stack, Typography } from '@mui/material'
+import { Box, Button, Grid, IconButton, Paper, Stack, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import Carousel from 'react-multi-carousel';
-import Calender from './Calender'
 import CDialog from '../../../common/dialog/CDialog';
 import AddItem from '../../../components/dashboard/AddItem';
-import { useTheme } from '@emotion/react';
 import MiniCart from '../../../components/dashboard/MiniCart';
+import { useDispatch, useSelector } from 'react-redux';
+import SelectDate from './SelectDate';
+import DateSelector from '../../../components/dashboard/DateSelector';
+import { removeSelectedDate } from '../../../redux/selectedDateSlice';
+import DateAndInfoSec from '../../../components/dashboard/DateAndInfoSec';
 
 
 
@@ -37,7 +40,7 @@ const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
 
       // position:'absolute',top:0
     }}>
-      <IconButton disable={currentSlide === 0 ? true : false} onClick={() => previous()} variant='outlined' style={{ height: '40px', mr: 2, borderRadius: '50px', width: '90px' }}>
+      <IconButton disabled={currentSlide === 0 ? true : false} onClick={() => previous()} variant='outlined' style={{ height: '40px', mr: 2, borderRadius: '50px', width: '90px' }}>
         <ArrowBack />
       </IconButton>
       <IconButton onClick={() => next()} variant='outlined' style={{ height: '40px', borderRadius: '50px', width: '90px' }}>
@@ -54,8 +57,6 @@ const MySide = (props) => {
   const [openOptionProductAddDialog, setOpenOptionProductAddDialog] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
   const [selectedOptionProductId, setSelectedOptionProductId] = useState(null);
-
-  const theme = useTheme()
 
   const handleProductDialogOpen = (id) => {
     setSelectedProductId(id)
@@ -75,14 +76,21 @@ const MySide = (props) => {
   const SelectedItem = true
 
   return (
-    <Stack maxWidth='lg' mb={5} direction={{ xs: 'column', lg: 'row' }} gap={3}>
+    <Stack maxWidth='lg' mb={5} direction={{ xs: 'column-reverse', lg: 'row' }} gap={3}>
       <Box sx={{
         width: { xs: '100%', lg: '70%' }
       }}>
-        <Box mb={3}>
-          <Calender />
-        </Box>
-        <Paper>
+        {/* <Box sx={{
+          bgcolor: 'light.main',
+          p: 2, borderRadius: '8px', mb: 2,
+          display: { xs: 'block', lg: 'none' }
+        }}>
+          <Stack alignItems='center' justifyContent='center'>
+            <Typography sx={{ fontSize: '22px', fontWeight: '600', mb: 2 }}>Select Date</Typography>
+            <DateSelector />
+          </Stack>
+        </Box> */}
+        <Paper sx={{ mt: { xs: 15, lg: 0 } }}>
           <Typography sx={{
             bgcolor: '#52525B',
             padding: '12px 24px',
@@ -90,16 +98,16 @@ const MySide = (props) => {
             textAlign: 'center',
             borderRadius: '5px'
           }}>Lunch</Typography>
-          <Stack sx={{
+          <Grid sx={{
             height: '370px',
             overflowY: 'auto',
             p: 2
-          }} direction='row' flexWrap='wrap' gap={2}>
+          }} container spacing={2}>
             {
               [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, id) => (
-                <>
-                  <Box key={id} sx={{
-                    width: { xs: '100%', xl: '49%' },
+                <Grid item xs={0} md={6} key={id}>
+                  <Box sx={{
+                    // width:'100%',
                     display: 'flex',
                     alignItems: 'center',
                     gap: { xs: 1, md: 2 },
@@ -122,19 +130,19 @@ const MySide = (props) => {
                         </IconButton>
                       </Box>
                     </Stack>
+                    {/* product add dialog */}
+                    {
+                      selectedProductId === id && (
+                        <CDialog openDialog={openProductAddDialog}>
+                          <AddItem closeDialog={handleProductDialogClose} />
+                        </CDialog>
+                      )
+                    }
                   </Box>
-                  {/* product add dialog */}
-                  {
-                    selectedProductId === id && (
-                      <CDialog openDialog={openProductAddDialog}>
-                        <AddItem closeDialog={handleProductDialogClose} />
-                      </CDialog>
-                    )
-                  }
-                </>
+                </Grid>
               ))
             }
-          </Stack>
+          </Grid>
         </Paper>
 
         <Paper sx={{ mt: 3, width: '100%' }} >
@@ -175,53 +183,51 @@ const MySide = (props) => {
             >
               {
                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, id) => (
-                  <>
-                    <Box key={id} sx={{
-                      width: { xs: '140px', md: '173px' },
-                      height: '152px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      position: 'relative',
-                      gap: 2,
-                      p: 2.5,
-                      mb: { xs: 2, md: 0 }
-                    }}>
-                      <img style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        borderRadius: '12px',
-                        position: 'absolute',
-                        top: 0, zIndex: -1
-                      }} src="/insImg5.png" alt="" />
-                      <Stack sx={{
-                        bgcolor: 'rgb(0,0,0,10'
-                      }} gap={1}>
-                        <Typography sx={{ fontSize: '14px', fontWeight: 600, color: '#fff', textAlign: 'center' }}>The lunch collective's Caesar salad</Typography>
-                        <Box sx={{ display: 'inline-flex', alignSelf: 'flex-end' }}>
-                          <Box sx={{
-                            py: { xs: '8px', md: '6px' },
-                            px: { xs: '8px', md: '16px' },
-                            mr: 1,
-                            borderRadius: '40px',
-                            bgcolor: '#fff',
-                            fontSize: '14px',
-                            border: '1px solid gray'
-                          }}>
-                            <Typography sx={{ fontSize: { xs: '12px', md: '14px' } }}>$200.00</Typography>
-                          </Box>
-                          <IconButton onClick={() => handleOptionProductDialogOpen(id)} sx={{
-                            bgcolor: 'light.main',
-                            ":hover": {
-                              bgcolor: 'light.main'
-                            }
-                          }}>
-                            <Add fontSize='small' />
-                          </IconButton>
+                  <Box key={id} sx={{
+                    width: { xs: '140px', md: '173px' },
+                    height: '152px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    position: 'relative',
+                    gap: 2,
+                    p: 2.5,
+                    mb: { xs: 2, md: 0 }
+                  }}>
+                    <img style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      borderRadius: '12px',
+                      position: 'absolute',
+                      top: 0, zIndex: -1
+                    }} src="/insImg5.png" alt="" />
+                    <Stack sx={{
+                      bgcolor: 'rgb(0,0,0,10'
+                    }} gap={1}>
+                      <Typography sx={{ fontSize: '14px', fontWeight: 600, color: '#fff', textAlign: 'center' }}>The lunch collective's Caesar salad</Typography>
+                      <Box sx={{ display: 'inline-flex', alignSelf: 'flex-end' }}>
+                        <Box sx={{
+                          py: { xs: '8px', md: '6px' },
+                          px: { xs: '8px', md: '16px' },
+                          mr: 1,
+                          borderRadius: '40px',
+                          bgcolor: '#fff',
+                          fontSize: '14px',
+                          border: '1px solid gray'
+                        }}>
+                          <Typography sx={{ fontSize: { xs: '12px', md: '14px' } }}>$200.00</Typography>
                         </Box>
-                      </Stack>
-                    </Box>
+                        <IconButton onClick={() => handleOptionProductDialogOpen(id)} sx={{
+                          bgcolor: 'light.main',
+                          ":hover": {
+                            bgcolor: 'light.main'
+                          }
+                        }}>
+                          <Add fontSize='small' />
+                        </IconButton>
+                      </Box>
+                    </Stack>
                     {
                       selectedOptionProductId === id && (
                         <CDialog openDialog={openOptionProductAddDialog}>
@@ -229,7 +235,7 @@ const MySide = (props) => {
                         </CDialog>
                       )
                     }
-                  </>
+                  </Box>
                 ))
               }
             </Carousel>
@@ -239,31 +245,11 @@ const MySide = (props) => {
       <Box sx={{
         flex: 1
       }}>
-        <Box sx={{
-          bgcolor: 'light.main',
-          p: 2, borderRadius: '8px', mb: 2
-        }}>
-          <Typography sx={{ fontSize: '17px', fontWeight: '600' }}>Selected Date</Typography>
-          <Typography sx={{ fontSize: '16px', fontWeight: '400' }}>20 February 2024, Wednesday</Typography>
-        </Box>
-        <Box sx={{
-          bgcolor: 'light.main',
-          p: 2, borderRadius: '8px', mb: 2
-        }}>
-          <Typography sx={{ fontSize: '17px', fontWeight: '600' }}>Company Information</Typography>
-          <Typography sx={{ fontSize: '16px', fontWeight: '400' }}>Provato Solutions AS</Typography>
-        </Box>
-        <Box sx={{
-          bgcolor: 'light.main',
-          p: 2, borderRadius: '8px', mb: 2
-        }}>
-          <Typography sx={{ fontSize: '17px', fontWeight: '600' }}>Address</Typography>
-          <Typography sx={{ fontSize: '16px', fontWeight: '400' }}>1901 Thornridge Cir. Shiloh, Hawaii 81063</Typography>
-        </Box>
+        <DateAndInfoSec />
         {
           SelectedItem
             ?
-            <MiniCart path='/dashboard/myside/cart'/>
+            <MiniCart path='/dashboard/myside/cart' />
             :
             <Box sx={{
               p: 2, borderRadius: '8px', mb: 2,

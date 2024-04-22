@@ -1,9 +1,11 @@
 import { Box, Button, Checkbox, Container, FormControl, FormControlLabel, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CButton from '../../common/CButton/CButton'
 import { Link } from 'react-router-dom'
 import { Google, KeyboardArrowLeft, Visibility, VisibilityOff } from '@mui/icons-material';
 import Carousel from 'react-multi-carousel';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from './graphql/mutation';
 
 
 const responsive = {
@@ -42,10 +44,47 @@ const SlideItem = () => {
 }
 
 const Login = (props) => {
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [forgotePassSecOpen, setForgotePassSecOpen] = useState(false)
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [forgotePassSecOpen, setForgotePassSecOpen] = useState(false);
+  const [payload, setPayload] = useState({ email: '', password: '' })
+  const [error, setError] = useState({ email: "", password: "" });
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const [loginUser, { loading }] = useMutation(LOGIN_USER, {
+    onCompleted: (res) => {
+      localStorage.setItem("token", res.loginUser.access);
+      localStorage.setItem("refresh", res.loginUser.refresh);
+      console.log('res:', res)
+      // window.location.href = "/admin/dashboard";
+    },
+    onError: (err) => {
+      if (err?.graphQLErrors[0]?.extensions?.errors) {
+        setError(err.graphQLErrors[0].extensions.errors);
+      } else {
+        console.log('err:', err)
+      }
+    },
+  });
+
+
+
+  const handleInputChange = (e) => {
+    setError({ ...error, [e.target.name]: '' });
+    setPayload({ ...payload, [e.target.name]: e.target.value })
+  }
+  const handleLogin = () => {
+    if (!payload.email) {
+      setError({ ...error, email: 'Please enter email!' });
+      return;
+    }
+    if (!payload.password) {
+      setError({ ...error, password: 'Please enter password!' })
+      return;
+    }
+    loginUser({ variables: payload })
+  }
+
+
+  const passwordVisibilityHandler = () => setPasswordVisibility(!passwordVisibility);
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -129,11 +168,11 @@ const Login = (props) => {
                 <Box sx={{
                   width: { xs: '70%', md: '200px' },
                   mb: 2,
-                  display:{xs:'none',lg:'flex'}
+                  display: { xs: 'none', lg: 'flex' }
                 }}>
                   <img width='100%' src="Logo.svg" alt="" />
                 </Box>
-                <Button onClick={()=> setForgotePassSecOpen(false)} sx={{
+                <Button onClick={() => setForgotePassSecOpen(false)} sx={{
                   color: 'primary.main',
                   mb: 2,
                 }} startIcon={<KeyboardArrowLeft />}> Back To Home </Button>
@@ -142,7 +181,7 @@ const Login = (props) => {
               <TextField sx={{ mb: 2 }} fullWidth label="Email Address" variant="outlined" />
               <CButton variant='contained'>Submit</CButton>
             </Stack>
-            
+
           ) : (
             <Stack sx={{
               width: { xs: '100%', md: '480px' },
@@ -163,33 +202,71 @@ const Login = (props) => {
                 </Link>
               </Stack>
               <Typography sx={{ fontWeight: 600, fontSize: '25px', mb: 3 }}>Sign into your account</Typography>
-              <TextField sx={{ mb: 2 }} fullWidth label="Email" variant="outlined" />
-              {/* <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel> */}
-              <FormControl variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+              <TextField
+                onChange={handleInputChange}
+                name='email'
+                value={payload.email}
+                error={error.email !== ''}
+                helperText={error && error.email}
+                sx={{ mb: 2 }}
+                fullWidth
+                label="Email"
+                variant="outlined"
+              />
+              <TextField
+                sx={{ mb: 3, width: "85%" }}
+                variant="outlined"
+                type={passwordVisibility ? "text" : "password"}
+                name="password"
+                label="Password"
+                value={payload.password}
+                error={error.password !== ""}
+                helperText={error && error.password}
+                onChange={handleInputChange}
+                // onKeyPress={handleKeypress}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={passwordVisibilityHandler}
+                        onMouseDown={passwordVisibilityHandler}
+                        edge="end"
+                      >
+                        {passwordVisibility ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              {/* <FormControl variant="outlined">
+                <InputLabel >Password</InputLabel>
                 <OutlinedInput
-                  id="outlined-adornment-password"
-                  type={showPassword ? 'text' : 'password'}
+                  onChange={handleInputChange}
+                  name='password'
+                  error={error.email !== ''}
+                  helperText={error && error.email}
+                  type={passwordVisibility ? 'text' : 'password'}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
+                        onClick={passwordVisibilityHandler}
                         onMouseDown={handleMouseDownPassword}
                         edge="end"
                       >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                        {passwordVisibility ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
                   }
                   label="Password"
                 />
-              </FormControl>
+              </FormControl> */}
               <Stack direction='row' justifyContent='space-between'>
                 <FormControlLabel control={<Checkbox />} label="Remember me" />
                 <Typography onClick={() => setForgotePassSecOpen(true)} sx={{ fontSize: '15px', alignSelf: 'center', my: 3, color: 'primary.main ', cursor: 'pointer' }}>Forgot password?</Typography>
               </Stack>
-              <CButton variant='contained'> Sign In</CButton>
+              <CButton onClick={handleLogin} variant='contained'> Sign In</CButton>
               <CButton startIcon={<Google />} variant='outlined' style={{ mt: 2 }}>Sign in with Google</CButton>
               <Box sx={{ display: 'inline-flex', alignSelf: 'center', mt: 2 }}>
                 <Typography sx={{ whiteSpace: 'nowrap', fontSize: { xs: '14px', md: '16px' } }}>Don't have an account?</Typography>

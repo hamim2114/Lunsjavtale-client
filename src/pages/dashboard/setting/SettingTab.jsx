@@ -1,5 +1,5 @@
 import { Delete } from "@mui/icons-material";
-import { Avatar, Box, Button, Paper, Stack, Tab, Tabs, Typography, styled, tabClasses, tabsClasses } from "@mui/material";
+import { Avatar, Box, Button, Paper, Stack, Tab, Tabs, Typography, styled, tabClasses, tabsClasses, useMediaQuery } from "@mui/material";
 import PropTypes from 'prop-types';
 import { useState } from "react";
 import General from "./tabs/General";
@@ -65,8 +65,11 @@ const tabName = [
 const SettingTab = () => {
   const [tabIndex, setTabIndex] = useState(0);
 
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('lg'));
+
+
   return (
-    <Paper elevation={{xs:0,lg:4}}>
+    <Paper elevation={isMobile ? 0 : 4}>
       <Stack direction='row' sx={{ justifyContent: 'center', }}>
         <Tabs
           variant="scrollable"
