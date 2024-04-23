@@ -5,6 +5,8 @@ import DataTable from '../../../components/dashboard/DataTable'
 import CDialog from '../../../common/dialog/CDialog';
 import AddStaff from './AddStaff';
 import EditStaff from './EditStaff';
+import { useQuery } from '@apollo/client';
+import { GET_COMPANY_STAFFS } from './graphql/query';
 
 
 const rows = [
@@ -22,13 +24,20 @@ const rows = [
 
 
 const ManageStaff = () => {
+  // const [rows, setRows] = useState([])
   const [addStaffDialogOpen, setAddStaffDilogOpen] = useState(false);
   const [editStaffDialogOpen, setEditStaffDilogOpen] = useState(false);
   const [removeDialogOpen, setRemoveDialogOpen] = useState(false);
   const [columnVisibilityModel, setColumnVisibilityModel] = useState({});
 
-
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
+
+  const { loading, error } = useQuery(GET_COMPANY_STAFFS, {
+    onCompleted: (data) => {
+      // const res = data?.categories?.edges
+      console.log(data)
+    },
+  });
 
   useEffect(() => {
    setColumnVisibilityModel({

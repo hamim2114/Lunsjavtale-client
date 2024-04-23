@@ -66,7 +66,7 @@ console.log(data)
     return totalPrice;
   };
   const calculatePrice = (quantity) => {
-    const price = data.node.price
+    const price = data?.node?.price
     const parsedQuantity = parseInt(quantity, 10);
     if (!isNaN(parsedQuantity)) {
       return price * parsedQuantity;
@@ -112,11 +112,11 @@ console.log(data)
                 // width:'96px',
                 // height:'96px'
               }}>
-                <img style={{ width: '96px', height: '96px', objectFit: 'cover', borderRadius: '12px' }} src={data.node.attachments.edges[0].node.fileUrl} alt="" />
+                <img style={{ width: '96px', height: '96px', objectFit: 'cover', borderRadius: '12px' }} src={data?.node?.attachments?.edges[0].node?.fileUrl} alt="" />
               </Box>
               <Box mb={2}>
-                <Typography variant='h6'>{data.node.name}</Typography>
-                <Typography sx={{ fontSize: '14px', mb: 2 }}>{data.node.description}</Typography>
+                <Typography variant='h6'>{data?.node?.name}</Typography>
+                <Typography sx={{ fontSize: '14px', mb: 2 }}>{data?.node?.description}</Typography>
                 {/* <Typography variant='h6'>Allergens</Typography>
                 <Typography sx={{ fontSize: '14px' }}>Egg, Milk, Mustard, Sulphite</Typography> */}
               </Box>

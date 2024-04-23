@@ -100,6 +100,10 @@ function Layout() {
     setUsermenuOpen(null);
   };
 
+  const handleLogout = () => {
+    localStorage.clear()
+    window.location.href = '/'
+  }
 
   const handleDrawerClose = () => {
     setDrawerOpen(true);
@@ -286,17 +290,15 @@ function Layout() {
             </ClickAwayListener>
             {/* user menu */}
             <Box>
-              <Tooltip title="Account settings">
-                <IconButton
-                  onClick={handleUserMenuOpen}
-                  size="small"
-                  aria-controls={open ? 'account-menu' : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={open ? 'true' : undefined}
-                >
-                  <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
-                </IconButton>
-              </Tooltip>
+              <IconButton
+                onClick={handleUserMenuOpen}
+                size="small"
+                aria-controls={open ? 'account-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+              >
+                <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+              </IconButton>
               <Menu
                 anchorEl={userMenuOpen}
                 id="account-menu"
@@ -314,13 +316,16 @@ function Layout() {
                   Profile
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={handleUserMenuClose}>
+                {/* <MenuItem onClick={handleUserMenuClose}>
                   <ListItemIcon>
                     <Settings fontSize="small" />
                   </ListItemIcon>
                   Settings
-                </MenuItem>
-                <MenuItem onClick={handleUserMenuClose}>
+                </MenuItem> */}
+                <MenuItem onClick={() => (
+                  handleUserMenuClose(),
+                  handleLogout()
+                )}>
                   <ListItemIcon>
                     <Logout fontSize="small" />
                   </ListItemIcon>

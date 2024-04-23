@@ -1,11 +1,12 @@
 import { Box, Button, Checkbox, Container, FormControl, FormControlLabel, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import CButton from '../../common/CButton/CButton'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Google, KeyboardArrowLeft, Visibility, VisibilityOff } from '@mui/icons-material';
 import Carousel from 'react-multi-carousel';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from './graphql/mutation';
+import toast from 'react-hot-toast';
 
 
 const responsive = {
@@ -52,20 +53,15 @@ const Login = (props) => {
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     onCompleted: (res) => {
       localStorage.setItem("token", res.loginUser.access);
-      localStorage.setItem("refresh", res.loginUser.refresh);
+      // localStorage.setItem("refresh", res.loginUser.refresh);
       console.log('res:', res)
-      // window.location.href = "/admin/dashboard";
+      toast.success('Login Success!')
+      window.location.href = "/dashboard/myside";
     },
     onError: (err) => {
-      if (err?.graphQLErrors[0]?.extensions?.errors) {
-        setError(err.graphQLErrors[0].extensions.errors);
-      } else {
-        console.log('err:', err)
-      }
+      toast.error(err.message)
     },
   });
-
-
 
   const handleInputChange = (e) => {
     setError({ ...error, [e.target.name]: '' });
@@ -85,10 +81,6 @@ const Login = (props) => {
 
 
   const passwordVisibilityHandler = () => setPasswordVisibility(!passwordVisibility);
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
 
 
   return (
@@ -214,16 +206,16 @@ const Login = (props) => {
                 variant="outlined"
               />
               <TextField
-                sx={{ mb: 3, width: "85%" }}
+                sx={{ mb: 2 }}
                 variant="outlined"
                 type={passwordVisibility ? "text" : "password"}
                 name="password"
                 label="Password"
+                fullWidth
                 value={payload.password}
                 error={error.password !== ""}
                 helperText={error && error.password}
                 onChange={handleInputChange}
-                // onKeyPress={handleKeypress}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -239,34 +231,11 @@ const Login = (props) => {
                   ),
                 }}
               />
-              {/* <FormControl variant="outlined">
-                <InputLabel >Password</InputLabel>
-                <OutlinedInput
-                  onChange={handleInputChange}
-                  name='password'
-                  error={error.email !== ''}
-                  helperText={error && error.email}
-                  type={passwordVisibility ? 'text' : 'password'}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={passwordVisibilityHandler}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {passwordVisibility ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
-                />
-              </FormControl> */}
               <Stack direction='row' justifyContent='space-between'>
                 <FormControlLabel control={<Checkbox />} label="Remember me" />
                 <Typography onClick={() => setForgotePassSecOpen(true)} sx={{ fontSize: '15px', alignSelf: 'center', my: 3, color: 'primary.main ', cursor: 'pointer' }}>Forgot password?</Typography>
               </Stack>
-              <CButton onClick={handleLogin} variant='contained'> Sign In</CButton>
+              <CButton onClick={handleLogin} isLoading={loading} variant='contained'> Sign In</CButton>
               <CButton startIcon={<Google />} variant='outlined' style={{ mt: 2 }}>Sign in with Google</CButton>
               <Box sx={{ display: 'inline-flex', alignSelf: 'center', mt: 2 }}>
                 <Typography sx={{ whiteSpace: 'nowrap', fontSize: { xs: '14px', md: '16px' } }}>Don't have an account?</Typography>

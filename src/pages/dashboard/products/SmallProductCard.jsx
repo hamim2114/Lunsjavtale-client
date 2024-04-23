@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import CDialog from '../../../common/dialog/CDialog'
 import AddItem from '../../../components/dashboard/AddItem'
 
-const SingleProduct = ({ data }) => {
+const SmallProductCard = ({ data }) => {
   const [openProductAddDialog, setOpenProductAddDialog] = useState(false);
 
   const handleProductDialogClose = () => {
@@ -47,4 +47,4 @@ const SingleProduct = ({ data }) => {
   )
 }
 
-export default SingleProduct
+export default SmallProductCard

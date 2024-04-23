@@ -1,6 +1,6 @@
 import { ArrowRightAlt, Chat, Close, KeyboardBackspace } from '@mui/icons-material'
 import { Box, Button, Container, Dialog, DialogActions, IconButton, Input, Slide, Stack, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CButton from '../../common/CButton/CButton'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
@@ -14,25 +14,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 
 const Hero = () => {
-  const [postcode, setPostcode] = useState(null);
-  const [inputdetect, setInputdetect] = useState(false);
-  const [postcodeAvailable, setPostcodeAvailable] = useState('');
-  const [postcodeDialog, setPostcodeDialog] = useState(false)
 
-  const handleDialog = () => {
-    setPostcodeDialog(false)
-  }
-  const navigate = useNavigate()
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
-
-  const handleSearchClick = () => {
-    navigate(`/search`)
-    // if (postcode) {
-    //   navigate(`/search/${postcode}`)
-    // } else {
-    //   setInputdetect(true)
-    // }
-  }
+  useEffect(() => {
+    setToken(localStorage.getItem('token'))
+  }, [])
 
   return (
     <Container maxWidth='xxl' sx={{
@@ -44,17 +31,6 @@ const Hero = () => {
       height: { xs: '1044px', md: '900px' }
     }}>
       <Container maxWidth='lg'>
-        {/* <Dialog
-          fullScreen
-          open={postcodeDialog}
-          TransitionComponent={Transition}
-        >
-          <DialogActions>
-            <Button sx={{ pr: 5 }} startIcon={<KeyboardBackspace />} onClick={handleDialog}>Back to Home</Button>
-          </DialogActions>
-          <Search code={postcode} handleDialog={handleDialog} />
-        </Dialog> */}
-        {/* {loading && <LoadingBar />} */}
         <Stack direction='row' alignItems='center' justifyContent='space-between' py={2}>
           {/* <Box sx={{ display: { xs: 'none', lg: 'block' } }}></Box> */}
           <Box sx={{
@@ -62,11 +38,19 @@ const Hero = () => {
           }}>
             <img style={{ width: '100%' }} src="/Logo.svg" alt="" />
           </Box>
-          <Link to='/login'>
-            <CButton variant='contained' endIcon={<ArrowRightAlt />} style={{ fontSize: { xs: '14px', md: '16px' }, width: { xs: '104px', md: '136px' }, height: { xs: '37px', md: '56px     ' } }}>
-              Sign In
-            </CButton>
-          </Link>
+          {
+            token ?
+              <Link to='/dashboard/myside'>
+                <CButton variant='contained' endIcon={<ArrowRightAlt />} style={{ fontSize: { xs: '14px', md: '16px' }, width: { xs: '104px', md: '136px' }, height: { xs: '37px', md: '56px     ' } }}>
+                  Dashboard
+                </CButton>
+              </Link> :
+              <Link to='/login'>
+                <CButton variant='contained' endIcon={<ArrowRightAlt />} style={{ fontSize: { xs: '14px', md: '16px' }, width: { xs: '104px', md: '136px' }, height: { xs: '37px', md: '56px     ' } }}>
+                  Sign In
+                </CButton>
+              </Link>
+          }
         </Stack>
 
         <Stack sx={{ height: '700px' }} direction={{ xs: 'column', md: 'row' }} alignItems='center' justifyContent='space-between' gap={5}>
@@ -119,15 +103,17 @@ const Hero = () => {
                 border: 'none', outline: 'none',
                 flex: 1, fontSize: { xs: '11px', sm: '13px', md: '15px' }, borderRadius: '38px'
               }} type="number" placeholder="Your company's postcode" value={postcode} onChange={e => setPostcode(e.target.value)} /> */}
-              <Button variant='contained' size='small' sx={{
-                textWrap: 'nowrap',
-                fontWeight: 400,
-                fontSize: { xs: '14px', sm: '15px', md: '15px' },
-                borderRadius: '38px',
-                px: { xs: 3, md: 5 }
-              }} startIcon={<Chat size='small' />} onClick={handleSearchClick}>I want to start now</Button>
+              <Link to='/search'>
+                <Button variant='contained' size='small' sx={{
+                  textWrap: 'nowrap',
+                  fontWeight: 400,
+                  fontSize: { xs: '14px', sm: '15px', md: '15px' },
+                  borderRadius: '38px',
+                  px: { xs: 3, md: 5 },
+                  py: { xs: 1, md: 2 }
+                }} startIcon={<Chat size='small' />}>I want to start now</Button>
+              </Link>
             </Stack>
-            {/* <Typography sx={{ ml: 2, color: 'red', visibility: inputdetect ? 'visible' : 'hidden' }}>Post Code Needed!</Typography> */}
 
           </Stack>
           <Box sx={{

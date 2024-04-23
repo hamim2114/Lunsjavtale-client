@@ -9,8 +9,8 @@ import { Add } from '@mui/icons-material';
 import CDialog from '../../../common/dialog/CDialog';
 import AddItem from '../../../components/dashboard/AddItem';
 import DateAndInfoSec from '../../../components/dashboard/DateAndInfoSec';
-import SingleProduct from './SingleProduct';
 import ErrorMsg from '../../../common/ErrorMsg/ErrorMsg';
+import SmallProductCard from './SmallProductCard';
 
 const TabItem = styled(Tab)(({ theme }) => ({
   position: "relative",
@@ -140,7 +140,7 @@ const Products = () => {
               }} gap={2}>
                 {
                   item?.node?.products?.edges?.map((data, id) => (
-                    <SingleProduct data={data} key={id}/>
+                    <SmallProductCard data={data} key={id}/>
                   ))
                 }
               </Stack>

@@ -32,6 +32,32 @@ query{
 }
 `
 
+export const GET_SINGLE_CATEGORY = gql`
+  query SingleCategory ($id: ID){
+    category(id: $id){
+      name
+      products{
+        edges{
+          node{
+            id
+            name
+            title
+            price
+            description
+            attachments{
+              edges{
+                node{
+                  fileUrl
+              }
+            }
+          }
+        }
+      }
+    }
+    }
+  }
+`
+
 export const CHECk_POST_CODE = gql`
   query CheckPostCode ($postCode: Int){
     checkPostCode(postCode: $postCode)
