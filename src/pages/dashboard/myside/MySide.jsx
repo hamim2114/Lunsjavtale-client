@@ -78,7 +78,6 @@ const MySide = (props) => {
       setOptionProducts(res.category)
     },
   });
-  console.log(optionProducts)
 
   const SelectedItem = true
 

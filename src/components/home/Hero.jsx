@@ -36,12 +36,12 @@ const Hero = () => {
           <Box sx={{
             width: { xs: '96px', md: '194px' }
           }}>
-            <img style={{ width: '100%' }} src="/Logo.svg" alt="" />
+            <img style={{ width: '100%' }} src="/logo.gif" alt="" />
           </Box>
           {
             token ?
               <Link to='/dashboard/myside'>
-                <CButton variant='contained' endIcon={<ArrowRightAlt />} style={{ fontSize: { xs: '14px', md: '16px' }, width: { xs: '104px', md: '136px' }, height: { xs: '37px', md: '56px     ' } }}>
+                <CButton variant='contained' endIcon={<ArrowRightAlt />} style={{ fontSize: { xs: '14px', md: '16px' }, height: { xs: '37px', md: '56px     ' } }}>
                   Dashboard
                 </CButton>
               </Link> :
@@ -106,8 +106,8 @@ const Hero = () => {
               <Link to='/search'>
                 <Button variant='contained' size='small' sx={{
                   textWrap: 'nowrap',
-                  fontWeight: 400,
-                  fontSize: { xs: '14px', sm: '15px', md: '15px' },
+                  fontWeight: 500,
+                  fontSize: { xs: '14px', sm: '15px', md: '16px' },
                   borderRadius: '38px',
                   px: { xs: 3, md: 5 },
                   py: { xs: 1, md: 2 }

@@ -5,7 +5,7 @@ import { useTheme } from '@emotion/react'
 import { Link } from 'react-router-dom'
 
 const ProductCard = ({ data }) => {
-  console.log('product card:',data)
+  // console.log('product card:',data)
   const theme = useTheme()
   return (
     <Stack sx={{

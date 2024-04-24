@@ -59,7 +59,6 @@ const EditStaff = ({ closeDialog }) => {
             <Stack flex={1} gap={2}>
               <TextField size='small' label='Last Name' />
               <TextField size='small' label='Phone Number' />
-              <TextField size='small' label='Staff Role' />
             </Stack>
           </Stack>
         </Stack>

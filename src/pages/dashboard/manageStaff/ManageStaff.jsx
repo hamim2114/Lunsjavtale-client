@@ -7,24 +7,14 @@ import AddStaff from './AddStaff';
 import EditStaff from './EditStaff';
 import { useQuery } from '@apollo/client';
 import { GET_COMPANY_STAFFS } from './graphql/query';
-
-
-const rows = [
-  { id: '#89012300', name: 'Brooklyn Simmons', email: 'jackson.graham@.com', phone: '(603) 555-0123', join: 'December 2, 2018' },
-  { id: '#89012301', name: 'Emma Thompson', email: 'emma.thompson@.com', phone: '(603) 555-1234', join: 'January 10, 2019' },
-  { id: '#89012302', name: 'James Smith', email: 'james.smith@.com', phone: '(603) 555-2345', join: 'February 20, 2019' },
-  { id: '#89012303', name: 'Sophia Johnson', email: 'sophia.johnson@.com', phone: '(603) 555-3456', join: 'March 15, 2019' },
-  { id: '#89012304', name: 'Michael Williams', email: 'michael.williams@.com', phone: '(603) 555-4567', join: 'April 5, 2019' },
-  { id: '#89012305', name: 'Olivia Brown', email: 'olivia.brown@.com', phone: '(603) 555-5678', join: 'May 18, 2019' },
-  { id: '#89012306', name: 'William Jones', email: 'william.jones@.com', phone: '(603) 555-6789', join: 'June 30, 2019' },
-  { id: '#89012307', name: 'Ava Garcia', email: 'ava.garcia@.com', phone: '(603) 555-7890', join: 'July 9, 2019' },
-  { id: '#89012308', name: 'Alexander Martinez', email: 'alexander.martinez@.com', phone: '(603) 555-8901', join: 'August 14, 2019' },
-
-];
+import LoadingBar from '../../../common/loadingBar/LoadingBar';
+import { format } from 'date-fns';
+import ErrorMsg from '../../../common/ErrorMsg/ErrorMsg';
+import Loader from '../../../common/loader/Index';
 
 
 const ManageStaff = () => {
-  // const [rows, setRows] = useState([])
+  const [rowdata, setRowData] = useState([])
   const [addStaffDialogOpen, setAddStaffDilogOpen] = useState(false);
   const [editStaffDialogOpen, setEditStaffDilogOpen] = useState(false);
   const [removeDialogOpen, setRemoveDialogOpen] = useState(false);
@@ -33,18 +23,32 @@ const ManageStaff = () => {
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
   const { loading, error } = useQuery(GET_COMPANY_STAFFS, {
-    onCompleted: (data) => {
-      // const res = data?.categories?.edges
-      console.log(data)
+    onCompleted: (res) => {
+      const data = res.companyStaffs.edges
+      setRowData(data)
     },
   });
 
+  const rows = rowdata?.map(item => {
+    return {
+      id: item.node.id,
+      name: item.node.firstName + ' ' + item.node.lastName,
+      firstName: item.node.firstName,
+      lastName: item.node.lastName,
+      email: item.node.email,
+      jobTitle: item.node.jobTitle,
+      phone: item.node.phone,
+      join: format(new Date(item.node.dateJoined), 'MMMM dd, yyyy')
+    }
+  })
+
+
   useEffect(() => {
-   setColumnVisibilityModel({
-    email: isMobile ? false : true,
-    phone: isMobile ? false : true,
-    join: isMobile ? false : true,
-   })
+    setColumnVisibilityModel({
+      email: isMobile ? false : true,
+      phone: isMobile ? false : true,
+      join: isMobile ? false : true,
+    })
   }, [isMobile])
 
 
@@ -81,9 +85,9 @@ const ManageStaff = () => {
     {
       field: 'action',
       headerName: 'Action',
-      flex:1,
+      flex: 1,
       renderCell: (params) => (
-        <Stack sx={{height:'100%'}} direction='row' gap={2} alignItems='center'>
+        <Stack sx={{ height: '100%' }} direction='row' gap={2} alignItems='center'>
           <IconButton sx={{
             bgcolor: 'light.main',
             borderRadius: '5px',
@@ -146,11 +150,14 @@ const ManageStaff = () => {
         </DialogActions>
       </CDialog>
       <Box>
-        <DataTable
-          rows={rows}
-          columns={columns}
-          columnVisibilityModel={columnVisibilityModel}
-        />
+        {
+          loading ? <Loader/> : error ? <ErrorMsg /> :
+            <DataTable
+              rows={rows}
+              columns={columns}
+              columnVisibilityModel={columnVisibilityModel}
+            />
+        }
       </Box>
     </Box>
   )

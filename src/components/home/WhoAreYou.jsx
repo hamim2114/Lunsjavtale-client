@@ -49,11 +49,11 @@ function CustomTabPanel(props) {
     </div>
   );
 }
-CustomTabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
+// CustomTabPanel.propTypes = {
+//   children: PropTypes.node,
+//   index: PropTypes.number.isRequired,
+//   value: PropTypes.number.isRequired,
+// };
 
 function WhoAreYou() {
   const [tabIndex, setTabIndex] = useState(0);

@@ -7,6 +7,8 @@ import Carousel from 'react-multi-carousel';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from './graphql/mutation';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/authSlice';
 
 
 const responsive = {
@@ -50,12 +52,13 @@ const Login = (props) => {
   const [payload, setPayload] = useState({ email: '', password: '' })
   const [error, setError] = useState({ email: "", password: "" });
 
+  const dispatch = useDispatch()
+
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     onCompleted: (res) => {
       localStorage.setItem("token", res.loginUser.access);
-      // localStorage.setItem("refresh", res.loginUser.refresh);
-      console.log('res:', res)
-      toast.success('Login Success!')
+      dispatch(setUser(res.loginUser.user))
+      toast.success('Login Success!');
       window.location.href = "/dashboard/myside";
     },
     onError: (err) => {

@@ -13,6 +13,11 @@ import Typography from '@mui/material/Typography';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { AccountCircle, CategoryOutlined, DoubleArrow, Logout, MailOutline, NotificationsNone, PeopleAltOutlined, Search, Settings, SettingsOutlined, ViewStreamOutlined } from '@mui/icons-material';
 import { Avatar, Badge, ClickAwayListener, Collapse, InputAdornment, Menu, MenuItem, Stack, TextField, Tooltip } from '@mui/material';
+import { LOGOUT } from '../login/graphql/mutation';
+import LoadingBar from '../../common/loadingBar/LoadingBar';
+import toast from 'react-hot-toast';
+import { useMutation } from '@apollo/client';
+import { useSelector } from 'react-redux';
 
 const drawerWidth = 264;
 
@@ -92,6 +97,19 @@ function Layout() {
 
   const { pathname } = useLocation()
 
+  const user = useSelector(state => state.auth.user)
+console.log(user)
+  const [logout, { loading }] = useMutation(LOGOUT, {
+    onCompleted: (res) => {
+      localStorage.clear()
+      toast.success(res.message)
+      window.location.href = '/'
+    },
+  });
+
+  const handleLogout = () => {
+    logout()
+  }
   const open = Boolean(userMenuOpen);
   const handleUserMenuOpen = (event) => {
     setUsermenuOpen(event.currentTarget);
@@ -100,10 +118,6 @@ function Layout() {
     setUsermenuOpen(null);
   };
 
-  const handleLogout = () => {
-    localStorage.clear()
-    window.location.href = '/'
-  }
 
   const handleDrawerClose = () => {
     setDrawerOpen(true);
@@ -138,10 +152,10 @@ function Layout() {
           </Box>
         </Link>
       </Toolbar>
-      {/* <Divider /> */}
       <Typography sx={{
-        // width: '100%',
         padding: '16px 12px',
+        maxWidth:'200px',
+        width:'100%',
         color: 'primary.main',
         bgcolor: 'light.main',
         borderRadius: '8px',
@@ -149,9 +163,7 @@ function Layout() {
         fontWeight: 500,
         textAlign: 'center',
         m: 3
-      }}>
-        Deal: Provato Solutions AS
-      </Typography>
+      }}><b>Deal:</b> {user.company.name}</Typography>
       <Stack>
         <Typography sx={{
           color: '#C2C2C2',
@@ -181,6 +193,7 @@ function Layout() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
+      {loading && <LoadingBar />}
       <AppBar
         color='white'
         position="fixed"
@@ -203,7 +216,8 @@ function Layout() {
           >
             <MenuIcon />
           </IconButton>
-          <TextField sx={{
+          <Box/>
+          {/* <TextField sx={{
             mr: { xs: 0, sm: 2, md: 20 },
             maxWidth: '700px',
             width: '100%'
@@ -219,7 +233,7 @@ function Layout() {
                 </InputAdornment>
               )
             }}
-          />
+          /> */}
           <Box sx={{
             display: 'flex',
             alignItems: 'center'
