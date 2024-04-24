@@ -129,7 +129,7 @@ const Orders = () => {
   // }, [isMobile])
 
   return (
-    <Box maxWidth='lg'>
+    <Box maxWidth='xxl'>
       <Stack direction='row' justifyContent='space-between'>
         <Typography sx={{ fontSize: { xs: '18px', lg: '24px' }, fontWeight: 600 }}>Order History</Typography>
         <Box sx={{

@@ -98,7 +98,7 @@ function Layout() {
   const { pathname } = useLocation()
 
   const user = useSelector(state => state.auth.user)
-console.log(user)
+
   const [logout, { loading }] = useMutation(LOGOUT, {
     onCompleted: (res) => {
       localStorage.clear()
@@ -106,9 +106,12 @@ console.log(user)
       window.location.href = '/'
     },
   });
-
+  
   const handleLogout = () => {
-    logout()
+    // logout()
+    localStorage.clear()
+    toast.success('Logout Success!')
+    window.location.href = '/'
   }
   const open = Boolean(userMenuOpen);
   const handleUserMenuOpen = (event) => {

@@ -82,7 +82,7 @@ const MySide = (props) => {
   const SelectedItem = true
 
   return (
-    <Stack maxWidth='lg' mb={5} direction={{ xs: 'column-reverse', lg: 'row' }} gap={3}>
+    <Stack maxWidth='xxl' mb={5} direction={{ xs: 'column-reverse', lg: 'row' }} gap={3}>
       <Box sx={{
         width: { xs: '100%', lg: '70%' }
       }}>

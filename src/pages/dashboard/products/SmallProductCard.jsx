@@ -15,6 +15,7 @@ const SmallProductCard = ({ data }) => {
   return (
     <Box sx={{
       width: '100%',
+      maxWidth:'1000px',
       display: 'flex',
       alignItems: 'center',
       gap: { xs: 1, md: 2 },
