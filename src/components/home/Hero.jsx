@@ -34,7 +34,7 @@ const Hero = () => {
         <Stack direction='row' alignItems='center' justifyContent='space-between' py={2}>
           {/* <Box sx={{ display: { xs: 'none', lg: 'block' } }}></Box> */}
           <Box sx={{
-            width: { xs: '96px', md: '194px' }
+            width: { xs: '150px', md: '300px' }
           }}>
             <img style={{ width: '100%' }} src="/logo.gif" alt="" />
           </Box>
@@ -63,9 +63,9 @@ const Hero = () => {
           }}>
             <Typography sx={{
               mt: { xs: 5, md: 0 },
-              fontSize: { xs: '32px', md: '48px' },
+              fontSize: { xs: '32px', md: '58px' },
               fontWeight: 800,
-              // lineHeight: '57.6px'
+              lineHeight: {xs:'40px',md:'57.6px'}
             }}>The next generation <br /> of work lunches</Typography>
             <Typography sx={{ fontSize: { xs: '14px', md: '18px' }, fontWeight: 200, mb: 1 }}>Let employees manage their own lunch with just a few keystrokes. Cut administration, costs and food waste, while employees are delivered exactly the lunch they want.</Typography>
 

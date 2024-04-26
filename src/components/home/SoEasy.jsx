@@ -28,7 +28,7 @@ const SoEasy = () => {
               <CButton variant='contained' color='secondary' style={{ width: { xs: '100%', md: '119px' }, textWrap: 'noWrap' }}>Get Started</CButton>
             </Link>
             <Link to='/search'>
-              <CButton variant='outlined' style={{ flexGrow: 1 }}>Do you need meeting food?</CButton>
+              <CButton variant='outlined' style={{ width:'100%' }}>Do you need meeting food?</CButton>
             </Link>
           </Stack>
         </Box>

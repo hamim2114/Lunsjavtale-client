@@ -71,4 +71,16 @@
   /* background-color: #dddddd; */
 }
 
+/* .react-datepicker__input-container{
+  border-radius: 8px;
+  border: 1px solid lightgray;
+  padding: 10px 20px;
+} */
+.react-datepicker__input-container input{
+  border-radius: 8px;
+  border: 1px solid lightgray;
+  padding: 10px 20px;
+  outline: none;
+}
+
 

@@ -124,7 +124,7 @@ const Login = (props) => {
           <Carousel
             swipeable={true}
             // draggable={true}
-            showDots={false}
+            showDots={true}
             arrows={false}
             rewindWithAnimation={true}
             rewind={true}
@@ -143,7 +143,7 @@ const Login = (props) => {
 
             {
               [1, 2, 3].map((item, id) => (
-                <Box key={id} px={1}>
+                <Box key={id} px={1} py={5}>
                   <SlideItem />
                 </Box>
               ))

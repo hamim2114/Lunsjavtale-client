@@ -88,7 +88,7 @@ const MySide = (props) => {
       }}>
         {
           loading ? <LoadingBar /> : error ? <ErrorMsg /> :
-            <Paper sx={{ mt: { xs: 15, lg: 0 } }}>
+            <Paper sx={{ mt: { xs: 15, lg: 0 } }} elevation={3}>
               <Typography sx={{
                 bgcolor: '#52525B',
                 padding: '12px 24px',
@@ -115,7 +115,7 @@ const MySide = (props) => {
         }
         {
           opLoading ? <LoadingBar /> : opErr ? <ErrorMsg /> :
-            <Paper sx={{ mt: 3, width: '100%' }} >
+            <Paper sx={{ mt: 6, width: '100%' }} elevation={3}>
               <Typography sx={{
                 bgcolor: '#52525B',
                 padding: '12px 24px',

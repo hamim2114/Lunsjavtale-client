@@ -8,6 +8,7 @@ import { CHECk_POST_CODE } from '../../graphql/query'
 import LoadingBar from '../../common/loadingBar/LoadingBar'
 import PostCodeAvailable from './PostcodeAvailable'
 import PostCodeNotAvailable from './PostcodeNotAvailable'
+import toast from 'react-hot-toast'
 
 const Search = () => {
   const [postcode, setPostcode] = useState(null);
@@ -62,7 +63,8 @@ const Search = () => {
       }
       setInputErr(false)
     } else {
-      setInputErr(true)
+      // setInputErr(true)
+      toast.error('Post Code Incorrect!')
     }
     setPostcode(null);
   };

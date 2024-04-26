@@ -39,7 +39,7 @@ const DateSelector = () => {
         placeholderText="Click to select date"
         minDate={new Date()}
         maxDate={addMonths(new Date(), 1)}
-        showIcon
+        // showIcon
         selectedDates={selectedDates}
         selectsMultiple
         onChange={onChange}

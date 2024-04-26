@@ -3,6 +3,8 @@ import { Avatar, Box, Button, FormGroup, IconButton, Stack, TextField, Typograph
 import React, { useState } from 'react'
 import CButton from '../../../common/CButton/CButton';
 import { useTheme } from '@emotion/react';
+import { useMutation } from '@apollo/client';
+import { CREATE_COMPANY_STAFF } from './graphql/mutation';
 
 const allergies = [
   'Gluten (oats, wheat, rye, spelt, barley)',
@@ -16,6 +18,22 @@ const allergies = [
 const AddStaff = ({ closeDialog }) => {
   const [staffImg, setStaffImg] = useState('');
   const [selectedAllergies, setSelectedAllergies] = useState([]);
+  const [payload, setPayload] = useState({})
+
+  const [createStaff, {loading}] = useMutation(CREATE_COMPANY_STAFF, {
+    onCompleted: (res)=> {
+      console.log(res)
+    }
+  }) 
+console.log(payload)
+  const handleInputChange = (e) => {
+    setPayload({
+      ...payload, 
+      [e.target.name]: e.target.value, 
+      company: "1",
+      role:"employee"
+    })
+  }
 
   const theme = useTheme()
 
@@ -54,14 +72,13 @@ const AddStaff = ({ closeDialog }) => {
         <Stack mt={4}>
           <Stack direction='row' gap={2} mb={2}>
             <Stack flex={1} gap={2}>
-              <TextField size='small' label='Name' />
-              <TextField size='small' label='Email' />
-              <TextField size='small' label='Job Title' />
+              <TextField onChange={handleInputChange} name='firstName' size='small' label='First Name' />
+              <TextField onChange={handleInputChange} name='email' size='small' label='Email' />
+              {/* <TextField name='userName' size='small' label='User Name' /> */}
             </Stack>
             <Stack flex={1} gap={2}>
-              <TextField size='small' label='Last Name' />
-              <TextField size='small' label='Phone Number' />
-              <TextField size='small' label='Staff Role' />
+              <TextField onChange={handleInputChange} name='lastName' size='small' label='Last Name' />
+              <TextField onChange={handleInputChange} name='phone' size='small' label='Phone Number' />
             </Stack>
           </Stack>
         </Stack>
