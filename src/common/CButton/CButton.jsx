@@ -9,9 +9,9 @@ const CButton = (props) => {
       sx={{
         textTransform: "none",
         boxShadow: "none",
-        height: '50px',
+        height: '40px',
         fontSize: '16px',
-        borderRadius: '8px',
+        borderRadius: '4px',
         // border: '1px solid lightgray',
         position: "relative",
         ...props.style,

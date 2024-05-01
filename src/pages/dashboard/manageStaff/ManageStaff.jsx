@@ -52,7 +52,7 @@ const ManageStaff = () => {
   }, [isMobile])
 
 
-  function handleEdit(row) {
+  function handleStaffEdit(row) {
     setEditStaffDilogOpen(true)
     console.log(row)
   }
@@ -93,7 +93,7 @@ const ManageStaff = () => {
             borderRadius: '5px',
             width: '40px',
             height: '40px',
-          }} onClick={() => handleEdit(params.row)}>
+          }} onClick={() => handleStaffEdit(params.row)}>
             <BorderColor fontSize='small' />
           </IconButton>
           <IconButton sx={{

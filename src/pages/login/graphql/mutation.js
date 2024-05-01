@@ -46,3 +46,13 @@ export const LOGOUT = gql`
   }
 }
 `
+
+
+export const PASSWORD_RESET = gql`
+  mutation PasswordResetMail ($email: String!){
+    passwordResetMail(email:$email){
+      success
+      message
+  }
+}
+`

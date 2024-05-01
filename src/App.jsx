@@ -2,7 +2,6 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import Home from './pages/home/Home'
 import NotFound from './pages/notFound/Index'
 import Search from './pages/search/Search'
-import Submited from './pages/search/Submited'
 import Login from './pages/login/Login'
 import Layout from './pages/dashboard/Layout'
 import MySide from './pages/dashboard/myside/MySide'
@@ -19,6 +18,8 @@ import EditOrder from './pages/dashboard/orders/EditOrder'
 import OrderDetails from './pages/dashboard/orders/OrderDetails'
 import OrderSingleDetails from './pages/dashboard/orders/OrderSingleDetails'
 import { useEffect, useState } from 'react'
+import EmailVerification from './pages/emailVerification/EmailVerification'
+import PassReset from './pages/passReset/PassReset'
 
 function App() {
 
@@ -34,11 +35,8 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={token ? <Navigate to='/dashboard/myside' /> : <Login />} />
         <Route path='/search' element={<Search />} />
-        {/* <Route path='/search/not-available' element={<PostCodeFalse />} />
-        <Route path='/search/:postcode/available' element={<PostCodeTrue />} /> */}
-        {/* <Route path='/search/:postcode/not-available' element={<PostCodeFalse />} />
-        <Route path='/search/:postcode/available' element={<PostCodeTrue />} /> */}
-        <Route path='/search/:postcode/submited' element={<Submited />} />
+        <Route path='/email-verification/:token?' element={<EmailVerification />} />
+        <Route path='/password-reset/:token?' element={<PassReset />} />
         <Route element={token ? <Layout /> : <Navigate to='/login' />}>
           <Route path='/dashboard/myside' element={<MySide />} />
           <Route path='/dashboard/myside/cart' element={<CartPage />} />
@@ -56,7 +54,6 @@ function App() {
         </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>
-
     </div>
   )
 }

@@ -108,6 +108,7 @@ const CategoryTab = (props) => {
 
   const { loading, error } = useQuery(GET_ALL_CATEGORY, {
     onCompleted: (data) => {
+      // console.log(data)
       const res = data?.categories?.edges
       setAllCategorys(res)
     },

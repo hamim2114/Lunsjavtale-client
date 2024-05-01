@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import { Chat, Close, KeyboardArrowLeft } from '@mui/icons-material'
-import { Box, Button, Checkbox, Container, Input, Slide, Stack, TextField, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Chat, KeyboardArrowLeft } from '@mui/icons-material'
+import { Box, Button, Container, Input, Stack, Typography } from '@mui/material'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { CHECk_POST_CODE } from '../../graphql/query'
 import LoadingBar from '../../common/loadingBar/LoadingBar'
@@ -11,24 +11,12 @@ import PostCodeNotAvailable from './PostcodeNotAvailable'
 import toast from 'react-hot-toast'
 
 const Search = () => {
-  const [postcode, setPostcode] = useState(null);
+  const [postcode, setPostcode] = useState('');
   const [inputErr, setInputErr] = useState(false);
   const [postcodeAvailable, setPostcodeAvailable] = useState(false);
   const [postcodeNotAvailabe, setPostcodeNotAvailabe] = useState(false);
   const [postcodeTrue, setPostcodeTrue] = useState(undefined);
 
-
-  // function handlePostcodeErrMsg() {
-  //   if (postcode?.length < 4 || postcode?.length > 4) {
-  //     setPostcodeErrMsg('Post Code Not Correct!')
-  //   }
-  //   if (postcode?.length === 4) {
-  //     setPostcodeErrMsg('')
-  //   }
-  //   if (postcode?.length === 0) {
-  //     setPostcodeErrMsg('Post Code Empty!')
-  //   }
-  // }
 
   const handleAvailabe = () => {
     setPostcodeAvailable(false);
@@ -63,10 +51,9 @@ const Search = () => {
       }
       setInputErr(false)
     } else {
-      // setInputErr(true)
       toast.error('Post Code Incorrect!')
     }
-    setPostcode(null);
+    // setPostcode(null);
   };
 
   return (
@@ -98,7 +85,7 @@ const Search = () => {
           }}>Better food, less food waste, more time</Typography>
           {
             postcodeAvailable ?
-              <PostCodeAvailable handleAvailabe={handleAvailabe} />
+              <PostCodeAvailable handleAvailabe={handleAvailabe} postCode={postcode} />
               : postcodeNotAvailabe ? <PostCodeNotAvailable handleNotAvailabe={handleNotAvailabe} /> :
                 <Box>
                   <Typography sx={{
@@ -118,13 +105,13 @@ const Search = () => {
                     <Input disableUnderline sx={{
                       border: 'none', outline: 'none',
                       flex: 1, fontSize: { xs: '11px', sm: '13px', md: '15px' }, borderRadius: '38px'
-                    }} type="number" maxLength={4} placeholder="Your company's postcode" value={postcode}
+                    }} type="number" placeholder="Your company's postcode" value={postcode}
                       onChange={e => {
                         const newValue = e.target.value.slice(0, 4);
                         setPostcode(newValue);
                       }}
                     />
-                    <Button disabled={loading} onClick={handleSearchClick} variant='contained' size='small' sx={{
+                    <Button onClick={handleSearchClick} variant='contained' size='small' sx={{
                       textWrap: 'nowrap',
                       fontSize: { xs: '11px', sm: '13px', md: '15px' },
                       borderRadius: '38px',
